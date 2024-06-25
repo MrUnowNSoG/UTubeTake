@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              BackgroundColor="Black"
+             x:Class="MyHikiList.MainPage">
+
+    <ScrollView         
+        HorizontalScrollBarVisibility="Never"
+        VerticalScrollBarVisibility="Never"
+        
+        HorizontalOptions="FillAndExpand">
+        
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25"
+            x:Name="MainStackLayout">
+            
+            <Image
+                Source="dotnet_bot.png"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a race car number eight" />
+
+            <Label
+                Text="Hello, Hiki!"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Button
+                x:Name="SoloAnime"
+                Text="Friren" 
+                Clicked="SoloAnime_Clicked"
+                HorizontalOptions="Fill" />
+
+            <Button
+                x:Name="TopHundred"
+                Text="Top100" 
+                Clicked="TopHundred_Clicked"
+                HorizontalOptions="Fill" />
+
+            <Button
+                Text="Random anime" 
+                Clicked="RandomAnime_Clicked"
+                HorizontalOptions="Fill" />
+
+            <Button
+                Text="Profile" 
+                Clicked="ProfilePage_Clicked"
+                HorizontalOptions="Fill" />
+            
+            <Button
+            HeightRequest="50"
+            HorizontalOptions="FillAndExpand"
+                
+            Clicked="MoreTop_Clicked"
+            Text="More top"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

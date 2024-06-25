@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyHikiList.Pages.TopHundred"
+             BackgroundColor="Black"
+             Title="TopHundred">
+    
+    <ScrollView
+        HorizontalScrollBarVisibility="Never"
+        VerticalScrollBarVisibility="Never"
+        
+        HorizontalOptions="FillAndExpand">
+
+        <VerticalStackLayout
+            Padding="5"
+            Spacing="20"
+            
+            x:Name="StackLayout">
+
+            <Frame
+                HeightRequest="150"
+                
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+            
+                CornerRadius="10" 
+                Padding="0" 
+
+                BackgroundColor="#2e2e2e"
+                BorderColor="Transparent">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Image
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Grid.RowSpan="3"
+                        
+                        Aspect = "AspectFit"
+                        Source = "dotnet_bot.png"/>
+
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        
+                        VerticalOptions="Center"
+                        HorizontalOptions="StartAndExpand"
+                        
+                        FontSize="Medium"
+                        TextColor="White"
+                        
+                        Padding="10, 0, 0 ,0"
+                        
+                        Text="Friren so Friren"/>
+
+                    <HorizontalStackLayout
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        
+                        VerticalOptions="StartAndExpand"
+                        HorizontalOptions="StartAndExpand"
+                        
+                        Padding="10, 0, 0, 0"
+                        Spacing="10">
+
+                        <Frame
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+            
+                            CornerRadius="5" 
+                            Padding="7, 2, 7, 2" 
+                            
+                            BackgroundColor="#2e2e2e"
+                            BorderColor="White">
+
+                            <Label
+                                VerticalOptions="Center"
+                                HorizontalOptions="StartAndExpand"
+                        
+                                FontSize="Micro"
+                                TextColor="White"
+                        
+                                Text="G12"/>
+                        </Frame>
+
+                        <Frame
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+            
+                            CornerRadius="5" 
+                            Padding="7, 2, 7, 2" 
+                            
+                            BackgroundColor="#2e2e2e"
+                            BorderColor="White">
+
+                            <Label
+                                VerticalOptions="Center"
+                                HorizontalOptions="StartAndExpand"
+                        
+                                FontSize="Micro"
+                                TextColor="White"
+                        
+                                Text="2022"/>
+                        </Frame>
+
+                        <Frame
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+            
+                            CornerRadius="5" 
+                            Padding="7, 2, 7, 2" 
+                            
+                            BackgroundColor="#2e2e2e"
+                            BorderColor="White">
+
+                            <Label
+                                VerticalOptions="Center"
+                                HorizontalOptions="StartAndExpand"
+                        
+                                FontSize="Micro"
+                                TextColor="White"
+                        
+                                Text="Finished"/>
+                        </Frame>
+                    </HorizontalStackLayout>
+
+                    <Grid
+                        Grid.Column="1"
+                        Grid.Row="2">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.6*" />
+                            <ColumnDefinition Width="0.4*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label 
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            TextColor="White"
+                            
+                            Margin="10,0,0,0"
+                            
+                            FontSize="Body"
+                            Text="Ranked:#1"/>
+
+                        <Button
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            
+                            Clicked="OpenAnime_Clicked"
+                            
+                            Text="Watch anime">
+
+                            <Button.BindingContext>
+                                <x:String>52991</x:String>
+                            </Button.BindingContext>
+                        </Button>
+                    </Grid>
+
+                </Grid>
+            </Frame>
+
+            <Button
+            HeightRequest="50"
+            HorizontalOptions="FillAndExpand"
+                
+            Clicked="MoreTop_Clicked"
+            Text="More top"/>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
