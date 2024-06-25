@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UTubeTake.SettingPage"
+             Title="SettingPage">
+    <VerticalStackLayout>
+        <Label 
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Label
+            x:Name="PathVideo_label"
+            Text="Pick your video path"/>
+        
+        <Button
+            HeightRequest="50"
+            
+            HorizontalOptions="Fill"
+            
+            Clicked="PathVideo_Clicked"
+            
+            Text="Pick Path"/>
+
+        <Label
+            x:Name="PathImage_label"
+            Text="Pick your image path"/>
+
+        <Button
+            HeightRequest="50"
+            
+            HorizontalOptions="Fill"
+            
+            Clicked="PathImage_Clicked"
+            
+            Text="Pick Path"/>
+
+        <Button
+            HeightRequest="50"
+            
+            HorizontalOptions="Fill"
+            
+            Clicked="Back_Clicked"
+            
+            Text="Back"/>
+    </VerticalStackLayout>
+</ContentPage>
