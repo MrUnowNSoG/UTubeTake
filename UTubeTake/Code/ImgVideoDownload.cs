@@ -15,9 +15,18 @@ namespace UTubeTake.Code {
             _web = new WebClient();
         }
 
-        public void DownloadImg(string link, string name, string place) {
-            System.Uri uri = new System.Uri("http://img.youtube.com/vi/" + link + "/mqdefault.jpg");
-            _web.DownloadDataAsync(uri, place + name + ".png");
+        public async void DownloadImg(string link, string name, string place) {
+
+            //Need add static resoure bool for download we img yes or not
+            await Task.Run(() => {
+                string pathFile = place + "\\" + name + ".png";
+
+                link = GetImgVideoUrl(link);
+
+
+                byte[] img = _web.DownloadData(link);
+                File.WriteAllBytes(pathFile, img);
+            });
         }
 
         public bool DownloadImg(string link, out ImageSource img) {
@@ -48,7 +57,7 @@ namespace UTubeTake.Code {
             return false;
         }
 
-        public string GetVideoUrl(string link) {
+        public string GetImgVideoUrl(string link) {
 
             if (GetCodeLink(ref link)) {
                 return @"http://img.youtube.com/vi/" + link + @"/mqdefault.jpg";

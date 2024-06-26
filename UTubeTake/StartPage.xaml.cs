@@ -46,7 +46,7 @@ public partial class StartPage : ContentPage {
 		//
 		if(_linkTest.testUrl(ref link) && _loadInfo == false) {
 
-			imageVideo.Source = _imgVideoDownload.GetVideoUrl(link);
+			imageVideo.Source = _imgVideoDownload.GetImgVideoUrl(link);
 			DownloadInfoForVideo(link);
 			
 			
@@ -81,7 +81,7 @@ public partial class StartPage : ContentPage {
 	
 	private void DownloadImg(object sender, EventArgs e) {
 
-		string link = imageVideo.Source.ToString();
+		string link = linkEntry.Text;
 
 		if (link != null && link != "" && _linkTest.testUrl(ref link)) {
 			_imgVideoDownload.DownloadImg(link, _videoVariable.video.Title.ToString(), SettingStatic.pathForImage);
