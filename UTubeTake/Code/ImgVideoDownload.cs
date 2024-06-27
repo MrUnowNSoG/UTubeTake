@@ -18,6 +18,7 @@ namespace UTubeTake.Code {
         public async void DownloadImg(string link, string name, string place) {
 
             await Task.Run(() => {
+                name = RemoveInvalidPathChars(name);
                 string pathFile = place + "\\" + name + ".png";
 
                 link = GetImgVideoUrl(link);
@@ -103,6 +104,18 @@ namespace UTubeTake.Code {
             } 
 
             return false;
+        }
+
+
+        private string RemoveInvalidPathChars(string name) {
+
+            char[] invalidChars = Path.GetInvalidPathChars().Concat(new char[] { '\\', '/', '?' }).ToArray();
+
+            foreach (char c in invalidChars) {
+                name = name.Replace(c.ToString(), " ");
+            }
+
+            return name;
         }
 
     }
