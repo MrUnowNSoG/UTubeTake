@@ -10,7 +10,7 @@ namespace UTubeTake.Code {
             _variable = variable;
         }
 
-        public async void DownloadVideo(int quality, int bitrate) {
+        public async Task DownloadVideo(int quality, int bitrate) {
 
             //
             if (quality <= 0 && bitrate <= 0) return;

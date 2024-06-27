@@ -74,17 +74,30 @@ public partial class StartPage : ContentPage {
 	}
 
 	//Download Button
-    private void DownloadVideo(object sender, EventArgs e) {
-		VideoSizeText.Text = PickerQuality.SelectedIndex.ToString();
-		_videoDownloader.DownloadVideo(PickerQuality.SelectedIndex, PickerBitRate.SelectedIndex);
-    }
+	private async void DownloadVideo(object sender, EventArgs e) {
+
+		if (StaticFlags.downloadFile == false) {
+
+			StaticFlags.downloadFile = true;
+
+			VideoSizeText.Text = PickerQuality.SelectedIndex.ToString();
+			await _videoDownloader.DownloadVideo(PickerQuality.SelectedIndex, PickerBitRate.SelectedIndex);
+		
+			StaticFlags.downloadFile = false;
+		}
+	}
+
 	
 	private void DownloadImg(object sender, EventArgs e) {
 
-		string link = linkEntry.Text;
+		if (StaticFlags.downloadImg == false) {
+			string link = linkEntry.Text;
 
-		if (link != null && link != "" && _linkTest.testUrl(ref link)) {
-			_imgVideoDownload.DownloadImg(link, _videoVariable.video.Title.ToString(), SettingStatic.pathForImage);
+			if (link != null && link != "" && _linkTest.testUrl(ref link)) {
+
+				StaticFlags.downloadImg = true;
+				_imgVideoDownload.DownloadImg(link, _videoVariable.video.Title.ToString(), SettingStatic.pathForImage);
+			}
 		}
 	}
 

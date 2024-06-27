@@ -17,7 +17,6 @@ namespace UTubeTake.Code {
 
         public async void DownloadImg(string link, string name, string place) {
 
-            //Need add static resoure bool for download we img yes or not
             await Task.Run(() => {
                 string pathFile = place + "\\" + name + ".png";
 
@@ -27,6 +26,8 @@ namespace UTubeTake.Code {
                 byte[] img = _web.DownloadData(link);
                 File.WriteAllBytes(pathFile, img);
             });
+
+            StaticFlags.downloadImg = false;
         }
 
         public bool DownloadImg(string link, out ImageSource img) {
