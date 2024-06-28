@@ -77,31 +77,6 @@
              />
         </Border>
 
-
-        <Border 
-            Grid.Column="0"
-            Grid.Row="3"
-            
-            HorizontalOptions="Center"
-            VerticalOptions="End"        
-
-            
-            HeightRequest="40" 
-            WidthRequest="40"
-            
-            Stroke="Aqua">
-
-            <ImageButton
-                Aspect="AspectFit"
-                Source="setting_icon.png"
-               
-                VerticalOptions="Center"
-                HorizontalOptions="Center" 
-                 
-                Clicked="HistoryPage"/>
-        </Border>
-        
-
         <Border 
             Grid.Column="0"
             Grid.Row="4"
@@ -286,17 +261,15 @@
             Grid.Row="3"
             
             HorizontalOptions = "Center"
+            WidthRequest="300"
             
             Margin="0, 0, 0, 0"
             
             x:Name = "PickerQuality"
             SelectedIndexChanged="PickerQuality_SelectedIndexChanged"
-            Title = "Язык программирования">
+            Title = "Якість відео">
 
             <Picker.Items>
-                <x:String>C#</x:String>
-                <x:String>JavaScript</x:String>
-                <x:String>Java</x:String>
             </Picker.Items>
            
         </Picker>
@@ -306,17 +279,15 @@
             Grid.Row="3"
             
             HorizontalOptions = "Center"
+            WidthRequest="300"
             
             Margin="0, 0, 0, 0"
             
             x:Name = "PickerBitRate"
             SelectedIndexChanged="PickerBitRate_SelectedIndexChanged"
-            Title = "Мови програмування">
+            Title = "Якість звука">
 
             <Picker.Items>
-                <x:String>C#</x:String>
-                <x:String>JavaScript</x:String>
-                <x:String>Java</x:String>
             </Picker.Items>
         </Picker>
 
