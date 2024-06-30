@@ -10,7 +10,7 @@ namespace UTubeTake.Code {
             _variable = variable;
         }
 
-        public async Task DownloadVideo(int quality, int bitrate) {
+        public async Task DownloadVideo(int quality, int bitrate, IProgress<double> progress) {
 
             //
             if (quality <= 0 && bitrate <= 0) return;
@@ -36,16 +36,16 @@ namespace UTubeTake.Code {
                 convers.SetFFmpegPath(@"D:\Download\ffmpeg-windows-x64\ffmpeg.exe");
                 var streamInfos = new IStreamInfo[] { audioStream, videoStream };
 
-                await _variable.youtube.Videos.DownloadAsync(streamInfos, convers.Build());
+                await _variable.youtube.Videos.DownloadAsync(streamInfos, convers.Build(), progress);
 
             } else {
 
                 if (videoStream != null) {
-                    await _variable.youtube.Videos.Streams.DownloadAsync(videoStream, nameFile + ".mp4");
+                    await _variable.youtube.Videos.Streams.DownloadAsync(videoStream, nameFile + ".mp4", progress);
                 }
 
                 if (audioStream != null) {
-                    await _variable.youtube.Videos.Streams.DownloadAsync(audioStream, nameFile + ".mp3");
+                    await _variable.youtube.Videos.Streams.DownloadAsync(audioStream, nameFile + ".mp3", progress);
                 }
             }
         }

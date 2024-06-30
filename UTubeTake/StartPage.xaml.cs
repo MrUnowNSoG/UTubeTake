@@ -77,14 +77,22 @@ public partial class StartPage : ContentPage {
 
 			StaticFlags.downloadFile = true;
 
+
+			IProgress<double> progress = new Progress<double>(GetPercentVideo);
 			VideoSizeText.Text = PickerQuality.SelectedIndex.ToString();
-			await _videoDownloader.DownloadVideo(PickerQuality.SelectedIndex, PickerBitRate.SelectedIndex);
+			await _videoDownloader.DownloadVideo(PickerQuality.SelectedIndex, PickerBitRate.SelectedIndex, progress);
 		
 			StaticFlags.downloadFile = false;
 		}
 	}
 
 	
+	private void GetPercentVideo(double d) {
+        VideoSizeText.Text = Math.Truncate(d * 100).ToString() + "%";
+
+		if (Math.Truncate(d * 100) >= 99) VideoSizeText.Text = "Done";
+    }
+
 	private void DownloadImg(object sender, EventArgs e) {
 
 		if (StaticFlags.downloadImg == false) {
