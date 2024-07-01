@@ -31,27 +31,27 @@
         Grid.Column="0" 
         Grid.RowSpan="5"
             
-        Color="Aqua"/>
+        Color="Black"/>
         
         <BoxView 
             Grid.Column="1"
             Grid.ColumnSpan="3"
             
-            Color="Yellow"/>
+            Color="Black"/>
 
         <BoxView 
             Grid.Column="1"
             Grid.ColumnSpan="3"
             Grid.Row="1"
             
-            Color="Green"/>
+            Color="Black"/>
 
         <BoxView 
             Grid.Column="1"
             Grid.ColumnSpan="3"
             Grid.Row="2"
             
-            Color="Purple"/>
+            Color="Black"/>
         <!--Help watch zones-->
         
         
@@ -299,8 +299,8 @@
             HorizontalOptions="Center"
             
             Text="Download"
+            x:Name="DownloadVideoButton"
             Clicked="DownloadVideo">
-            
         </Button>
 
         <!--Main Page-->

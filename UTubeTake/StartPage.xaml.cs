@@ -88,9 +88,9 @@ public partial class StartPage : ContentPage {
 
 	
 	private void GetPercentVideo(double d) {
-        VideoSizeText.Text = Math.Truncate(d * 100).ToString() + "%";
+        DownloadVideoButton.Text = Math.Truncate(d * 100).ToString() + "%";
 
-		if (Math.Truncate(d * 100) >= 99) VideoSizeText.Text = "Done";
+		if (Math.Truncate(d * 100) >= 99) VideoSizeText.Text = "Download";
     }
 
 	private void DownloadImg(object sender, EventArgs e) {
