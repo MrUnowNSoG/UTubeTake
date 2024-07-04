@@ -3,9 +3,75 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UTubeTake.HistoryPage"
              Title="HistoryPage">
-    <VerticalStackLayout>
 
-        <Button
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout
+            Grid.Column="0"
+            Grid.Row="0">
+            
+            <Border 
+            HorizontalOptions="Center"
+            VerticalOptions="Start"        
+            
+            HeightRequest="40" 
+            WidthRequest="40"
+            
+            Stroke="Aqua">
+                <Image
+                Aspect="AspectFit"
+                Source="setting_icon.png"
+               
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+             />
+            </Border>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout
+            Grid.Column="1"
+            Grid.Row="0"
+            HorizontalOptions="Fill">
+
+            <Label 
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" 
+            HorizontalOptions="StartAndExpand"/>
+
+            <Label
+            x:Name="PathVideo_label"
+            Text="Pick your video path"/>
+
+            <Button
+            HeightRequest="50"
+    
+            HorizontalOptions="FillAndExpand"
+    
+            Text="Pick Path"/>
+
+            <Label
+            x:Name="PathImage_label"
+            Text="Pick your image path"/>
+
+            <Button
+            HeightRequest="50"
+    
+            HorizontalOptions="Fill"
+    
+            Text="Pick Path"/>
+
+            <Button
+            Grid.Column="1"
+            Grid.Row="0"
+            
             HorizontalOptions="Center"
             WidthRequest="300"
             HeightRequest="100"
@@ -13,6 +79,9 @@
             Text="Back"
             
             Clicked="Back_Clicked"/>
+        </VerticalStackLayout>
+        
 
-    </VerticalStackLayout>
+    </Grid>
+
 </ContentPage>

@@ -3,45 +3,69 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UTubeTake.SettingPage"
              Title="SettingPage">
-    <VerticalStackLayout>
-        <Label 
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout 
+            Grid.Column="0"
+            Grid.Row="0"
+            BackgroundColor="#03DBFF">
+        
+        </VerticalStackLayout>
+
+        <VerticalStackLayout
+            Grid.Column="1"
+            Grid.Row="0"
+            HorizontalOptions="Fill">
+            
+            <Label 
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="StartAndExpand"/>
 
-        <Label
+            <Label
             x:Name="PathVideo_label"
             Text="Pick your video path"/>
-        
-        <Button
+
+            <Button
             HeightRequest="50"
-            
-            HorizontalOptions="Fill"
-            
+    
+            HorizontalOptions="FillAndExpand"
+    
             Clicked="PathVideo_Clicked"
-            
+    
             Text="Pick Path"/>
 
-        <Label
+            <Label
             x:Name="PathImage_label"
             Text="Pick your image path"/>
 
-        <Button
+            <Button
             HeightRequest="50"
-            
+    
             HorizontalOptions="Fill"
-            
+    
             Clicked="PathImage_Clicked"
-            
+    
             Text="Pick Path"/>
 
-        <Button
+            <Button
             HeightRequest="50"
-            
+    
             HorizontalOptions="Fill"
-            
+    
             Clicked="Back_Clicked"
-            
+    
             Text="Back"/>
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+
 </ContentPage>

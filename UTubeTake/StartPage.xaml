@@ -79,6 +79,29 @@
 
         <Border 
             Grid.Column="0"
+            Grid.Row="3"
+            
+            HorizontalOptions="Center"
+            VerticalOptions="End"        
+            Margin="5,0,5, 30"
+            
+            HeightRequest="40" 
+            WidthRequest="40"
+            
+            Stroke="Aqua">
+
+            <ImageButton
+                Aspect="AspectFit"
+                Source="setting_icon.png"
+               
+                VerticalOptions="Center"
+                HorizontalOptions="Center" 
+                 
+                Clicked="HistoryPage"/>
+        </Border>
+
+        <Border 
+            Grid.Column="0"
             Grid.Row="4"
             
             HorizontalOptions="Center"
