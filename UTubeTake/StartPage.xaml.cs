@@ -123,7 +123,4 @@ public partial class StartPage : ContentPage {
         await Navigation.PushModalAsync(new SettingPage(), false);
     }
 
-	private async void HistoryPage(object sender, EventArgs e) {
-		await Navigation.PushModalAsync(new HistoryPage(), false);
-	}
 }

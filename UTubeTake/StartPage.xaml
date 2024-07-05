@@ -3,12 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UTubeTake.StartPage"
              Title="UTakePage"
-             BackgroundColor="{StaticResource Black}">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-
-        </ResourceDictionary>
-    </ContentPage.Resources>
+             BackgroundColor="{StaticResource BlackBacground}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -19,42 +14,26 @@
         </Grid.ColumnDefinitions>
         
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="80"/>
             <RowDefinition />
             <RowDefinition Height="220"/>
             <RowDefinition Height="0.8*"/>
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <!--Help watch zones-->
-        <BoxView 
-        Grid.Column="0" 
-        Grid.RowSpan="5"
-            
-        Color="Black"/>
-        
-        <BoxView 
+        <BoxView
             Grid.Column="1"
-            Grid.ColumnSpan="3"
+            Grid.Row="0"
+            Grid.RowSpan="5"
             
-            Color="Black"/>
+            HorizontalOptions="Start"
+            VerticalOptions="Fill"
 
-        <BoxView 
-            Grid.Column="1"
-            Grid.ColumnSpan="3"
-            Grid.Row="1"
+            WidthRequest="1"
             
-            Color="Black"/>
+            BackgroundColor="{StaticResource BlackElement}"
+            />
 
-        <BoxView 
-            Grid.Column="1"
-            Grid.ColumnSpan="3"
-            Grid.Row="2"
-            
-            Color="Black"/>
-        <!--Help watch zones-->
-        
-        
         <!--Nav-->
         <Border 
             Grid.Column="0"
@@ -65,8 +44,9 @@
             
             HeightRequest="40" 
             WidthRequest="40"
+            Margin="0,20,0,0"
             
-            Stroke="Aqua">
+            Stroke="Transparent">
 
             <Image
                 Aspect="AspectFit"
@@ -79,37 +59,14 @@
 
         <Border 
             Grid.Column="0"
-            Grid.Row="3"
-            
-            HorizontalOptions="Center"
-            VerticalOptions="End"        
-            Margin="5,0,5, 30"
-            
-            HeightRequest="40" 
-            WidthRequest="40"
-            
-            Stroke="Aqua">
-
-            <ImageButton
-                Aspect="AspectFit"
-                Source="setting_icon.png"
-               
-                VerticalOptions="Center"
-                HorizontalOptions="Center" 
-                 
-                Clicked="HistoryPage"/>
-        </Border>
-
-        <Border 
-            Grid.Column="0"
             Grid.Row="4"
-            
+
             HorizontalOptions="Center"
-            VerticalOptions="End"        
-            Margin="5,0,5, 30"
+            VerticalOptions="Center"        
             
             HeightRequest="40" 
             WidthRequest="40"
+            Margin="0,0,0,20"
             
             Stroke="Aqua">
 
@@ -127,15 +84,17 @@
         
         <!--Main Page-->
         <Label
-            Grid.Column="2"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            Grid.Row="0"
             
             HorizontalTextAlignment="Center"
             VerticalTextAlignment="Center"
             
-            FontSize="32"
-            TextColor="Gray"
+            FontSize="20"
+            TextColor="White"
             
-            Text="Set links"/>
+            Text="Download all from YouTube"/>
 
         <!--Find video-->
         <Border
@@ -147,7 +106,7 @@
         
             HeightRequest="50"
             
-            Stroke="Pink"
+            Stroke="{StaticResource NeonBlue}"
             StrokeThickness="5">
 
             <Border.StrokeShape>
@@ -165,9 +124,9 @@
 
                 <Entry 
                     FontFamily="Helvetica"
-                    FontSize="22" 
+                    FontSize="20" 
                     
-                    Placeholder = "Вставте сюда посилання!" 
+                    Placeholder = "Insert link here!" 
                     
                     ClearButtonVisibility="WhileEditing"
                     MaxLength ="200" 
@@ -182,7 +141,12 @@
                     HorizontalOptions="Fill"    
                     CornerRadius="0"
                     
-                    Text="Find!"
+                    BackgroundColor="{StaticResource NeonBlue}"
+                    
+                    TextColor="White"
+                    FontSize="20"
+                    
+                    Text="Find"
                     
                     Clicked="FindVideo"/>
             </Grid>
@@ -203,7 +167,7 @@
             HeightRequest = "180" 
             WidthRequest = "320"
             
-            Stroke="Aqua">
+            Stroke="{StaticResource NeonBlue}">
 
                 <Image
                 Aspect="AspectFit"
@@ -231,7 +195,11 @@
             Grid.Column="2"
             Grid.ColumnSpan="3"
             Grid.Row="2"
-            HorizontalOptions="Start">
+            HorizontalOptions="Start"
+            
+            BackgroundColor="{StaticResource BlackElement}">
+            
+            
             
             <Label
             
@@ -239,7 +207,7 @@
             VerticalTextAlignment="Center"
             
             FontSize="28"
-            TextColor="Gray"
+            TextColor="White"
             
             x:Name="VideoNameText"
             Text="Name Video"/>
@@ -250,7 +218,7 @@
             VerticalTextAlignment="Center"
             
             FontSize="20"
-            TextColor="Gray"
+            TextColor="White"
             
             x:Name="VideoAuthorText"
             Text="Author Video"/>
@@ -261,7 +229,7 @@
             VerticalTextAlignment="Center"
             
             FontSize="20"
-            TextColor="Gray"
+            TextColor="White"
             
             x:Name="VideoDurationText"
             Text="Duration Video"/>
@@ -272,7 +240,7 @@
             VerticalTextAlignment="Center"
             
             FontSize="20"
-            TextColor="Gray"
+            TextColor="White"
             
             x:Name="VideoSizeText"
             Text="Size Video"/>
