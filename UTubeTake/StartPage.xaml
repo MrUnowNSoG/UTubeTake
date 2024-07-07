@@ -16,7 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition />
-            <RowDefinition Height="220"/>
+            <RowDefinition Height="230"/>
             <RowDefinition Height="120"/>
             <RowDefinition />
         </Grid.RowDefinitions>
@@ -51,7 +51,7 @@
 
             <Image
                 Aspect="AspectFit"
-                Source="setting_icon.png"
+                Source="logo_icon.png"
                
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
@@ -59,25 +59,34 @@
         </Border>
 
 
-
-        <ImageButton
-                     
+        <VerticalStackLayout 
             Grid.Column="0"
             Grid.Row="4"
+            
+            VerticalOptions="End">
 
-            HorizontalOptions="Center"
-            VerticalOptions="Center"        
-   
+
+            <ImageButton
+                 
+            Grid.Column="0"
+            Grid.Row="4"
+            
+            Margin="0,0,0,20"
             HeightRequest="40" 
             WidthRequest="40"
-      
+                
+            HorizontalOptions="Center"
+            VerticalOptions="Center"        
+  
             Aspect="Fill"
             Source="setting_icon.png"
-      
-      
+  
+  
             BackgroundColor="Transparent"
-       
+   
             Clicked="SettingPage"/>
+
+        </VerticalStackLayout>
         <!--Nav-->
         
         
@@ -203,6 +212,7 @@
             Grid.Row="2"
             HorizontalOptions="FillAndExpand"
             
+            Spacing="10"
             Margin="0, 0, 60, 20"
             Padding="10"
             
@@ -217,7 +227,7 @@
             TextColor="White"
             
             x:Name="VideoNameText"
-            Text="Name Video"/>
+            Text="Name"/>
         
             <Label
             
@@ -228,7 +238,7 @@
             TextColor="White"
             
             x:Name="VideoAuthorText"
-            Text="Author Video"/>
+            Text="Author"/>
 
             <Label
             
@@ -239,7 +249,7 @@
             TextColor="White"
             
             x:Name="VideoDurationText"
-            Text="Duration Video"/>
+            Text="Duration"/>
 
             <Label
             
@@ -250,7 +260,7 @@
             TextColor="White"
             
             x:Name="VideoSizeText"
-            Text="Size Video"/>
+            Text="Size"/>
         </VerticalStackLayout>
         
         <!--Select oprion and download video-->
@@ -271,6 +281,11 @@
             
                 Margin="0, 0, 0, 0"
                 
+                TitleColor="White"
+                TextColor="White"
+                BackgroundColor="{StaticResource BlackElementLight}"
+              
+                
                 x:Name = "PickerQuality"
                 SelectedIndexChanged="PickerQuality_SelectedIndexChanged"
                 Title = "Video quality">
@@ -285,6 +300,11 @@
             
                 Margin="0, 0, 0, 0"
             
+                TitleColor="White"
+                TextColor="White"
+                BackgroundColor="{StaticResource BlackElementLight}"
+                
+                
                 x:Name = "PickerBitRate"
                 SelectedIndexChanged="PickerBitRate_SelectedIndexChanged"
                 Title = "Sound quality">

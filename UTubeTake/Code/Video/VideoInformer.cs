@@ -56,7 +56,7 @@ namespace UTubeTake.Code {
             _variable.streamsVideo = _variable.currentVideoStreams.GetVideoOnlyStreams().Where(s => s.Container == Container.Mp4).OrderByDescending(item => item.VideoQuality).ToList();
 
             _variable.videoQuality.Clear();
-            _variable.videoQuality.Add("No videoId", -1);
+            _variable.videoQuality.Add("No video", -1);
 
             for(int i = 0, k = 0; i < _variable.streamsVideo.Count; i++, k++) {
                 if (!_variable.videoQuality.ContainsKey(_variable.streamsVideo[i].VideoQuality.Label)) {
@@ -69,7 +69,7 @@ namespace UTubeTake.Code {
             _variable.streamsAudio = _variable.currentVideoStreams.GetAudioOnlyStreams().Where(s => s.Container == Container.Mp4).OrderByDescending(item => item.Bitrate).ToList();
 
             _variable.videoBitRate.Clear();
-            _variable.videoBitRate.Add("No soundId", -1);
+            _variable.videoBitRate.Add("No sound", -1);
 
             for (int i = 0; i < _variable.streamsAudio.Count; i++) {
                 if (!_variable.videoBitRate.ContainsKey(_variable.streamsAudio[i].Bitrate.ToString())) {

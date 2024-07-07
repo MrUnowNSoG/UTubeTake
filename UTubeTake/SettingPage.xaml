@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UTubeTake.SettingPage"
+               BackgroundColor="{StaticResource BlackBacground}"
              Title="SettingPage">
 
     <Grid>
@@ -11,60 +12,165 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <VerticalStackLayout 
-            Grid.Column="0"
-            Grid.Row="0"
-            BackgroundColor="#03DBFF">
-        
-        </VerticalStackLayout>
-
-        <VerticalStackLayout
+        <BoxView
             Grid.Column="1"
             Grid.Row="0"
-            HorizontalOptions="Fill">
+            Grid.RowSpan="5"
             
+            HorizontalOptions="Start"
+            VerticalOptions="Fill"
+
+            WidthRequest="1"
+            
+            BackgroundColor="{StaticResource BlackElement}"
+        />
+
+        <!--Nav-->
+        <Border
+            Grid.Column="0"
+            Grid.Row="0"
+            
+            HorizontalOptions="Center"
+            VerticalOptions="Center"        
+        
+            HeightRequest="40" 
+            WidthRequest="40"
+            Margin="0,20,0,0"
+        
+            Stroke="Transparent">
+
+            <Image
+            Aspect="AspectFit"
+            Source="logo_icon.png"
+           
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+        </Border>
+
+
+        <VerticalStackLayout 
+            Grid.Column="0"
+            Grid.Row="1"
+            
+            VerticalOptions="End">
+
+
+            <ImageButton    
+                Grid.Column="0"
+                Grid.Row="4"
+            
+                Margin="0,0,0,20"
+                HeightRequest="40" 
+                WidthRequest="40"
+                
+                HorizontalOptions="Center"
+                VerticalOptions="Center"        
+                Padding="5"
+                
+                Aspect="AspectFill"
+                Source="back_icon.png"
+  
+  
+                BackgroundColor="Transparent"
+   
+                Clicked="Back_Clicked"/>
+            
+        </VerticalStackLayout>
+        <!--Nav-->
+
+        <!--Title page-->
+        <Label
+            Grid.Column="1"
+            Grid.Row="0"
+     
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+     
+            FontSize="20"
+            TextColor="White"
+     
+            Text="Setting"/>
+
+        <!--Buttons-->
+        <VerticalStackLayout
+            Grid.Column="1"
+            Grid.Row="1"
+            HorizontalOptions="Fill"
+            Padding="20">
+
+            <!--Video-->
             <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="StartAndExpand"/>
+                VerticalOptions="Center" 
+                HorizontalOptions="StartAndExpand"
+                FontSize="16"
+                
+                Text="Place where videos are stored:"/>
 
             <Label
-            x:Name="PathVideo_label"
-            Text="Pick your video path"/>
+                HeightRequest="30"
+                VerticalTextAlignment="Center"
+                
+                Padding="20,0,0,0"
+                
+                
+                BackgroundColor="{StaticResource BlackElementLight}"
+                FontSize="16"
+                
+                x:Name="PathVideo_label"
+                
+                Text="Pick your video path"/>
 
             <Button
-            HeightRequest="50"
-    
-            HorizontalOptions="FillAndExpand"
-    
-            Clicked="PathVideo_Clicked"
-    
-            Text="Pick Path"/>
+                HeightRequest="50" 
+                HorizontalOptions="FillAndExpand"
+                CornerRadius="0"
+                
+                BackgroundColor="{StaticResource NeonBlue}"
+                TextColor="White"
+                FontSize="16"
+                
+                Clicked="PathVideo_Clicked"
+                Text="Pick Path"/>
 
+            <!--Just space-->
+            <Label Margin="10"/>
+
+            <!--Image-->
+            <Label 
+                VerticalOptions="Center" 
+                HorizontalOptions="StartAndExpand"
+                FontSize="16"
+                
+                Text="Place where pictures are stored:"/>
+            
             <Label
-            x:Name="PathImage_label"
-            Text="Pick your image path"/>
+                HeightRequest="30"
+                VerticalTextAlignment="Center"
+                
+                Padding="20,0,0,0"
+                
+                BackgroundColor="{StaticResource BlackElementLight}"
+                FontSize="16"
+                
+                x:Name="PathImage_label"
+                Text="Pick your image path"/>
 
             <Button
-            HeightRequest="50"
-    
-            HorizontalOptions="Fill"
-    
-            Clicked="PathImage_Clicked"
-    
-            Text="Pick Path"/>
+                HeightRequest="50"
+                HorizontalOptions="Fill"
+                CornerRadius="0"
+                
+                BackgroundColor="{StaticResource NeonBlue}"
+                TextColor="White" 
+                FontSize="16"
+            
+                Clicked="PathImage_Clicked"
+                Text="Pick Path"/>
 
-            <Button
-            HeightRequest="50"
-    
-            HorizontalOptions="Fill"
-    
-            Clicked="Back_Clicked"
-    
-            Text="Back"/>
         </VerticalStackLayout>
     </Grid>
 

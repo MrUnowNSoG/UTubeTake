@@ -43,12 +43,13 @@ public partial class StartPage : ContentPage {
 		//
 		if(_linkTest.testUrl(ref link) && StaticFlags.downloadInfo == false) {
 
-			imageVideo.Source = _imgVideoDownload.GetImgVideoUrl(link);
+            button.Text = "Find!";
+            imageVideo.Source = _imgVideoDownload.GetImgVideoUrl(link);
 			DownloadInfoForVideo(link);
 			
 			
         } else {
-            button.Text = "Linc can't recognize";
+            button.Text = "Try another link!";
         }
 	}
 
@@ -77,9 +78,7 @@ public partial class StartPage : ContentPage {
 
 			StaticFlags.downloadFile = true;
 
-
 			IProgress<double> progress = new Progress<double>(GetPercentVideo);
-			VideoSizeText.Text = PickerQuality.SelectedIndex.ToString();
 			await _videoDownloader.DownloadVideo(PickerQuality.SelectedIndex, PickerBitRate.SelectedIndex, progress);
 		
 			StaticFlags.downloadFile = false;
@@ -90,7 +89,7 @@ public partial class StartPage : ContentPage {
 	private void GetPercentVideo(double d) {
         DownloadVideoButton.Text = Math.Truncate(d * 100).ToString() + "%";
 
-		if (Math.Truncate(d * 100) >= 99) VideoSizeText.Text = "Download";
+		if (Math.Truncate(d * 100) >= 99) DownloadVideoButton.Text = "Download";
     }
 
 	private void DownloadImg(object sender, EventArgs e) {
