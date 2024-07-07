@@ -16,8 +16,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition />
-            <RowDefinition Height="240"/>
-            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="120"/>
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -204,12 +204,10 @@
             HorizontalOptions="FillAndExpand"
             
             Margin="0, 0, 60, 20"
-            
+            Padding="10"
             
             BackgroundColor="{StaticResource BlackElementLight}">
-            
-            
-            
+
             <Label
             
             HorizontalTextAlignment="Start"
@@ -261,13 +259,18 @@
             Grid.ColumnSpan="4"
             Grid.Row="3"
             
-            BackgroundColor="Bisque"
             
-            Margin="20,0,60,0"
+            Margin="0,0,60,0"
+            Padding="20"
+            Spacing="20"
             
-            HorizontalOptions = "Fill">
+            HorizontalOptions = "CenterAndExpand">
                 
-            <Picker            
+            <Picker       
+                WidthRequest="300"
+            
+                Margin="0, 0, 0, 0"
+                
                 x:Name = "PickerQuality"
                 SelectedIndexChanged="PickerQuality_SelectedIndexChanged"
                 Title = "Video quality">
@@ -291,7 +294,13 @@
             </Picker>
 
 
-            <Button           
+            <Button    
+                WidthRequest="160"
+                HeightRequest="40"
+                Margin="0,25,0,0"
+                
+                CornerRadius="0"
+                
                 BackgroundColor="{StaticResource NeonBlue}"
                 TextColor="White"
             
