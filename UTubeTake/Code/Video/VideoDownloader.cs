@@ -33,7 +33,8 @@ namespace UTubeTake.Code {
             if (videoStream != null && audioStream != null) {
 
                 ConversionRequestBuilder convers = new ConversionRequestBuilder(nameFile + ".mp4");
-                convers.SetFFmpegPath(@"D:\Download\ffmpeg-windows-x64\ffmpeg.exe");
+                convers.SetFFmpegPath(AppContext.BaseDirectory + @"ffmpeg-windows-x64\ffmpeg.exe");
+
                 var streamInfos = new IStreamInfo[] { audioStream, videoStream };
 
                 await _variable.youtube.Videos.DownloadAsync(streamInfos, convers.Build(), progress);
