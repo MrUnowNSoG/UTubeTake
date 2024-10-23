@@ -50,6 +50,7 @@ namespace UTubeTake.Code {
 
         public async Task LoadInfoForPicker(string url) {
 
+            _ = await _variable.youtube.Videos.Streams.GetManifestAsync(url);
             _variable.currentVideoStreams = await _variable.youtube.Videos.Streams.GetManifestAsync(url);
 
             //Video
