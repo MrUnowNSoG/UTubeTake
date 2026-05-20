@@ -19,11 +19,7 @@ namespace UTubeTake.Code {
         }
 
         public async Task LoadInfo(string url) {
-            try {
-                _variable.video = await _variable.youtube.Videos.GetAsync(url);
-            } catch (Exception ex) { 
-            
-            }
+            _variable.video = await _variable.youtube.Videos.GetAsync(url);
         }
 
         public string[] GetInfoForVideo() {

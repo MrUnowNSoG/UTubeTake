@@ -110,9 +110,8 @@
             Grid.ColumnSpan="3"
             Grid.Row="1"
             
-            Margin="60, 20, 60, 20"
-        
-            HeightRequest="50"
+            Margin="60, 0, 60, 0"
+            HeightRequest="60"
             
             Stroke="{StaticResource NeonBlue}"
             StrokeThickness="5">
@@ -123,8 +122,8 @@
 
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.75*"/>
-                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition Width="0.2*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -143,9 +142,10 @@
 
                 <Button
                     Grid.Column="2"
-                    Margin="0,0,0,0"
+                    Margin="5,0,5,0"
+                    Padding="0, 0, 0, 0"
                     
-                    VerticalOptions="Fill"
+                    VerticalOptions="CenterAndExpand"
                     HorizontalOptions="Fill"    
                     CornerRadius="0"
                     
@@ -162,175 +162,160 @@
         </Border>
 
         <!--Image and name video-->
-        <VerticalStackLayout
+        <Grid x:Name="VideoView"
             Grid.Column="1"
+            Grid.ColumnSpan="3"
             Grid.Row="2"
-            
-            HorizontalOptions="Fill"
-            VerticalOptions="Fill">
-            
-            <Border 
-            HorizontalOptions="Center"
-            VerticalOptions="Start"        
-            
-            HeightRequest = "180" 
-            WidthRequest = "320"
-            
-            Stroke="{StaticResource NeonBlue}">
+            Grid.RowSpan="3"
+            IsVisible="False"
+            ColumnDefinitions="*,*"
+            RowDefinitions="Auto,Auto">
 
-                <Image
-                Aspect="AspectFit"
-                Source= "{Binding ImageBytes}"
-               
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                
-                x:Name="imageVideo"
-             />
-            </Border>
+            <!--Image-->
+            <VerticalStackLayout
+                Grid.Column="0"
+                Grid.Row="0"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill">
 
-            <Button
-            HorizontalOptions="Center"
-            VerticalOptions="End"
-            WidthRequest="160"
-                   
-            BackgroundColor="{StaticResource NeonBlue}"
-            TextColor="White"
-            
-            CornerRadius="0"
-                
-            Text="Download"
-            Clicked="DownloadImg">
+                <Border
+                    HorizontalOptions="Center"
+                    VerticalOptions="Start"
+                    HeightRequest="180"
+                    WidthRequest="320"
+                    Stroke="{StaticResource NeonBlue}">
 
-            </Button>
-        </VerticalStackLayout>
+                    <Image
+                        Aspect="AspectFit"
+                        Source="{Binding ImageBytes}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        x:Name="imageVideo"/>
+                </Border>
 
-        <!--Text for video-->
-        <VerticalStackLayout
-            Grid.Column="2"
-            Grid.ColumnSpan="2"
-            Grid.Row="2"
-            HorizontalOptions="FillAndExpand"
-            
-            Spacing="10"
-            Margin="0, 0, 60, 20"
-            Padding="10"
-            
-            BackgroundColor="{StaticResource BlackElementLight}">
+                <Button
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    WidthRequest="160"
+                    BackgroundColor="{StaticResource NeonBlue}"
+                    TextColor="White"
+                    CornerRadius="0"
+                    Text="Download"
+                    Clicked="DownloadImg"/>
+            </VerticalStackLayout>
 
-            <Label
-            
-            HorizontalTextAlignment="Start"
-            VerticalTextAlignment="Center"
-            
-            FontSize="28"
-            TextColor="White"
-            
-            x:Name="VideoNameText"
-            Text="Name"/>
-        
-            <Label
-            
-            HorizontalTextAlignment="Start"
-            VerticalTextAlignment="Center"
-            
-            FontSize="20"
-            TextColor="White"
-            
-            x:Name="VideoAuthorText"
-            Text="Author"/>
+            <!--Text-->
+            <VerticalStackLayout
+                Grid.Column="1"
+                Grid.Row="0"
+                HorizontalOptions="FillAndExpand"
+                Spacing="10"
+                Margin="0,0,60,20"
+                Padding="10"
+                BackgroundColor="{StaticResource BlackElementLight}">
 
-            <Label
-            
-            HorizontalTextAlignment="Start"
-            VerticalTextAlignment="Center"
-            
-            FontSize="20"
-            TextColor="White"
-            
-            x:Name="VideoDurationText"
-            Text="Duration"/>
+                <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                   FontSize="28" TextColor="White"
+                   x:Name="VideoNameText" Text="Name"/>
 
-            <Label
-            
-            HorizontalTextAlignment="Start"
-            VerticalTextAlignment="Center"
-            
-            FontSize="20"
-            TextColor="White"
-            
-            x:Name="VideoSizeText"
-            Text="Size"/>
-        </VerticalStackLayout>
-        
-        <!--Select oprion and download video-->
-        <HorizontalStackLayout
+                <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                   FontSize="20" TextColor="White"
+                   x:Name="VideoAuthorText" Text="Author"/>
+
+                <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                   FontSize="20" TextColor="White"
+                   x:Name="VideoDurationText" Text="Duration"/>
+
+                <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                   FontSize="20" TextColor="White"
+                   x:Name="VideoSizeText" Text="Size"/>
+            </VerticalStackLayout>
+
+            <!--Pickers + Download-->
+            <HorizontalStackLayout
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Grid.Row="1"
+                Margin="0,0,60,0"
+                Padding="20"
+                Spacing="20"
+                HorizontalOptions="CenterAndExpand">
+
+                <Picker WidthRequest="300"
+                    TitleColor="White" TextColor="White"
+                    BackgroundColor="{StaticResource BlackElementLight}"
+                    x:Name="PickerQuality"
+                    SelectedIndexChanged="PickerQuality_SelectedIndexChanged"
+                    Title="Video quality"/>
+
+                <Picker WidthRequest="300"
+                    TitleColor="White" TextColor="White"
+                    BackgroundColor="{StaticResource BlackElementLight}"
+                    x:Name="PickerBitRate"
+                    SelectedIndexChanged="PickerBitRate_SelectedIndexChanged"
+                    Title="Sound quality"/>
+
+                <Button WidthRequest="160" HeightRequest="40"
+                    Margin="0,25,0,0"
+                    CornerRadius="0"
+                    BackgroundColor="{StaticResource NeonBlue}"
+                    TextColor="White"
+                    Text="Download"
+                    x:Name="DownloadVideoButton"
+                    Clicked="DownloadVideo"/>
+            </HorizontalStackLayout>
+
+        </Grid>
+        <!--Main Page-->
+
+        <HorizontalStackLayout x:Name="LoadingView"
             Grid.Column="1"
-            Grid.ColumnSpan="4"
-            Grid.Row="3"
+            Grid.ColumnSpan="3"
+            Grid.Row="2"
+            Grid.RowSpan="3"
             
-            
-            Margin="0,0,60,0"
-            Padding="20"
-            Spacing="20"
-            
-            HorizontalOptions = "CenterAndExpand">
-                
-            <Picker       
-                WidthRequest="300"
-            
-                Margin="0, 0, 0, 0"
-                
-                TitleColor="White"
-                TextColor="White"
-                BackgroundColor="{StaticResource BlackElementLight}"
-              
-                
-                x:Name = "PickerQuality"
-                SelectedIndexChanged="PickerQuality_SelectedIndexChanged"
-                Title = "Video quality">
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            Spacing="12">
 
-                <Picker.Items>
-                </Picker.Items>
-           
-            </Picker>
+            <Ellipse x:Name="Dot_1"
+                WidthRequest="24"
+                HeightRequest="24">
 
-            <Picker 
-                WidthRequest="300"
-            
-                Margin="0, 0, 0, 0"
-            
-                TitleColor="White"
-                TextColor="White"
-                BackgroundColor="{StaticResource BlackElementLight}"
-                
-                
-                x:Name = "PickerBitRate"
-                SelectedIndexChanged="PickerBitRate_SelectedIndexChanged"
-                Title = "Sound quality">
+                <Ellipse.Background>
+                    <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
+                        <GradientStop Color="{StaticResource BlackBacground}" Offset="0.0"/>
+                        <GradientStop Color="{StaticResource NeonBlue}" Offset="1.0"/>
+                    </RadialGradientBrush>
+                </Ellipse.Background>
+            </Ellipse>
 
-                <Picker.Items>
-                </Picker.Items>
-            </Picker>
+            <Ellipse x:Name="Dot_2"
+                WidthRequest="24"
+                HeightRequest="24">
 
+                <Ellipse.Background>
+                    <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
+                        <GradientStop Color="{StaticResource BlackBacground}" Offset="0.0"/>
+                        <GradientStop Color="{StaticResource NeonBlue}" Offset="1.0"/>
+                    </RadialGradientBrush>
+                </Ellipse.Background>
+            </Ellipse>
 
-            <Button    
-                WidthRequest="160"
-                HeightRequest="40"
-                Margin="0,25,0,0"
-                
-                CornerRadius="0"
-                
-                BackgroundColor="{StaticResource NeonBlue}"
-                TextColor="White"
-            
-                Text="Download"
-                x:Name="DownloadVideoButton"
-                Clicked="DownloadVideo">
-            </Button>
+            <Ellipse x:Name="Dot_3"
+                WidthRequest="24"
+                HeightRequest="24">
+
+                <Ellipse.Background>
+                    <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
+                        <GradientStop Color="{StaticResource BlackBacground}" Offset="0.0"/>
+                        <GradientStop Color="{StaticResource NeonBlue}" Offset="1.0"/>
+                    </RadialGradientBrush>
+                </Ellipse.Background>
+            </Ellipse>
+
         </HorizontalStackLayout>
-                <!--Main Page-->
-        
+
     </Grid>
 
 

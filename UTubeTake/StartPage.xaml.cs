@@ -1,5 +1,5 @@
-using Microsoft.Maui.Graphics.Platform;
 using UTubeTake.Code;
+
 
 namespace UTubeTake;
 
@@ -13,58 +13,81 @@ public partial class StartPage : ContentPage {
 	private VideoUiUpdater _videoUiUpdater;
 	private VideoDownloader _videoDownloader;
 
+	private DotAnimation _dotAnimation;
 
 	public StartPage() {
 		InitializeComponent();
 
-		//
 		SettingStatic.LoadSetting();
 
-		//FirstStage
-		_linkTest = new LinkTest();
-		_imgVideoDownload = new ImgVideoDownload();
+        CreateOwnComponent();
 
-		//SecondStage
-		_videoVariable = VideoVariable.Instanite();
-
-		_videoInformer = new VideoInformer(_videoVariable);
-		_videoUiUpdater = new VideoUiUpdater(PickerQuality, PickerBitRate, VideoNameText, VideoAuthorText, VideoDurationText, VideoSizeText);
-		
-		_videoDownloader = new VideoDownloader(_videoVariable);
+		VideoView.IsVisible = false;
+        LoadingView.IsVisible = false;
 	}
 
+    private void CreateOwnComponent() {
+        _linkTest = new LinkTest();
+        _imgVideoDownload = new ImgVideoDownload();
 
-	private void FindVideo(object sender, System.EventArgs e) {
-		
+        _videoVariable = VideoVariable.Instanite();
+
+        _videoInformer = new VideoInformer(_videoVariable);
+        _videoUiUpdater = new VideoUiUpdater(PickerQuality, PickerBitRate, VideoNameText, VideoAuthorText, VideoDurationText, VideoSizeText);
+
+        _videoDownloader = new VideoDownloader(_videoVariable);
+
+        _dotAnimation = new DotAnimation(Dot_1, Dot_2, Dot_3);
+    }
+
+    private void FindVideo(object sender, System.EventArgs e) {
+
 		Button button = (Button)sender;
 		string link = linkEntry.Text;
 
+		if (StaticFlags.downloadInfo == true) return;
 		
-		if(_linkTest.testUrl(ref link) && StaticFlags.downloadInfo == false) {
-
-			StaticFlags.downloadFile = true;
-
+		if(_linkTest.testUrl(ref link) == true) {
             button.Text = "Find!";
-            imageVideo.Source = _imgVideoDownload.GetImgVideoUrl(link);
-			DownloadInfoForVideo(link);
-
-            StaticFlags.downloadFile = true;
+			Wait(link);
 
         } else {
-            button.Text = "Try another link!";
+            VideoView.IsVisible = false;
+
+			_dotAnimation.StopAnimation();
+			LoadingView.IsVisible = false;
+
         }
+
 	}
 
-	private async void DownloadInfoForVideo(string url) {
+	private async void Wait(string link) {
 
-		Task video = _videoInformer.LoadInfo(url);
-		Task picker = _videoInformer.LoadInfoForPicker(url);
+        StaticFlags.downloadInfo = true;
 
-		await video;
-		_videoUiUpdater.UpdateTextVideo(_videoInformer.GetInfoForVideo());
+        _dotAnimation.StartAnimation();
+        LoadingView.IsVisible = true;
+        VideoView.IsVisible = false;
 
-		await picker;
-		_videoUiUpdater.UpdatePicker(_videoInformer.GetQualityList(), _videoInformer.GetBitRateList());
+        imageVideo.Source = _imgVideoDownload.GetImgVideoUrl(link);
+        await DownloadInfoForVideo(link);
+
+        _dotAnimation.StopAnimation();
+        LoadingView.IsVisible = false;
+
+        VideoView.IsVisible = true;
+
+        StaticFlags.downloadInfo = false;
+
+    }
+
+	private async Task DownloadInfoForVideo(string url) {
+
+		await _videoInformer.LoadInfo(url);
+		await _videoInformer.LoadInfoForPicker(url);
+		
+        _videoUiUpdater.UpdateTextVideo(_videoInformer.GetInfoForVideo());
+        _videoUiUpdater.UpdatePicker(_videoInformer.GetQualityList(), _videoInformer.GetBitRateList());
 
 		UpdateVideoSize();
 
