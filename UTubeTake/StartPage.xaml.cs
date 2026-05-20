@@ -36,26 +36,26 @@ public partial class StartPage : ContentPage {
 
 	private void FindVideo(object sender, System.EventArgs e) {
 		
-		//Variables
 		Button button = (Button)sender;
 		string link = linkEntry.Text;
 
-		//
+		
 		if(_linkTest.testUrl(ref link) && StaticFlags.downloadInfo == false) {
+
+			StaticFlags.downloadFile = true;
 
             button.Text = "Find!";
             imageVideo.Source = _imgVideoDownload.GetImgVideoUrl(link);
 			DownloadInfoForVideo(link);
-			
-			
+
+            StaticFlags.downloadFile = true;
+
         } else {
             button.Text = "Try another link!";
         }
 	}
 
 	private async void DownloadInfoForVideo(string url) {
-
-        StaticFlags.downloadInfo = true;
 
 		Task video = _videoInformer.LoadInfo(url);
 		Task picker = _videoInformer.LoadInfoForPicker(url);
@@ -68,7 +68,6 @@ public partial class StartPage : ContentPage {
 
 		UpdateVideoSize();
 
-		StaticFlags.downloadInfo = false;
 	}
 
 	//Download Button
