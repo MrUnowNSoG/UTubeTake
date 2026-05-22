@@ -14,8 +14,8 @@
         </Grid.ColumnDefinitions>
         
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="230"/>
             <RowDefinition Height="120"/>
             <RowDefinition />
@@ -58,7 +58,6 @@
              />
         </Border>
 
-
         <VerticalStackLayout 
             Grid.Column="0"
             Grid.Row="4"
@@ -90,7 +89,7 @@
         <!--Nav-->
         
         
-        <!--Main Page-->
+        <!--Top page-->
         <Label
             Grid.Column="1"
             Grid.ColumnSpan="3"
@@ -102,7 +101,7 @@
             FontSize="20"
             TextColor="White"
             
-            Text="Download all from YouTube"/>
+            Text="Download all from YouTube!"/>
 
         <!--Find video-->
         <Border
@@ -133,7 +132,7 @@
                     FontFamily="Helvetica"
                     FontSize="20" 
                     
-                    Placeholder = "Insert link here!" 
+                    Placeholder = "https://www.youtube.com/watch..." 
                     
                     ClearButtonVisibility="WhileEditing"
                     MaxLength ="250" 
@@ -142,12 +141,12 @@
 
                 <Button
                     Grid.Column="2"
-                    Margin="5,0,5,0"
-                    Padding="0, 0, 0, 0"
-                    
-                    VerticalOptions="CenterAndExpand"
-                    HorizontalOptions="Fill"    
+                    Margin="5, 5, 5, 5"
+                    Padding="0, 0, 0, 5"
                     CornerRadius="0"
+                    
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Fill"    
                     
                     BorderColor="{StaticResource NeonBlue}"
                     BackgroundColor="{StaticResource NeonBlue}"
@@ -160,14 +159,138 @@
                     Clicked="FindVideo"/>
             </Grid>
         </Border>
+        <!--Top page-->
 
-        <!--Image and name video-->
-        <Grid x:Name="VideoView"
+        
+        <!--Welcome view-->
+        <HorizontalStackLayout x:Name="WelcomeView" IsVisible="False"
             Grid.Column="1"
             Grid.ColumnSpan="3"
             Grid.Row="2"
             Grid.RowSpan="3"
+                                 
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Spacing="12">
+
+            <Label
+                FontSize="40"
+                Text="Welcome dear user, I wait You ^.^"/>
+
+        </HorizontalStackLayout>
+        <!--Welcome view-->
+
+        
+        <!--Error view-->
+        <Grid x:Name="ErrorView"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            Grid.Row="2"
+            Grid.RowSpan="3"
+            
+            IsVisible="True"
+            
+            Margin="5, 10, 5, 5"  
+            
+            ColumnDefinitions="Auto, *"
+            RowDefinitions="auto,*,auto">
+
+            <Label
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Grid.Row="0"
+                
+                HorizontalOptions="Center"
+                
+                FontSize="20"
+                Text="Error detected!"
+                />
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="1"
+                
+                HorizontalOptions="Center"
+                BackgroundColor="Yellow"
+
+                FontSize="20"
+                Text="Error context:"/>
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="2"
+                
+                HorizontalOptions="Center"
+                BackgroundColor="Red"
+
+                HeightRequest="80"
+                
+                FontSize="20"
+                Text="Resolve:"/>
+
+        </Grid>
+        <!--Welcome view-->
+
+
+        <!--Loading view-->
+        <HorizontalStackLayout x:Name="LoadingView"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            Grid.Row="2"
+            Grid.RowSpan="3"
+            
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            Spacing="12">
+
+            <Ellipse x:Name="Dot_1"
+                WidthRequest="24"
+                HeightRequest="24">
+
+                <Ellipse.Background>
+                    <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
+                        <GradientStop Color="{StaticResource BlackBacground}" Offset="0.0"/>
+                        <GradientStop Color="{StaticResource NeonBlue}" Offset="1.0"/>
+                    </RadialGradientBrush>
+                </Ellipse.Background>
+            </Ellipse>
+
+            <Ellipse x:Name="Dot_2"
+                WidthRequest="24"
+                HeightRequest="24">
+
+                <Ellipse.Background>
+                    <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
+                        <GradientStop Color="{StaticResource BlackBacground}" Offset="0.0"/>
+                        <GradientStop Color="{StaticResource NeonBlue}" Offset="1.0"/>
+                    </RadialGradientBrush>
+                </Ellipse.Background>
+            </Ellipse>
+
+            <Ellipse x:Name="Dot_3"
+                WidthRequest="24"
+                HeightRequest="24">
+
+                <Ellipse.Background>
+                    <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
+                        <GradientStop Color="{StaticResource BlackBacground}" Offset="0.0"/>
+                        <GradientStop Color="{StaticResource NeonBlue}" Offset="1.0"/>
+                    </RadialGradientBrush>
+                </Ellipse.Background>
+            </Ellipse>
+
+        </HorizontalStackLayout>
+        <!--Loading view-->
+
+        
+        <!--Vido view-->
+        <Grid x:Name="VideoView"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            Grid.Row="2"
+            Grid.RowSpan="3"  
             IsVisible="False"
+              
             ColumnDefinitions="*,*"
             RowDefinitions="Auto,Auto">
 
@@ -266,56 +389,9 @@
             </HorizontalStackLayout>
 
         </Grid>
-        <!--Main Page-->
+        <!--Vido view-->
 
-        <HorizontalStackLayout x:Name="LoadingView"
-            Grid.Column="1"
-            Grid.ColumnSpan="3"
-            Grid.Row="2"
-            Grid.RowSpan="3"
-            
-            HorizontalOptions="CenterAndExpand"
-            VerticalOptions="CenterAndExpand"
-            Spacing="12">
-
-            <Ellipse x:Name="Dot_1"
-                WidthRequest="24"
-                HeightRequest="24">
-
-                <Ellipse.Background>
-                    <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
-                        <GradientStop Color="{StaticResource BlackBacground}" Offset="0.0"/>
-                        <GradientStop Color="{StaticResource NeonBlue}" Offset="1.0"/>
-                    </RadialGradientBrush>
-                </Ellipse.Background>
-            </Ellipse>
-
-            <Ellipse x:Name="Dot_2"
-                WidthRequest="24"
-                HeightRequest="24">
-
-                <Ellipse.Background>
-                    <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
-                        <GradientStop Color="{StaticResource BlackBacground}" Offset="0.0"/>
-                        <GradientStop Color="{StaticResource NeonBlue}" Offset="1.0"/>
-                    </RadialGradientBrush>
-                </Ellipse.Background>
-            </Ellipse>
-
-            <Ellipse x:Name="Dot_3"
-                WidthRequest="24"
-                HeightRequest="24">
-
-                <Ellipse.Background>
-                    <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
-                        <GradientStop Color="{StaticResource BlackBacground}" Offset="0.0"/>
-                        <GradientStop Color="{StaticResource NeonBlue}" Offset="1.0"/>
-                    </RadialGradientBrush>
-                </Ellipse.Background>
-            </Ellipse>
-
-        </HorizontalStackLayout>
-
+        
     </Grid>
 
 
