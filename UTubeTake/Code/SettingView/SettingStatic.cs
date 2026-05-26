@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace UTubeTake.Code.Setting {
 
-namespace UTubeTake.Code {
     public static class SettingStatic {
 
         public static string pathForVideo = "";

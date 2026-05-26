@@ -1,43 +1,35 @@
 using UTubeTake.Code;
+using UTubeTake.Code.Animation;
+using UTubeTake.Code.Bootstrap;
+using UTubeTake.Code.Setting;
+using UTubeTake.Code.Tools;
 
 
 namespace UTubeTake;
 
 public partial class StartPage : ContentPage {
 
-	private LinkTest _linkTest;
-	private ImgVideoDownload _imgVideoDownload;
-	
-	private VideoVariable _videoVariable;
-	private VideoInformer _videoInformer;
-	private VideoUiUpdater _videoUiUpdater;
-	private VideoDownloader _videoDownloader;
 
-	private DotAnimation _dotAnimation;
+	private BootstrapContainer _container;
+
 
 	public StartPage() {
+
 		InitializeComponent();
-
-		SettingStatic.LoadSetting();
-
-        CreateOwnComponent();
+        Initialize();
 
 		VideoView.IsVisible = false;
         LoadingView.IsVisible = false;
 	}
 
-    private void CreateOwnComponent() {
-        _linkTest = new LinkTest();
-        _imgVideoDownload = new ImgVideoDownload();
+    private void Initialize() {
 
-        _videoVariable = VideoVariable.Instanite();
+        SettingStatic.LoadSetting();
 
-        _videoInformer = new VideoInformer(_videoVariable);
-        _videoUiUpdater = new VideoUiUpdater(PickerQuality, PickerBitRate, VideoNameText, VideoAuthorText, VideoDurationText, VideoSizeText);
-
-        _videoDownloader = new VideoDownloader(_videoVariable);
-
-        _dotAnimation = new DotAnimation(Dot_1, Dot_2, Dot_3);
+        Bootstrap boot = new Bootstrap();
+		_container = boot.Initialize();
+        _container.VideoUiUpdater = new VideoUiUpdater(PickerQuality, PickerBitRate, VideoNameText, VideoAuthorText, VideoDurationText, VideoSizeText);
+        _container.DotAnimation = new DotAnimation(Dot_1, Dot_2, Dot_3);
     }
 
     private void FindVideo(object sender, System.EventArgs e) {
@@ -47,14 +39,14 @@ public partial class StartPage : ContentPage {
 
 		if (StaticFlags.downloadInfo == true) return;
 		
-		if(_linkTest.testUrl(ref link) == true) {
+		if(_container.LinkTest.testUrl(ref link) == true) {
             button.Text = "Find!";
 			Wait(link);
 
         } else {
             VideoView.IsVisible = false;
 
-			_dotAnimation.StopAnimation();
+            _container.DotAnimation.StopAnimation();
 			LoadingView.IsVisible = false;
 
         }
@@ -65,14 +57,14 @@ public partial class StartPage : ContentPage {
 
         StaticFlags.downloadInfo = true;
 
-        _dotAnimation.StartAnimation();
+        _container.DotAnimation.StartAnimation();
         LoadingView.IsVisible = true;
         VideoView.IsVisible = false;
 
-        imageVideo.Source = _imgVideoDownload.GetImgVideoUrl(link);
+        imageVideo.Source = _container.AvatarVideoService.GetImgVideoUrl(link);
         await DownloadInfoForVideo(link);
 
-        _dotAnimation.StopAnimation();
+        _container.DotAnimation.StopAnimation();
         LoadingView.IsVisible = false;
 
         VideoView.IsVisible = true;
@@ -83,11 +75,13 @@ public partial class StartPage : ContentPage {
 
 	private async Task DownloadInfoForVideo(string url) {
 
-		await _videoInformer.LoadInfo(url);
-		await _videoInformer.LoadInfoForPicker(url);
+		VideoInformer informer = _container.VideoInformer;
+
+		await informer.LoadInfo(url);
+		await informer.LoadInfoForPicker(url);
 		
-        _videoUiUpdater.UpdateTextVideo(_videoInformer.GetInfoForVideo());
-        _videoUiUpdater.UpdatePicker(_videoInformer.GetQualityList(), _videoInformer.GetBitRateList());
+        _container.VideoUiUpdater.UpdateTextVideo(informer.GetInfoForVideo());
+        _container.VideoUiUpdater.UpdatePicker(informer.GetQualityList(), informer.GetBitRateList());
 
 		UpdateVideoSize();
 
@@ -101,7 +95,7 @@ public partial class StartPage : ContentPage {
 			StaticFlags.downloadFile = true;
 
 			IProgress<double> progress = new Progress<double>(GetPercentVideo);
-			await _videoDownloader.DownloadVideo(PickerQuality.SelectedIndex, PickerBitRate.SelectedIndex, progress);
+			await _container.VideoDownloader.DownloadVideo(PickerQuality.SelectedIndex, PickerBitRate.SelectedIndex, progress);
 		
 			StaticFlags.downloadFile = false;
 		}
@@ -119,10 +113,10 @@ public partial class StartPage : ContentPage {
 		if (StaticFlags.downloadImg == false) {
 			string link = linkEntry.Text;
 
-			if (link != null && link != "" && _linkTest.testUrl(ref link)) {
+			if (link != null && link != "" && _container.LinkTest.testUrl(ref link)) {
 
 				StaticFlags.downloadImg = true;
-				_imgVideoDownload.DownloadImg(link, _videoVariable.video.Title.ToString(), SettingStatic.pathForImage);
+				_container.AvatarVideoService.DownloadImg(link, _container.VideoVariable.video.Title.ToString(), SettingStatic.pathForImage);
 			}
 		}
 	}
@@ -136,7 +130,10 @@ public partial class StartPage : ContentPage {
 		UpdateVideoSize();
     }
 
-	private void UpdateVideoSize() => _videoUiUpdater.UpdateSizeVideo(_videoInformer.GetSizeFile(PickerQuality.SelectedIndex, PickerBitRate.SelectedIndex));
+	private void UpdateVideoSize() {
+		string sizeVideo = _container.VideoInformer.GetSizeFile(PickerQuality.SelectedIndex, PickerBitRate.SelectedIndex);
+        _container.VideoUiUpdater.UpdateSizeVideo(sizeVideo);
+	}
 
 
     //Pages

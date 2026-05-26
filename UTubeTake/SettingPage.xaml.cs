@@ -1,5 +1,5 @@
 using CommunityToolkit.Maui.Storage;
-using UTubeTake.Code;
+using UTubeTake.Code.Setting;
 
 namespace UTubeTake;
 

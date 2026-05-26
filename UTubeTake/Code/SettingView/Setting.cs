@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UTubeTake.Code {
+namespace UTubeTake.Code.Setting {
     internal class Setting {
 
         //Const

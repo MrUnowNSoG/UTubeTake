@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace UTubeTake.Code {
+namespace UTubeTake.Code.Animation {
 
     internal class DotAnimation {
 

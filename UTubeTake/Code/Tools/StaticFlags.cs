@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UTubeTake.Code {
+namespace UTubeTake.Code.Tools {
     public class StaticFlags {
 
         public static bool downloadInfo = false;
