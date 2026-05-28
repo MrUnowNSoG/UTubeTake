@@ -1,7 +1,9 @@
+using Microsoft.Maui.Controls.Shapes;
 using UTubeTake.Code;
 using UTubeTake.Code.Animation;
 using UTubeTake.Code.Bootstrap;
 using UTubeTake.Code.Setting;
+using UTubeTake.Code.StartPage;
 using UTubeTake.Code.Tools;
 
 
@@ -9,27 +11,51 @@ namespace UTubeTake;
 
 public partial class StartPage : ContentPage {
 
-
+	private StartPage_WindowManager _windowManager;
 	private BootstrapContainer _container;
 
 
 	public StartPage() {
 
 		InitializeComponent();
-        Initialize();
+		var container = InitializeWindowComponent();
+		InitializeOwnComponent(container);
 
-		VideoView.IsVisible = false;
-        LoadingView.IsVisible = false;
 	}
 
-    private void Initialize() {
+	private StartPage_XAMLContainer InitializeWindowComponent() {
+
+		StartPage_XAMLContainer container = new StartPage_XAMLContainer {
+			WelcomeView = this.WelcomeView,
+
+			LoadongView = this.LoadingView,
+			LoadingDots = new List<Ellipse> { Dot_1, Dot_2, Dot_3 },
+
+			VideoView = this.VideoView,
+			QualityPicker = this.PickerQuality,
+			BitRatePicker = this.PickerBitRate,
+			NameVideoLabel = this.VideoNameLabel,
+			AuthorVideoLabel = this.VideoAuthorLabel,
+			DurationVideoLabel = this.VideoDurationLabel,
+			SizeVideoLabel = this.VideoSizeLabel,
+
+			ErrorView = this.ErrorView
+
+		};
+
+		StartPage_WindowManager windowManager = new StartPage_WindowManager(container);
+		windowManager.ShowWelcomeView();
+
+		return container;
+
+	}
+
+    private void InitializeOwnComponent(StartPage_XAMLContainer container) {
 
         SettingStatic.LoadSetting();
 
-        Bootstrap boot = new Bootstrap();
+        Bootstrap boot = new Bootstrap(container);
 		_container = boot.Initialize();
-        _container.VideoUiUpdater = new VideoUiUpdater(PickerQuality, PickerBitRate, VideoNameText, VideoAuthorText, VideoDurationText, VideoSizeText);
-        _container.DotAnimation = new DotAnimation(Dot_1, Dot_2, Dot_3);
     }
 
     private void FindVideo(object sender, System.EventArgs e) {
@@ -46,7 +72,7 @@ public partial class StartPage : ContentPage {
         } else {
             VideoView.IsVisible = false;
 
-            _container.DotAnimation.StopAnimation();
+            //_container.DotAnimation.StopAnimation();
 			LoadingView.IsVisible = false;
 
         }
@@ -57,14 +83,14 @@ public partial class StartPage : ContentPage {
 
         StaticFlags.downloadInfo = true;
 
-        _container.DotAnimation.StartAnimation();
+        //_container.DotAnimation.StartAnimation();
         LoadingView.IsVisible = true;
         VideoView.IsVisible = false;
 
         imageVideo.Source = _container.AvatarVideoService.GetImgVideoUrl(link);
         await DownloadInfoForVideo(link);
 
-        _container.DotAnimation.StopAnimation();
+        //_container.DotAnimation.StopAnimation();
         LoadingView.IsVisible = false;
 
         VideoView.IsVisible = true;
@@ -116,7 +142,7 @@ public partial class StartPage : ContentPage {
 			if (link != null && link != "" && _container.LinkTest.testUrl(ref link)) {
 
 				StaticFlags.downloadImg = true;
-				_container.AvatarVideoService.DownloadImg(link, _container.VideoVariable.video.Title.ToString(), SettingStatic.pathForImage);
+			//	_container.AvatarVideoService.DownloadImg(link, _container.VideoVariable.video.Title.ToString(), SettingStatic.pathForImage);
 			}
 		}
 	}

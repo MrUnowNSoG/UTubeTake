@@ -1,30 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UTubeTake.Code.StartPage;
+
+
 
 namespace UTubeTake.Code {
-    internal class VideoUiUpdater {
 
-        //Visual
-        Picker _qualityPicker;
-        Picker _bitRatePicker;
+    internal sealed class VideoUiUpdater {
+
+        private Picker _qualityPicker;
+        private Picker _bitRatePicker;
 
         private Label _name;
         private Label _author;
         private Label _duration;
         private Label _sizeDownload;
 
-        public VideoUiUpdater(Picker pickerQuality, Picker pickerBitRate,params Label[] label) {
+        public VideoUiUpdater(StartPage_XAMLContainer container) {
 
-            _qualityPicker = pickerQuality;
-            _bitRatePicker = pickerBitRate;
+            _qualityPicker = container.QualityPicker;
+            _bitRatePicker = container.BitRatePicker;
 
-            _name = label[0];
-            _author = label[1];
-            _duration = label[2];
-            _sizeDownload = label[3];
+            _name = container.NameVideoLabel;
+            _author = container.AuthorVideoLabel;
+            _duration = container.DurationVideoLabel;
+            _sizeDownload = container.SizeVideoLabel;
+
         }
         
         public void UpdateTextVideo(string[] arrayText) {
@@ -41,5 +40,6 @@ namespace UTubeTake.Code {
         public void UpdateSizeVideo(string size) {
             _sizeDownload.Text = size;
         }
+    
     }
 }

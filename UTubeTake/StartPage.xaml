@@ -339,19 +339,19 @@
 
                 <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
                    FontSize="28" TextColor="White"
-                   x:Name="VideoNameText" Text="Name"/>
+                   x:Name="VideoNameLabel" Text="Name"/>
 
                 <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
                    FontSize="20" TextColor="White"
-                   x:Name="VideoAuthorText" Text="Author"/>
+                   x:Name="VideoAuthorLabel" Text="Author"/>
 
                 <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
                    FontSize="20" TextColor="White"
-                   x:Name="VideoDurationText" Text="Duration"/>
+                   x:Name="VideoDurationLabel" Text="Duration"/>
 
                 <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
                    FontSize="20" TextColor="White"
-                   x:Name="VideoSizeText" Text="Size"/>
+                   x:Name="VideoSizeLabel" Text="Size"/>
             </VerticalStackLayout>
 
             <!--Pickers + Download-->

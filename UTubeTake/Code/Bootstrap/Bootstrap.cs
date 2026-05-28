@@ -1,22 +1,33 @@
-﻿namespace UTubeTake.Code.Bootstrap {
+﻿using UTubeTake.Code.StartPage;
+
+
+
+namespace UTubeTake.Code.Bootstrap {
 
     internal sealed class Bootstrap {
-    
-        public Bootstrap() { }
+
+        private readonly StartPage_XAMLContainer _xamlContainer;
+
+        public Bootstrap(StartPage_XAMLContainer container) {
+            _xamlContainer = container;
+        }
 
         public BootstrapContainer Initialize() {
 
-            BootstrapContainer container = new BootstrapContainer();
+            VideoVariable variable = new VideoVariable();
 
-            container.LinkTest = new LinkTest();
-            container.AvatarVideoService = new ImgVideoDownload();
+            BootstrapContainer container = new BootstrapContainer {
 
-            container.VideoVariable = VideoVariable.Instanite();
+                LinkTest = new LinkTest(),
+                AvatarVideoService = new ImgVideoDownload(),
 
-            container.VideoInformer = new VideoInformer(container.VideoVariable);
-            container.VideoDownloader = new VideoDownloader(container.VideoVariable);
+                VideoInformer = new VideoInformer(variable),
+                VideoDownloader = new VideoDownloader(variable),
+                VideoUiUpdater = new VideoUiUpdater(_xamlContainer)
+            };
 
             return container;
+
         }
 
     }

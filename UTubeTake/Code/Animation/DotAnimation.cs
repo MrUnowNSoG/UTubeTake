@@ -1,7 +1,6 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
+
 
 namespace UTubeTake.Code.Animation {
 
@@ -13,15 +12,9 @@ namespace UTubeTake.Code.Animation {
         private List<Ellipse> _dots;
         private CancellationTokenSource _cancellToken;
 
-        public DotAnimation(params Ellipse[] dots) {
-
-            _dots = new List<Ellipse>();
+        public DotAnimation(List<Ellipse> dots) {
+            _dots = dots;
             _cancellToken = new CancellationTokenSource();
-
-            foreach (Ellipse dot in dots) { 
-                _dots.Add(dot);
-            }
-
         }
 
         public void StartAnimation() {
