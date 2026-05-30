@@ -1,5 +1,5 @@
 ﻿using UTubeTake.Code.StartPage;
-
+using UTubeTake.Code.Tools;
 
 
 namespace UTubeTake.Code.Bootstrap {
@@ -23,7 +23,9 @@ namespace UTubeTake.Code.Bootstrap {
 
                 VideoInformer = new VideoInformer(variable),
                 VideoDownloader = new VideoDownloader(variable),
-                VideoUiUpdater = new VideoUiUpdater(_xamlContainer)
+                VideoUiUpdater = new VideoUiUpdater(_xamlContainer),
+
+                ErrorHandlService = new ErrorHandlService(_xamlContainer),
             };
 
             return container;

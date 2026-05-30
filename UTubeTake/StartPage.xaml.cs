@@ -1,10 +1,10 @@
 using Microsoft.Maui.Controls.Shapes;
 using UTubeTake.Code;
-using UTubeTake.Code.Animation;
 using UTubeTake.Code.Bootstrap;
 using UTubeTake.Code.Setting;
 using UTubeTake.Code.StartPage;
 using UTubeTake.Code.Tools;
+
 
 
 namespace UTubeTake;
@@ -18,12 +18,16 @@ public partial class StartPage : ContentPage {
 	public StartPage() {
 
 		InitializeComponent();
-		var container = InitializeWindowComponent();
-		InitializeOwnComponent(container);
+
+		var xamlContainer = InitializeXAMLContainer();
+        _windowManager = new StartPage_WindowManager(xamlContainer);
+        _windowManager.ShowWelcomeView();
+
+        _container = InitializeBootCoontainer(xamlContainer);
 
 	}
 
-	private StartPage_XAMLContainer InitializeWindowComponent() {
+	private StartPage_XAMLContainer InitializeXAMLContainer() {
 
 		StartPage_XAMLContainer container = new StartPage_XAMLContainer {
 			WelcomeView = this.WelcomeView,
@@ -39,26 +43,24 @@ public partial class StartPage : ContentPage {
 			DurationVideoLabel = this.VideoDurationLabel,
 			SizeVideoLabel = this.VideoSizeLabel,
 
-			ErrorView = this.ErrorView
-
-		};
-
-		StartPage_WindowManager windowManager = new StartPage_WindowManager(container);
-		windowManager.ShowWelcomeView();
+			ErrorView = this.ErrorView,
+            ErrorCodeLabel = this.ErrorCodeLabel,
+			ErrorResolveLabel = this.ErrorResolveLabel,
+        };
 
 		return container;
 
 	}
-
-    private void InitializeOwnComponent(StartPage_XAMLContainer container) {
+    private BootstrapContainer InitializeBootCoontainer(StartPage_XAMLContainer container) {
 
         SettingStatic.LoadSetting();
 
         Bootstrap boot = new Bootstrap(container);
-		_container = boot.Initialize();
+		return boot.Initialize();
     }
 
-    private void FindVideo(object sender, System.EventArgs e) {
+
+    private void FindVideoEvent(object sender, System.EventArgs e) {
 
 		Button button = (Button)sender;
 		string link = linkEntry.Text;
@@ -67,39 +69,37 @@ public partial class StartPage : ContentPage {
 		
 		if(_container.LinkTest.testUrl(ref link) == true) {
             button.Text = "Find!";
-			Wait(link);
+            StartVideoProcessing(link);
 
-        } else {
-            VideoView.IsVisible = false;
-
-            //_container.DotAnimation.StopAnimation();
-			LoadingView.IsVisible = false;
-
-        }
+        } else {}
 
 	}
 
-	private async void Wait(string link) {
+	private async void StartVideoProcessing(string link) {
 
+		_windowManager.ShowLoadingView();
         StaticFlags.downloadInfo = true;
-
-        //_container.DotAnimation.StartAnimation();
-        LoadingView.IsVisible = true;
-        VideoView.IsVisible = false;
-
+    
         imageVideo.Source = _container.AvatarVideoService.GetImgVideoUrl(link);
-        await DownloadInfoForVideo(link);
 
-        //_container.DotAnimation.StopAnimation();
-        LoadingView.IsVisible = false;
+		try {
 
-        VideoView.IsVisible = true;
+			await VideoProcessing(link);
+
+		} catch (Exception ex) {
+			_container.ErrorHandlService.CathcError(ex);
+			_windowManager.ShowErrorView();
+
+            StaticFlags.downloadInfo = false;
+            return;
+        }
 
         StaticFlags.downloadInfo = false;
+		_windowManager.ShowVideoView();
 
     }
 
-	private async Task DownloadInfoForVideo(string url) {
+	private async Task VideoProcessing(string url) {
 
 		VideoInformer informer = _container.VideoInformer;
 
@@ -113,21 +113,26 @@ public partial class StartPage : ContentPage {
 
 	}
 
-	//Download Button
-	private async void DownloadVideo(object sender, EventArgs e) {
+	private async void DownloadVideoEvent(object sender, EventArgs e) {
 
 		if (StaticFlags.downloadFile == false) {
 
 			StaticFlags.downloadFile = true;
 
 			IProgress<double> progress = new Progress<double>(GetPercentVideo);
-			await _container.VideoDownloader.DownloadVideo(PickerQuality.SelectedIndex, PickerBitRate.SelectedIndex, progress);
-		
+
+            try {
+                await _container.VideoDownloader.DownloadVideo(PickerQuality.SelectedIndex, PickerBitRate.SelectedIndex, progress);
+            
+			} catch (Exception ex) {
+                _container.ErrorHandlService.CathcError(ex);
+                _windowManager.ShowErrorView();
+			}
+
 			StaticFlags.downloadFile = false;
 		}
 	}
 
-	
 	private void GetPercentVideo(double d) {
         DownloadVideoButton.Text = Math.Truncate(d * 100).ToString() + "%";
 
@@ -142,28 +147,23 @@ public partial class StartPage : ContentPage {
 			if (link != null && link != "" && _container.LinkTest.testUrl(ref link)) {
 
 				StaticFlags.downloadImg = true;
-			//	_container.AvatarVideoService.DownloadImg(link, _container.VideoVariable.video.Title.ToString(), SettingStatic.pathForImage);
+				//_container.AvatarVideoService.DownloadImg(link, _container.VideoVariable.video.Title.ToString(), SettingStatic.pathForImage);
 			}
 		}
 	}
 
-	//Size video
-    private void PickerBitRate_SelectedIndexChanged(object sender, EventArgs e) {
-		UpdateVideoSize();
-    }
+	
 
-    private void PickerQuality_SelectedIndexChanged(object sender, EventArgs e) {
-		UpdateVideoSize();
-    }
+    private void PickerBitRate_SelectedIndexChanged(object sender, EventArgs e) => UpdateVideoSize();
+    private void PickerQuality_SelectedIndexChanged(object sender, EventArgs e) => UpdateVideoSize();
 
-	private void UpdateVideoSize() {
+    private void UpdateVideoSize() {
 		string sizeVideo = _container.VideoInformer.GetSizeFile(PickerQuality.SelectedIndex, PickerBitRate.SelectedIndex);
         _container.VideoUiUpdater.UpdateSizeVideo(sizeVideo);
 	}
 
 
-    //Pages
-    private async void SettingPage(object sender, EventArgs eventArgs) {
+    private async void SettingPageEvent(object sender, EventArgs eventArgs) {
         await Navigation.PushModalAsync(new SettingPage(), false);
     }
 

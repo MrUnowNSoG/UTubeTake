@@ -19,6 +19,8 @@ namespace UTubeTake.Code.StartPage {
 
 
         public required Layout ErrorView;
+        public required Label ErrorCodeLabel { get; init; }
+        public required Label ErrorResolveLabel { get; init; }
 
     }
 

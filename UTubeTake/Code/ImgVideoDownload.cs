@@ -1,16 +1,13 @@
-﻿using AngleSharp.Dom;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 using UTubeTake.Code.Tools;
 
-namespace UTubeTake.Code {
-    internal class ImgVideoDownload {
 
-        private WebClient _web;
+
+namespace UTubeTake.Code {
+
+    internal sealed class ImgVideoDownload {
+
+        private readonly WebClient _web;
 
         public ImgVideoDownload() {
             _web = new WebClient();

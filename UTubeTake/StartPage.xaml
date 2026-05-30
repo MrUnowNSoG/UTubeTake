@@ -83,7 +83,7 @@
   
             BackgroundColor="Transparent"
    
-            Clicked="SettingPage"/>
+            Clicked="SettingPageEvent"/>
 
         </VerticalStackLayout>
         <!--Nav-->
@@ -156,7 +156,7 @@
                     
                     Text="Find"
                     
-                    Clicked="FindVideo"/>
+                    Clicked="FindVideoEvent"/>
             </Grid>
         </Border>
         <!--Top page-->
@@ -217,6 +217,14 @@
                 Text="Error context:"/>
 
             <Label
+                x:Name="ErrorCodeLabel"
+                 Grid.Column="1"
+                 Grid.Row="1"
+
+                 FontSize="20"
+                 Text=""/>
+
+            <Label
                 Grid.Column="0"
                 Grid.Row="2"
                 
@@ -227,6 +235,14 @@
                 
                 FontSize="20"
                 Text="Resolve:"/>
+
+            <Label
+                x:Name="ErrorResolveLabel"
+                 Grid.Column="1"
+                 Grid.Row="2"
+
+                 FontSize="20"
+                 Text=""/>
 
         </Grid>
         <!--Welcome view-->
@@ -385,7 +401,7 @@
                     TextColor="White"
                     Text="Download"
                     x:Name="DownloadVideoButton"
-                    Clicked="DownloadVideo"/>
+                    Clicked="DownloadVideoEvent"/>
             </HorizontalStackLayout>
 
         </Grid>

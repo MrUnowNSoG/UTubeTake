@@ -1,4 +1,6 @@
-﻿namespace UTubeTake.Code.Bootstrap {
+﻿using UTubeTake.Code.Tools;
+
+namespace UTubeTake.Code.Bootstrap {
 
     internal sealed class BootstrapContainer {
 
@@ -8,6 +10,8 @@
         public required VideoInformer VideoInformer { get; init; }
         public required VideoUiUpdater VideoUiUpdater { get; init; }
         public required VideoDownloader VideoDownloader { get; init; }
+
+        public required ErrorHandlService ErrorHandlService { get; init; }
 
     }
 

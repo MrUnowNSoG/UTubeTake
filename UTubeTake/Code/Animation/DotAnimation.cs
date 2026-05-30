@@ -12,18 +12,26 @@ namespace UTubeTake.Code.Animation {
         private List<Ellipse> _dots;
         private CancellationTokenSource _cancellToken;
 
+        private bool _animationState;
+        public bool GetAnimationState() => _animationState;
+
         public DotAnimation(List<Ellipse> dots) {
             _dots = dots;
             _cancellToken = new CancellationTokenSource();
+            _animationState = false;
         }
 
         public void StartAnimation() {
+
+            if (_animationState == true) return;
+
+            _animationState = true;
+
             foreach (Ellipse dot in _dots) {
                 dot.Scale = MIN_SIZE;
             }
 
             Animation(_cancellToken.Token);
-
         }
 
         private async void Animation(CancellationToken token) {
@@ -43,6 +51,7 @@ namespace UTubeTake.Code.Animation {
         public void StopAnimation() {
             _cancellToken.Cancel();
             _cancellToken = new CancellationTokenSource();
+            _animationState = false;
         }
 
     }

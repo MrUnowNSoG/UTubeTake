@@ -5,7 +5,7 @@ using YoutubeExplode.Videos.Streams;
 namespace UTubeTake.Code {
     internal class VideoDownloader {
 
-        private VideoVariable _variable;
+        private readonly VideoVariable _variable;
 
         public VideoDownloader(VideoVariable variable) { 
             _variable = variable;
@@ -13,11 +13,8 @@ namespace UTubeTake.Code {
 
         public async Task DownloadVideo(int quality, int bitrate, IProgress<double> progress) {
 
-            //
             if (quality <= 0 && bitrate <= 0) return;
 
-
-            //Need creat file
             IStreamInfo? videoStream = null;
             if (quality > 0) {
                 videoStream = _variable.streamsVideo[_variable.videoQuality.ElementAt(quality).Value];
@@ -30,7 +27,6 @@ namespace UTubeTake.Code {
 
             string nameFile = SettingStatic.pathForVideo + @"\" + RemoveInvalidPathChars(_variable.video.Title);
 
-            //Select Type File
             if (videoStream != null && audioStream != null) {
 
                 ConversionRequestBuilder convers = new ConversionRequestBuilder(nameFile + ".mp4");
@@ -42,14 +38,11 @@ namespace UTubeTake.Code {
 
             } else {
 
-                if (videoStream != null) {
-                    await _variable.youtube.Videos.Streams.DownloadAsync(videoStream, nameFile + ".mp4", progress);
-                }
+                if (videoStream != null) await _variable.youtube.Videos.Streams.DownloadAsync(videoStream, nameFile + ".mp4", progress);
+                if (audioStream != null) await _variable.youtube.Videos.Streams.DownloadAsync(audioStream, nameFile + ".mp3", progress);
 
-                if (audioStream != null) {
-                    await _variable.youtube.Videos.Streams.DownloadAsync(audioStream, nameFile + ".mp3", progress);
-                }
             }
+
         }
 
 
