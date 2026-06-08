@@ -6,12 +6,23 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
-    <!--My color-->
-    <Color x:Key="BlackBacground">#22252e</Color>
-    <Color x:Key="BlackElement">#3b434d</Color>
-    <Color x:Key="BlackElementLight">#1d2f39</Color>
-    <Color x:Key="NeonBlue">#2eb0b8</Color>
+    <!--Current color-->
+    <Color x:Key="Background">#0c0d0f</Color>
+    <Color x:Key="SideBackground">#070809</Color>
+    <Color x:Key="MainBackground">#15161a</Color>
+    <Color x:Key="MainAccent">#17c8b8</Color>
+    <Color x:Key="SubAccent">#4ade80</Color>
+    <Color x:Key="Border">#12FFFFFF</Color>
+    <Color x:Key="TextPrimary">#D1FFFFFF</Color>
+    <Color x:Key="TextSecondery">#47FFFFFF</Color>
 
+    <!--Old color-->
+    <Color x:Key="Old_BlackBacground">#22252e</Color>
+    <Color x:Key="Old_BlackElement">#3b434d</Color>
+    <Color x:Key="Old_BlackElementLight">#1d2f39</Color>
+    <Color x:Key="Old_NeonBlue">#2eb0b8</Color>
+
+    <!--System color-->
     <Color x:Key="Primary">#512BD4</Color>
     <Color x:Key="PrimaryDark">#ac99ea</Color>
     <Color x:Key="PrimaryDarkText">#242424</Color>

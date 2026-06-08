@@ -1,26 +1,72 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="UTubeTake.StartPage"
              Title="UTakePage"
-             BackgroundColor="{StaticResource BlackBacground}">
+             BackgroundColor="{StaticResource Background}">
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="360"/>
             <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="230"/>
-            <RowDefinition Height="120"/>
-            <RowDefinition />
-        </Grid.RowDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="230"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        
+        
+        <!--Nav-->
+        <BoxView
+           Grid.Column="0"
+           Grid.Row="0"
+           Grid.RowSpan="5"
+            
+           BackgroundColor="{StaticResource SideBackground}"/>
+
+        <Image
+            Grid.Column="0"
+            Grid.Row="1"  
+           
+            HeightRequest="32" 
+            WidthRequest="32"
+            Margin="0,0,0,10"
+            
+            Aspect="AspectFit"
+            Source="logo_icon.png"
+               
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+        </Image>
+
+        <Image
+            Grid.Column="0"
+            Grid.Row="4"
+    
+            Margin="0,0,0,20"
+            HeightRequest="32"
+            WidthRequest="32"
+    
+            HorizontalOptions="Center"
+            VerticalOptions="End"
+    
+            Aspect="AspectFit"
+            Source="setting_icon.png">
+
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="SettingPageEvent"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <!--Nav-->
+
+        
+        <!--Window spliters-->
         <BoxView
             Grid.Column="1"
             Grid.Row="0"
@@ -31,134 +77,116 @@
 
             WidthRequest="1"
             
-            BackgroundColor="{StaticResource BlackElement}"
-            />
+            BackgroundColor="{StaticResource Border}"
+        />
 
-        
-        <!--Nav-->
-        <Border 
+        <BoxView
             Grid.Column="0"
+            Grid.ColumnSpan="4"
             Grid.Row="0"
             
-            HorizontalOptions="Center"
-            VerticalOptions="Center"        
+            HorizontalOptions="Fill"
+            VerticalOptions="Start"
+
+            HeightRequest="1"
             
-            HeightRequest="40" 
-            WidthRequest="40"
-            Margin="0,20,0,0"
-            
-            Stroke="Transparent">
+            BackgroundColor="{StaticResource Border}"
+        />
+        <!--Window spliters-->
 
-            <Image
-                Aspect="AspectFit"
-                Source="logo_icon.png"
-               
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-             />
-        </Border>
-
-        <VerticalStackLayout 
-            Grid.Column="0"
-            Grid.Row="4"
-            
-            VerticalOptions="End">
-
-
-            <ImageButton
-                 
-            Grid.Column="0"
-            Grid.Row="4"
-            
-            Margin="0,0,0,20"
-            HeightRequest="40" 
-            WidthRequest="40"
-                
-            HorizontalOptions="Center"
-            VerticalOptions="Center"        
-  
-            Aspect="Fill"
-            Source="setting_icon.png"
-  
-  
-            BackgroundColor="Transparent"
-   
-            Clicked="SettingPageEvent"/>
-
-        </VerticalStackLayout>
-        <!--Nav-->
-        
         
         <!--Top page-->
-        <Label
-            Grid.Column="1"
-            Grid.ColumnSpan="3"
-            Grid.Row="0"
-            
-            HorizontalTextAlignment="Center"
-            VerticalTextAlignment="Center"
-            
-            FontSize="20"
-            TextColor="White"
-            
-            Text="Download all from YouTube!"/>
-
-        <!--Find video-->
-        <Border
+        <Grid
             Grid.Column="1"
             Grid.ColumnSpan="3"
             Grid.Row="1"
             
-            Margin="60, 0, 60, 0"
-            HeightRequest="60"
-            
-            Stroke="{StaticResource NeonBlue}"
-            StrokeThickness="5">
+            Margin="40, 0, 20, 0">
 
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="0,0,0,0" />
-            </Border.StrokeShape>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.8*"/>
-                    <ColumnDefinition Width="0.2*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="28"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="0.15*"/>
+            </Grid.ColumnDefinitions>
 
-                <Entry 
-                    FontFamily="Helvetica"
-                    FontSize="20" 
-                    
-                    Placeholder = "https://www.youtube.com/watch..." 
-                    
-                    ClearButtonVisibility="WhileEditing"
-                    MaxLength ="250" 
-                    
-                    x:Name="linkEntry"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <Border
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Grid.Row="0"
+                
+                BackgroundColor="{StaticResource MainBackground}"
+                
+                Stroke="{StaticResource Border}"
+                StrokeThickness="2">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10,10,10,10"/>
+                </Border.StrokeShape>
+
+                <Grid ColumnDefinitions="28,*">
+                    <Image
+                        Grid.Column="0"
+                        Margin="0,0,0,4"
+                        HeightRequest="16"
+                        WidthRequest="16"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Aspect="AspectFit"
+                        Source="link_icon.png">
+
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="{StaticResource TextSecondery}"/>
+                        </Image.Behaviors>
+                    </Image>
+
+                    <Entry
+                        Grid.Column="1"
+                        FontFamily="Helvetica"
+                        FontSize="20"
+                        PlaceholderColor="{StaticResource TextSecondery}"
+                        Placeholder="https://www.youtube.com/watch..."
+                        ClearButtonVisibility="WhileEditing"
+                        MaxLength="250"
+                        x:Name="linkEntry"/>
+
+                </Grid>
+            </Border>
+
+            <Border
+                Grid.Column="4"
+                Grid.Row="0"
+                
+                Stroke="{StaticResource Border}"
+                StrokeThickness="2">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10,10,10,10"/>
+                </Border.StrokeShape>
 
                 <Button
-                    Grid.Column="2"
-                    Margin="5, 5, 5, 5"
-                    Padding="0, 0, 0, 5"
-                    CornerRadius="0"
-                    
-                    VerticalOptions="Fill"
-                    HorizontalOptions="Fill"    
-                    
-                    BorderColor="{StaticResource NeonBlue}"
-                    BackgroundColor="{StaticResource NeonBlue}"
-                    
-                    TextColor="White"
-                    FontSize="20"
-                    
-                    Text="Find"
-                    
-                    Clicked="FindVideoEvent"/>
-            </Grid>
-        </Border>
+                     VerticalOptions="Fill"
+                     HorizontalOptions="Fill"    
+         
+                     BorderColor="{StaticResource MainAccent}"
+                     BackgroundColor="{StaticResource MainAccent}"
+         
+                     TextColor="{StaticResource Background}"
+                     FontSize="20"
+                     FontAttributes="Bold"
+         
+                     Text="Find"
+         
+                     Clicked="FindVideoEvent"/>
+
+            </Border>
+            
+        </Grid>
         <!--Top page-->
 
         
@@ -265,8 +293,8 @@
 
                 <Ellipse.Background>
                     <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
-                        <GradientStop Color="{StaticResource BlackBacground}" Offset="0.0"/>
-                        <GradientStop Color="{StaticResource NeonBlue}" Offset="1.0"/>
+                        <GradientStop Color="{StaticResource SubAccent}" Offset="0.0"/>
+                        <GradientStop Color="{StaticResource MainAccent}" Offset="1.0"/>
                     </RadialGradientBrush>
                 </Ellipse.Background>
             </Ellipse>
@@ -277,8 +305,8 @@
 
                 <Ellipse.Background>
                     <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
-                        <GradientStop Color="{StaticResource BlackBacground}" Offset="0.0"/>
-                        <GradientStop Color="{StaticResource NeonBlue}" Offset="1.0"/>
+                        <GradientStop Color="{StaticResource SubAccent}" Offset="0.0"/>
+                        <GradientStop Color="{StaticResource MainAccent}" Offset="1.0"/>
                     </RadialGradientBrush>
                 </Ellipse.Background>
             </Ellipse>
@@ -289,8 +317,8 @@
 
                 <Ellipse.Background>
                     <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
-                        <GradientStop Color="{StaticResource BlackBacground}" Offset="0.0"/>
-                        <GradientStop Color="{StaticResource NeonBlue}" Offset="1.0"/>
+                        <GradientStop Color="{StaticResource SubAccent}" Offset="0.0"/>
+                        <GradientStop Color="{StaticResource MainAccent}" Offset="1.0"/>
                     </RadialGradientBrush>
                 </Ellipse.Background>
             </Ellipse>
@@ -322,7 +350,7 @@
                     VerticalOptions="Start"
                     HeightRequest="180"
                     WidthRequest="320"
-                    Stroke="{StaticResource NeonBlue}">
+                    Stroke="{StaticResource MainAccent}">
 
                     <Image
                         Aspect="AspectFit"
@@ -336,7 +364,7 @@
                     HorizontalOptions="Center"
                     VerticalOptions="End"
                     WidthRequest="160"
-                    BackgroundColor="{StaticResource NeonBlue}"
+                    BackgroundColor="{StaticResource MainAccent}"
                     TextColor="White"
                     CornerRadius="0"
                     Text="Download"
@@ -351,7 +379,7 @@
                 Spacing="10"
                 Margin="0,0,60,20"
                 Padding="10"
-                BackgroundColor="{StaticResource BlackElementLight}">
+                BackgroundColor="{StaticResource MainBackground}">
 
                 <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
                    FontSize="28" TextColor="White"
@@ -382,14 +410,14 @@
 
                 <Picker WidthRequest="300"
                     TitleColor="White" TextColor="White"
-                    BackgroundColor="{StaticResource BlackElementLight}"
+                    BackgroundColor="{StaticResource MainBackground}"
                     x:Name="PickerQuality"
                     SelectedIndexChanged="PickerQuality_SelectedIndexChanged"
                     Title="Video quality"/>
 
                 <Picker WidthRequest="300"
                     TitleColor="White" TextColor="White"
-                    BackgroundColor="{StaticResource BlackElementLight}"
+                    BackgroundColor="{StaticResource MainBackground}"
                     x:Name="PickerBitRate"
                     SelectedIndexChanged="PickerBitRate_SelectedIndexChanged"
                     Title="Sound quality"/>
@@ -397,7 +425,7 @@
                 <Button WidthRequest="160" HeightRequest="40"
                     Margin="0,25,0,0"
                     CornerRadius="0"
-                    BackgroundColor="{StaticResource NeonBlue}"
+                    BackgroundColor="{StaticResource MainAccent}"
                     TextColor="White"
                     Text="Download"
                     x:Name="DownloadVideoButton"

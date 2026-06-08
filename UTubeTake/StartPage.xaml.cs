@@ -27,7 +27,7 @@ public partial class StartPage : ContentPage {
 
 	}
 
-	private StartPage_XAMLContainer InitializeXAMLContainer() {
+    private StartPage_XAMLContainer InitializeXAMLContainer() {
 
 		StartPage_XAMLContainer container = new StartPage_XAMLContainer {
 			WelcomeView = this.WelcomeView,
