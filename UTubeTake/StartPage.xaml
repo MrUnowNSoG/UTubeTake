@@ -7,26 +7,26 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="360"/>
-            <ColumnDefinition />
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="48"/>
+            <ColumnDefinition Width="{StaticResource ExternalSpace}"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="{StaticResource ExternalSpace}"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="{StaticResource ExternalSpace}"/>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="230"/>
+            <RowDefinition Height="{StaticResource InternalSpace}"/>
+            <RowDefinition Height="248"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="{StaticResource ExternalSpace}"/>
         </Grid.RowDefinitions>
-        
-        
+
         <!--Nav-->
         <BoxView
            Grid.Column="0"
            Grid.Row="0"
-           Grid.RowSpan="5"
+           Grid.RowSpan="7"
             
            BackgroundColor="{StaticResource SideBackground}"/>
 
@@ -34,9 +34,9 @@
             Grid.Column="0"
             Grid.Row="1"  
            
-            HeightRequest="32" 
-            WidthRequest="32"
-            Margin="0,0,0,10"
+            HeightRequest="{StaticResource ImageSize_middle}" 
+            WidthRequest="{StaticResource ImageSize_middle}"
+            Margin="0"
             
             Aspect="AspectFit"
             Source="logo_icon.png"
@@ -48,14 +48,13 @@
         <Image
             Grid.Column="0"
             Grid.Row="4"
-    
-            Margin="0,0,0,20"
-            HeightRequest="32"
-            WidthRequest="32"
-    
+   
+            HeightRequest="{StaticResource ImageSize_middle}"
+            WidthRequest="{StaticResource ImageSize_middle}"            
+            
             HorizontalOptions="Center"
-            VerticalOptions="End"
-    
+            VerticalOptions="End"            
+
             Aspect="AspectFit"
             Source="setting_icon.png">
 
@@ -70,7 +69,7 @@
         <BoxView
             Grid.Column="1"
             Grid.Row="0"
-            Grid.RowSpan="5"
+            Grid.RowSpan="7"
             
             HorizontalOptions="Start"
             VerticalOptions="Fill"
@@ -97,18 +96,17 @@
         
         <!--Top page-->
         <Grid
-            Grid.Column="1"
-            Grid.ColumnSpan="3"
+            Grid.Column="2"
             Grid.Row="1"
             
-            Margin="40, 0, 20, 0">
+            Margin="0, 0, 0, 0">
 
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="28"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="10"/>
-                <ColumnDefinition Width="0.15*"/>
+                <ColumnDefinition Width="{StaticResource InternalSpace}"/>
+                <ColumnDefinition Width="0.16*"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -132,11 +130,12 @@
                 <Grid ColumnDefinitions="28,*">
                     <Image
                         Grid.Column="0"
-                        Margin="0,0,0,4"
-                        HeightRequest="16"
-                        WidthRequest="16"
+                        HeightRequest="{StaticResource ImageSize_small}"
+                        WidthRequest="{StaticResource ImageSize_small}"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
+                        
+                        Margin="0"
                         Aspect="AspectFit"
                         Source="link_icon.png">
 
@@ -145,15 +144,15 @@
                         </Image.Behaviors>
                     </Image>
 
-                    <Entry
+                    <Entry x:Name="linkEntry"
                         Grid.Column="1"
+                        
                         FontFamily="Helvetica"
-                        FontSize="20"
+                        FontSize="{StaticResource FontSize_middle}"
+                        
                         PlaceholderColor="{StaticResource TextSecondery}"
                         Placeholder="https://www.youtube.com/watch..."
-                        ClearButtonVisibility="WhileEditing"
-                        MaxLength="250"
-                        x:Name="linkEntry"/>
+                        ClearButtonVisibility="WhileEditing"/>
 
                 </Grid>
             </Border>
@@ -282,7 +281,7 @@
             Grid.ColumnSpan="3"
             Grid.Row="2"
             Grid.RowSpan="3"
-            
+                               
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="CenterAndExpand"
             Spacing="12">
@@ -329,16 +328,187 @@
         
         <!--Vido view-->
         <Grid x:Name="VideoView"
+            IsVisible="False"
+          
+            Grid.Column="2"
+            Grid.Row="3"
+            
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+              
+            ColumnDefinitions="*,*"
+            RowDefinitions="*,*">
+
+            <Border
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                
+                BackgroundColor="{StaticResource MainBackground}"
+                
+                Stroke="{StaticResource Border}"
+                StrokeThickness="2">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10,10,10,10"/>
+                </Border.StrokeShape>
+
+                <HorizontalStackLayout
+                    Padding="0"
+                    Margin="0">
+
+                    <Grid
+                         Grid.Column="0"
+                         Grid.Row="0"
+                         Padding="0"
+                         Margin="0"
+                   
+                         HorizontalOptions="Fill"
+                         VerticalOptions="Fill"
+                         
+                         ColumnDefinitions="320"
+                         RowDefinitions="180,*">
+
+                        <Border
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill"
+                            Padding="0"
+          
+                            Stroke="{StaticResource MainAccent}"
+                            StrokeThickness="0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10,0,0,0"/>
+                            </Border.StrokeShape>
+
+                            <Image x:Name="imageVideo"
+                                       Source="{Binding ImageBytes}"
+                                       
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"     
+                                       Aspect="AspectFit"/>
+                        </Border>
+
+                        <Button Clicked="DownloadImg"
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                
+                                HorizontalOptions="Fill"
+                                VerticalOptions="Fill"
+                                Margin="20,8,20,8"
+                                Padding="0"
+                                CornerRadius="8"
+                                
+                                BackgroundColor="{StaticResource MainAccent}"
+                                ImageSource="link_icon.png"
+                                ContentLayout="Left, 8"
+                                TextColor="White"
+                                Text="Download"/>
+                        
+                    </Grid>
+                    
+                    <VerticalStackLayout
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        HorizontalOptions="Fill"
+                        
+                        Spacing="10"
+                        Margin="0"
+                        Padding="10"
+                        
+                        BackgroundColor="{StaticResource MainBackground}">
+
+                            <Label x:Name="VideoNameLabel"  
+                                   HorizontalTextAlignment="Start" 
+                                   VerticalTextAlignment="Center"
+                            
+                                   FontSize="28" 
+                                   TextColor="White"
+                                   Text="Name"/>
+
+                            <Label x:Name="VideoAuthorLabel" 
+                                   HorizontalTextAlignment="Start" 
+                                   VerticalTextAlignment="Center"
+                                   
+                                   FontSize="20" 
+                                   TextColor="White"
+                                   Text="Author"/>
+
+                            <Label x:Name="VideoDurationLabel" 
+                                   HorizontalTextAlignment="Start" 
+                                   VerticalTextAlignment="Center"
+                               
+                                   FontSize="20" 
+                                   TextColor="White"
+                                   Text="Duration"/>
+
+                            <Label x:Name="VideoSizeLabel" 
+                                   HorizontalTextAlignment="Start" 
+                                   VerticalTextAlignment="Center"
+                               
+                                   FontSize="20" 
+                                   TextColor="White"
+                                   Text="Size"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+
+            </Border>
+
+        </Grid>
+
+
+
+        <HorizontalStackLayout
+                Grid.Column="3"
+                Grid.ColumnSpan="2"
+                Grid.Row="6"
+                Margin="0,0,60,0"
+                Padding="20"
+                Spacing="20"
+                HorizontalOptions="CenterAndExpand">
+
+            <Picker WidthRequest="300"
+                    TitleColor="White" TextColor="White"
+                    BackgroundColor="{StaticResource MainBackground}"
+                    x:Name="PickerQuality"
+                    SelectedIndexChanged="PickerQuality_SelectedIndexChanged"
+                    Title="Video quality"/>
+
+            <Picker WidthRequest="300"
+                    TitleColor="White" TextColor="White"
+                    BackgroundColor="{StaticResource MainBackground}"
+                    x:Name="PickerBitRate"
+                    SelectedIndexChanged="PickerBitRate_SelectedIndexChanged"
+                    Title="Sound quality"/>
+
+            <Button WidthRequest="160" HeightRequest="40"
+                    Margin="0,25,0,0"
+                    CornerRadius="0"
+                    BackgroundColor="{StaticResource MainAccent}"
+                    TextColor="White"
+                    Text="Download"
+                    x:Name="DownloadVideoButton"
+                    Clicked="DownloadVideoEvent"/>
+        </HorizontalStackLayout>
+        <!--Old Vido view-->
+        <!--
+        
+        <Grid x:Name="VideoView"
             Grid.Column="1"
             Grid.ColumnSpan="3"
             Grid.Row="2"
-            Grid.RowSpan="3"  
+            Grid.RowSpan="2"  
             IsVisible="False"
+            
               
+            BackgroundColor="Green"
             ColumnDefinitions="*,*"
             RowDefinitions="Auto,Auto">
 
-            <!--Image-->
             <VerticalStackLayout
                 Grid.Column="0"
                 Grid.Row="0"
@@ -371,7 +541,6 @@
                     Clicked="DownloadImg"/>
             </VerticalStackLayout>
 
-            <!--Text-->
             <VerticalStackLayout
                 Grid.Column="1"
                 Grid.Row="0"
@@ -398,7 +567,6 @@
                    x:Name="VideoSizeLabel" Text="Size"/>
             </VerticalStackLayout>
 
-            <!--Pickers + Download-->
             <HorizontalStackLayout
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
@@ -433,9 +601,8 @@
             </HorizontalStackLayout>
 
         </Grid>
-        <!--Vido view-->
+        -->
 
-        
     </Grid>
 
 
