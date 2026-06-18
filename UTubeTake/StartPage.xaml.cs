@@ -148,8 +148,10 @@ public partial class StartPage : ContentPage {
 
 				StaticFlags.downloadImg = true;
 				//_container.AvatarVideoService.DownloadImg(link, _container.VideoVariable.video.Title.ToString(), SettingStatic.pathForImage);
-			}
-		}
+                _container.AvatarVideoService.DownloadImg(link, "Image", SettingStatic.pathForImage);
+
+            }
+        }
 	}
 
 	

@@ -23,7 +23,10 @@ namespace UTubeTake.Code {
         }
 
         public string[] GetInfoForVideo() {
-            return new String[] { _variable.video.Title, _variable.video.Author.ToString(), _variable.video.Duration.ToString()};
+            TimeSpan span = _variable.video.Duration ?? TimeSpan.Zero;
+            string timeVideo = $"{(int)span.TotalMinutes}:{span.Seconds:D2}";
+
+            return new String[] { _variable.video.Title, _variable.video.Author.ToString(), timeVideo };
         }
 
         public List<string> GetQualityList() {
