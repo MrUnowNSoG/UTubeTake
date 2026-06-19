@@ -17,7 +17,6 @@
             <RowDefinition Height="{StaticResource ExternalSpace}"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="{StaticResource InternalSpace}"/>
-            <RowDefinition Height="248"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="{StaticResource ExternalSpace}"/>
         </Grid.RowDefinitions>
@@ -47,7 +46,7 @@
 
         <Image
             Grid.Column="0"
-            Grid.Row="4"
+            Grid.Row="3"
    
             HeightRequest="{StaticResource ImageSize_middle}"
             WidthRequest="{StaticResource ImageSize_middle}"            
@@ -64,7 +63,7 @@
         </Image>
         <!--Nav-->
 
-        
+
         <!--Window spliters-->
         <BoxView
             Grid.Column="1"
@@ -78,7 +77,6 @@
             
             BackgroundColor="{StaticResource Border}"
         />
-
         <BoxView
             Grid.Column="0"
             Grid.ColumnSpan="4"
@@ -93,7 +91,7 @@
         />
         <!--Window spliters-->
 
-        
+
         <!--Top page-->
         <Grid
             Grid.Column="2"
@@ -184,11 +182,11 @@
                      Clicked="FindVideoEvent"/>
 
             </Border>
-            
+
         </Grid>
         <!--Top page-->
 
-        
+
         <!--Welcome view-->
         <HorizontalStackLayout x:Name="WelcomeView" IsVisible="False"
             Grid.Column="1"
@@ -207,7 +205,7 @@
         </HorizontalStackLayout>
         <!--Welcome view-->
 
-        
+
         <!--Error view-->
         <Grid x:Name="ErrorView"
             Grid.Column="1"
@@ -325,19 +323,15 @@
         </HorizontalStackLayout>
         <!--Loading view-->
 
-        
+
         <!--Vido view-->
-        <Grid x:Name="VideoView"
-            IsVisible="False"
-          
+        <VerticalStackLayout x:Name="VideoView"            
             Grid.Column="2"
             Grid.Row="3"
             
             HorizontalOptions="Fill"
             VerticalOptions="Fill"
-              
-            ColumnDefinitions="*"
-            RowDefinitions="*">
+            Spacing="{StaticResource ExternalSpace}">
 
             <Border
                 Grid.Column="0"
@@ -349,7 +343,7 @@
                 StrokeThickness="2">
 
                 <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10,10,10,10"/>
+                    <RoundRectangle CornerRadius="{StaticResource CornerRadius}"/>
                 </Border.StrokeShape>
 
                 <Grid
@@ -359,8 +353,8 @@
                     HorizontalOptions="Fill"
                     VerticalOptions="Fill"
                     
-                    ColumnDefinitions="320,*"
-                    RowDefinitions="180,*"
+                    ColumnDefinitions="320, *"
+                    RowDefinitions="180, 64"
                     
                     Padding="0"
                     Margin="0">
@@ -398,10 +392,13 @@
                     <Border 
                         Grid.Column="0"
                         Grid.Row="1"
+                        
                         HorizontalOptions="Fill"
                         VerticalOptions="Fill"
-                        Margin="12"
-                        BackgroundColor="{StaticResource AccentBackground}">
+                        Margin="{StaticResource InternalSpace}"
+                        
+                        BackgroundColor="{StaticResource SubMainAccent}"
+                        Stroke="{StaticResource MainAccent}">
 
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="{StaticResource CornerRadius}"/>
@@ -422,21 +419,25 @@
                                 
                                Source="gallery_download_icon_white.png"
                                Aspect="AspectFit">
-                               
+
                                 <Image.Behaviors>
-                                    <toolkit:IconTintColorBehavior TintColor="{StaticResource TextSecondery}"/>
+                                    <toolkit:IconTintColorBehavior TintColor="{StaticResource MainAccent}"/>
                                 </Image.Behaviors>
-                                
+
                             </Image>
 
 
                             <Label 
                                 Grid.Column="1"
-                                Text="Download"
-                                TextColor="{StaticResource TextSecondery}"
-                                FontSize="{StaticResource FontSize_middle}"
                                 VerticalOptions="Center"
-                                VerticalTextAlignment="Center"/>
+                                VerticalTextAlignment="Center"
+                                
+                                MaxLines="1"
+                                LineBreakMode="TailTruncation"
+                                
+                                TextColor="{StaticResource TextPrimary}"
+                                FontSize="{StaticResource FontSize_middle}"
+                                Text="Save thumbnail"/>
                         </Grid>
 
                         <Border.GestureRecognizers>
@@ -570,152 +571,311 @@
 
             </Border>
 
-        </Grid>
-
-
-
-        <HorizontalStackLayout
-                Grid.Column="3"
-                Grid.ColumnSpan="2"
-                Grid.Row="6"
-                Margin="0,0,60,0"
-                Padding="20"
-                Spacing="20"
-                HorizontalOptions="CenterAndExpand">
-
-            <Picker WidthRequest="300"
-                    TitleColor="White" TextColor="White"
-                    BackgroundColor="{StaticResource CardBackground}"
-                    x:Name="PickerQuality"
-                    SelectedIndexChanged="PickerQuality_SelectedIndexChanged"
-                    Title="Video quality"/>
-
-            <Picker WidthRequest="300"
-                    TitleColor="White" TextColor="White"
-                    BackgroundColor="{StaticResource CardBackground}"
-                    x:Name="PickerBitRate"
-                    SelectedIndexChanged="PickerBitRate_SelectedIndexChanged"
-                    Title="Sound quality"/>
-
-            <Button WidthRequest="160" HeightRequest="40"
-                    Margin="0,25,0,0"
-                    CornerRadius="0"
-                    BackgroundColor="{StaticResource MainAccent}"
-                    TextColor="White"
-                    Text="Download"
-                    x:Name="DownloadVideoButton"
-                    Clicked="DownloadVideoEvent"/>
-        </HorizontalStackLayout>
-        <!--Old Vido view-->
-        <!--
-        
-        <Grid x:Name="VideoView"
-            Grid.Column="1"
-            Grid.ColumnSpan="3"
-            Grid.Row="2"
-            Grid.RowSpan="2"  
-            IsVisible="False"
-            
-              
-            BackgroundColor="Green"
-            ColumnDefinitions="*,*"
-            RowDefinitions="Auto,Auto">
-
-            <VerticalStackLayout
-                Grid.Column="0"
-                Grid.Row="0"
+            <Grid
                 HorizontalOptions="Fill"
-                VerticalOptions="Fill">
+                ColumnSpacing="{StaticResource ExternalSpace}">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    
+                    Margin="0,0,0, 2"
+                    
+                    MaxLines="2"
+                    LineBreakMode="TailTruncation"
+                    
+                    FontSize="{StaticResource FontSize_middle}"
+                    TextColor="{StaticResource TextSecondery}"
+                    Text="VIDEO QUALITY"/>
+
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                 
+                    Margin="0,0,0, 2"
+                    
+                    MaxLines="2"
+                    LineBreakMode="TailTruncation"
+                    
+                    FontSize="{StaticResource FontSize_middle}"
+                    TextColor="{StaticResource TextSecondery}"
+                    Text="SOUND QUALITY"/>
 
                 <Border
-                    HorizontalOptions="Center"
-                    VerticalOptions="Start"
-                    HeightRequest="180"
-                    WidthRequest="320"
-                    Stroke="{StaticResource MainAccent}">
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill">
 
-                    <Image
-                        Aspect="AspectFit"
-                        Source="{Binding ImageBytes}"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        x:Name="imageVideo"/>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="{StaticResource CornerRadius}"/>
+                    </Border.StrokeShape>
+                    <Border.StrokeThickness>0</Border.StrokeThickness>
+
+                    <Picker x:Name="PickerQuality"
+                        SelectedIndexChanged="PickerQuality_SelectedIndexChanged"
+                        
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                    
+                        BackgroundColor="{StaticResource CardBackground}"
+                        TextColor="{StaticResource TextPrimary}"/>
                 </Border>
 
-                <Button
-                    HorizontalOptions="Center"
-                    VerticalOptions="End"
-                    WidthRequest="160"
-                    BackgroundColor="{StaticResource MainAccent}"
-                    TextColor="White"
-                    CornerRadius="0"
-                    Text="Download"
-                    Clicked="DownloadImg"/>
-            </VerticalStackLayout>
+                <Border
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill">
 
-            <VerticalStackLayout
-                Grid.Column="1"
-                Grid.Row="0"
-                HorizontalOptions="FillAndExpand"
-                Spacing="10"
-                Margin="0,0,60,20"
-                Padding="10"
-                BackgroundColor="{StaticResource CardBackground}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="{StaticResource CornerRadius}"/>
+                    </Border.StrokeShape>
+                    <Border.StrokeThickness>0</Border.StrokeThickness>
 
-                <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
-                   FontSize="28" TextColor="White"
-                   x:Name="VideoNameLabel" Text="Name"/>
+                    <Picker x:Name="PickerBitRate"
+                        SelectedIndexChanged="PickerBitRate_SelectedIndexChanged"
+                        
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                    
+                        BackgroundColor="{StaticResource CardBackground}"
+                        TextColor="{StaticResource TextPrimary}"/>
 
-                <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
-                   FontSize="20" TextColor="White"
-                   x:Name="VideoAuthorLabel" Text="Author"/>
+                </Border>
 
-                <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
-                   FontSize="20" TextColor="White"
-                   x:Name="VideoDurationLabel" Text="Duration"/>
+                <Border 
+                    Grid.Column="2"
+                    Grid.Row="1"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    BackgroundColor="{StaticResource MainAccent}">
 
-                <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
-                   FontSize="20" TextColor="White"
-                   x:Name="VideoSizeLabel" Text="Size"/>
-            </VerticalStackLayout>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="{StaticResource CornerRadius}"/>
+                    </Border.StrokeShape>
+                    <Border.StrokeThickness>0</Border.StrokeThickness>
 
-            <HorizontalStackLayout
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Grid.Row="1"
-                Margin="0,0,60,0"
-                Padding="20"
-                Spacing="20"
-                HorizontalOptions="CenterAndExpand">
+                    <Grid
+                        HorizontalOptions="Center" 
+                        VerticalOptions="Center"
+                              
+                        ColumnDefinitions="*, *" 
+                        ColumnSpacing="{StaticResource InternalSpace}">
 
-                <Picker WidthRequest="300"
-                    TitleColor="White" TextColor="White"
-                    BackgroundColor="{StaticResource CardBackground}"
-                    x:Name="PickerQuality"
-                    SelectedIndexChanged="PickerQuality_SelectedIndexChanged"
-                    Title="Video quality"/>
+                        <Image 
+                            Grid.Column="0"
+                            HeightRequest="{StaticResource ImageSize_small}" 
+                            WidthRequest="{StaticResource ImageSize_small}"
+                                
+                            Source="download_bottom_icon_white.png"
+                            Aspect="AspectFit">
 
-                <Picker WidthRequest="300"
-                    TitleColor="White" TextColor="White"
-                    BackgroundColor="{StaticResource CardBackground}"
-                    x:Name="PickerBitRate"
-                    SelectedIndexChanged="PickerBitRate_SelectedIndexChanged"
-                    Title="Sound quality"/>
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource Background}"/>
+                            </Image.Behaviors>
 
-                <Button WidthRequest="160" HeightRequest="40"
-                    Margin="0,25,0,0"
-                    CornerRadius="0"
-                    BackgroundColor="{StaticResource MainAccent}"
-                    TextColor="White"
-                    Text="Download"
-                    x:Name="DownloadVideoButton"
-                    Clicked="DownloadVideoEvent"/>
-            </HorizontalStackLayout>
+                        </Image>
 
-        </Grid>
-        -->
+
+                        <Label x:Name="DownloadVideoLabel"  
+                            Grid.Column="1"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center"
+                            
+                            MaxLines="1"
+                            LineBreakMode="TailTruncation"
+                               
+                            TextColor="{StaticResource Background}"
+                            FontSize="{StaticResource FontSize_middle}"
+                            FontAttributes="Bold"
+                            Text="Download"/>
+                    </Grid>
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="DownloadVideoEvent"/>
+                    </Border.GestureRecognizers>
+                </Border>
+
+            </Grid>
+
+            <Border
+                Padding="{StaticResource ExternalSpace}"
+                BackgroundColor="{StaticResource CardBackground}"
+                
+                Stroke="{StaticResource MainAccent}"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="{StaticResource CornerRadius}"/>
+                </Border.StrokeShape>
+
+                <Grid                    
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                   
+                    Padding="0"
+                    Margin="0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="{StaticResource ExternalSpace}"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Ellipse
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        
+                        HeightRequest="{StaticResource ImageSize_small}" 
+                        WidthRequest="{StaticResource ImageSize_small}"
+                        
+                        BackgroundColor="{StaticResource MainAccent}"/>
+
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        
+                        HorizontalOptions="Start"
+                        VerticalOptions="Fill"
+                        VerticalTextAlignment="Center"
+                        
+                        Margin="8,0,0,2"
+                        
+                        MaxLines="1"
+                        LineBreakMode="TailTruncation"
+                        
+                        TextColor="{StaticResource TextSecondery}"
+                        FontSize="{StaticResource FontSize_middle}"
+                        FontAttributes="Bold"
+                        Text="Downloading..."/>
+
+                    <Label
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        
+                        HorizontalOptions="Start"
+                        VerticalOptions="Fill"
+                        VerticalTextAlignment="Center"
+                        
+                        Margin="0,0,0,2"
+                        
+                        TextColor="{StaticResource MainAccent}"
+                        FontSize="{StaticResource FontSize_middle}"
+                        FontAttributes="Bold"
+                        Text="100%"/>
+
+                    <Image 
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        
+                        HeightRequest="{StaticResource ImageSize_small}" 
+                        WidthRequest="{StaticResource ImageSize_small}"
+                                
+                        Source="video_file_download_icon_white.png"
+                        Aspect="AspectFit">
+
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="{StaticResource TextSecondery}"/>
+                        </Image.Behaviors>
+                    </Image>
+
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        
+                        HorizontalOptions="Start"
+                        VerticalOptions="Fill"
+                        VerticalTextAlignment="Center"
+                        
+                        Margin="8,0,0,2"
+                        
+                        MaxLines="1"
+                        LineBreakMode="TailTruncation"
+                        
+                        TextColor="{StaticResource TextSecondery}"
+                        FontSize="{StaticResource FontSize_middle}"
+                        Text="Name file.mp3"/>
+
+                    <ProgressBar x:Name="MyProgressBar"
+                         Grid.Column="0"
+                         Grid.ColumnSpan="3"
+                         Grid.Row="3"
+                                 
+                         HorizontalOptions="Fill"
+                         VerticalOptions="Fill"
+                         Margin="0, 8, 0, 8"
+                         ScaleY="2"
+                               
+                         ProgressColor="{StaticResource MainAccent}" 
+             
+                         BackgroundColor="#E0E0E0" 
+             
+                         Progress="0.5"/>
+
+                    <HorizontalStackLayout
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Grid.Row="4"
+                        
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        Margin="0,8,0,8"
+                        
+                        Spacing="{StaticResource ExternalSpace}">
+
+                        <Label                     
+                            MaxLines="1"
+                        
+                            TextColor="{StaticResource TextSecondery}"
+                            FontSize="{StaticResource FontSize_middle}"
+                            Text="148 KB / 148 KB"/>
+
+                        <Label                     
+                            MaxLines="1"
+                        
+                            TextColor="{StaticResource TextSecondery}"
+                            FontSize="{StaticResource FontSize_middle}"
+                            Text="2.4 MB/s"/>
+
+                        <Label                     
+                            MaxLines="1"
+                        
+                            TextColor="{StaticResource TextSecondery}"
+                            FontSize="{StaticResource FontSize_middle}"
+                            Text="ETA: 6s"/>
+
+                    </HorizontalStackLayout>
+                </Grid>
+
+            </Border>
+
+        </VerticalStackLayout>
+        <!--Vido view-->
+
 
     </Grid>
-
-
 </ContentPage>
