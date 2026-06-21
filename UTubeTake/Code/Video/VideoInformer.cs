@@ -10,6 +10,7 @@ using YoutubeExplode.Videos;
 using YoutubeExplode.Videos.Streams;
 
 namespace UTubeTake.Code {
+
     internal class VideoInformer {
 
         private VideoVariable _variable;

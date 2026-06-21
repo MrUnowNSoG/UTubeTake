@@ -11,7 +11,7 @@ namespace UTubeTake;
 
 public partial class StartPage : ContentPage {
 
-	private StartPage_WindowManager _windowManager;
+	private StartPage_ViewManager _viewManager;
 	private BootstrapContainer _container;
 
 
@@ -20,8 +20,8 @@ public partial class StartPage : ContentPage {
 		InitializeComponent();
 
 		var xamlContainer = InitializeXAMLContainer();
-        _windowManager = new StartPage_WindowManager(xamlContainer);
-        _windowManager.ShowWelcomeView();
+        _viewManager = new StartPage_ViewManager(xamlContainer);
+        _viewManager.ShowWelcomeView();
 
         _container = InitializeBootCoontainer(xamlContainer);
 
@@ -35,18 +35,22 @@ public partial class StartPage : ContentPage {
 			LoadongView = this.LoadingView,
 			LoadingDots = new List<Ellipse> { Dot_1, Dot_2, Dot_3 },
 
-			VideoView = this.VideoView,
+			VideoLayout = this.VideoView,
 			QualityPicker = this.PickerQuality,
 			BitRatePicker = this.PickerBitRate,
-			NameVideoLabel = this.VideoNameLabel,
+			TitleVideoLabel = this.VideoNameLabel,
 			AuthorVideoLabel = this.VideoAuthorLabel,
 			DurationVideoLabel = this.VideoDurationLabel,
 			SizeVideoLabel = this.VideoSizeLabel,
+			ThumbnailImage = this.ThumbnailImage,
+			ThumbnailButtonBorder = this.ThumbnailButtonBorder,
+			ThumbnailButtonImage = this.ThumbnailButtonImage,
+			ThumbnailButtonLabel = this.ThumbnailButtonLabel,
 
 			ErrorView = this.ErrorView,
-            ErrorCodeLabel = this.ErrorCodeLabel,
+			ErrorCodeLabel = this.ErrorCodeLabel,
 			ErrorResolveLabel = this.ErrorResolveLabel,
-        };
+		};
 
 		return container;
 
@@ -62,54 +66,15 @@ public partial class StartPage : ContentPage {
 
     private void FindVideoEvent(object sender, System.EventArgs e) {
 
-		Button button = (Button)sender;
-		string link = linkEntry.Text;
+        if (StaticFlags.downloadInfo == true) return;
 
-		if (StaticFlags.downloadInfo == true) return;
+        Button button = (Button)sender;
+		string url = linkEntry.Text;
 		
-		if(_container.LinkTest.testUrl(ref link) == true) {
+		if(_container.LinkTest.testUrl(ref url) == true) {
             button.Text = "Find!";
-            StartVideoProcessing(link);
-
+			_viewManager.ProcessVideoView(url);
         } else {}
-
-	}
-
-	private async void StartVideoProcessing(string link) {
-
-		_windowManager.ShowLoadingView();
-        StaticFlags.downloadInfo = true;
-    
-        imageVideo.Source = _container.AvatarVideoService.GetImgVideoUrl(link);
-
-		try {
-
-			await VideoProcessing(link);
-
-		} catch (Exception ex) {
-			_container.ErrorHandlService.CathcError(ex);
-			_windowManager.ShowErrorView();
-
-            StaticFlags.downloadInfo = false;
-            return;
-        }
-
-        StaticFlags.downloadInfo = false;
-		_windowManager.ShowVideoView();
-
-    }
-
-	private async Task VideoProcessing(string url) {
-
-		VideoInformer informer = _container.VideoInformer;
-
-		await informer.LoadInfo(url);
-		await informer.LoadInfoForPicker(url);
-		
-        _container.VideoUiUpdater.UpdateTextVideo(informer.GetInfoForVideo());
-        _container.VideoUiUpdater.UpdatePicker(informer.GetQualityList(), informer.GetBitRateList());
-
-		UpdateVideoSize();
 
 	}
 
@@ -126,7 +91,7 @@ public partial class StartPage : ContentPage {
             
 			} catch (Exception ex) {
                 _container.ErrorHandlService.CathcError(ex);
-                _windowManager.ShowErrorView();
+                _viewManager.ShowErrorView();
 			}
 
 			StaticFlags.downloadFile = false;

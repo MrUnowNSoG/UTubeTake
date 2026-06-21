@@ -45,7 +45,6 @@ namespace UTubeTake.Code {
 
         }
 
-
         private string RemoveInvalidPathChars(string name) {
 
             char[] invalidChars = Path.GetInvalidPathChars().Concat(new char[] { '\\', '/', '?', '!', '"', '&', '.', ',', '|', '*', ':' }).ToArray();

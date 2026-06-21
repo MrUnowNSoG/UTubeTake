@@ -166,7 +166,7 @@
                     <RoundRectangle CornerRadius="10,10,10,10"/>
                 </Border.StrokeShape>
 
-                <Button
+                <Button Clicked="FindVideoEvent"
                      VerticalOptions="Fill"
                      HorizontalOptions="Fill"    
          
@@ -176,10 +176,8 @@
                      TextColor="{StaticResource Background}"
                      FontSize="20"
                      FontAttributes="Bold"
-         
-                     Text="Find"
-         
-                     Clicked="FindVideoEvent"/>
+                     
+                     Text="Find"/>
 
             </Border>
 
@@ -381,15 +379,15 @@
                               HorizontalOptions="Center"     
                               Aspect="AspectFit"/>
 
-                            <Image x:Name="imageVideo"
-                                Source="{Binding ImageBytes}"
+                            <Image x:Name="ThumbnailImage"
+                                Source="video_base_icon.png"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"     
                                 Aspect="AspectFit"/>
                         </Grid>
                     </Border>
 
-                    <Border 
+                    <Border x:Name="ThumbnailButtonBorder"
                         Grid.Column="0"
                         Grid.Row="1"
                         
@@ -412,7 +410,7 @@
                             ColumnDefinitions="*, *" 
                             ColumnSpacing="{StaticResource InternalSpace}">
 
-                            <Image 
+                            <Image x:Name="ThumbnailButtonImage"
                                Grid.Column="0"
                                HeightRequest="{StaticResource ImageSize_small}" 
                                WidthRequest="{StaticResource ImageSize_small}"
@@ -427,7 +425,7 @@
                             </Image>
 
 
-                            <Label 
+                            <Label x:Name="ThumbnailButtonLabel " 
                                 Grid.Column="1"
                                 VerticalOptions="Center"
                                 VerticalTextAlignment="Center"

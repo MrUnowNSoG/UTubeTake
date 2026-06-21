@@ -1,48 +1,38 @@
 ﻿using System.Net;
-using UTubeTake.Code.StartPage;
 using YoutubeExplode.Exceptions;
 
 
 
 namespace UTubeTake.Code.Tools {
 
-    internal sealed class ErrorHandlService {
+    internal sealed class ErrorHandlerService {
 
-        public struct ErrorLog {
+        private static readonly ErrorHandlerService _instance;
+        public static ErrorHandlerService GetInstance() => _instance;
 
-            public string Message;
-            public string Resolve;
 
-            public ErrorLog(string message, string resolve) {
-                Message = message;
-                Resolve = resolve;
-            }
-
+        static ErrorHandlerService() {
+            _instance = new ErrorHandlerService();
         }
 
-        public readonly Label _errorCodeLabel;
-        public readonly Label _errorResolveLabel;
+        private ErrorHandlerService() { }
 
-        public ErrorHandlService(StartPage_XAMLContainer container) {
-            _errorCodeLabel = container.ErrorCodeLabel;
-            _errorResolveLabel = container.ErrorResolveLabel;
-        }
+
+        public event Action<ErrorLog> OnCatchError;
+
 
         public void CathcError(Exception ex) {
             ErrorLog log = DefinityError(ex);
-            _errorCodeLabel.Text = log.Message;
-            _errorResolveLabel.Text = log.Resolve;
+            OnCatchError?.Invoke(log);
         }
 
         private ErrorLog DefinityError(Exception ex) => ex switch {
 
             HttpRequestException or WebException => new ErrorLog("Немає підключення", "Перевірте своє інтернет підключення та спробуйте ще раз."),
                
-            // Файлові помилки
             FileNotFoundException => new ErrorLog($"Файл відсутній: {(ex as FileNotFoundException)?.FileName}", "Перевірте наявність файлу."),
             UnauthorizedAccessException => new ErrorLog("Немає доступу", "Програма не має прав доступу до файлу або папки."),
 
-            // YouTube помилки
             VideoUnavailableException => new ErrorLog("Відео недоступне.", "Це відео недоступне або було видалено."),
             VideoRequiresPurchaseException => new ErrorLog("Платне відео", "Це відео потребує придбання і не може бути завантажене."),
 

@@ -1,24 +1,14 @@
-﻿using AngleSharp.Dom;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace UTubeTake.Code {
 
-namespace UTubeTake.Code {
+    internal sealed class LinkTest {
 
-    public class LinkTest {
+        public LinkTest() {}
 
-
-        public LinkTest() {
-        
-        }
 
         public bool testUrl(ref string url) {
 
             if (url == null) return false;
 
-            //Space cleaner
             url = SpaceCleaner(url);
 
             if (url == null) return false;
@@ -31,6 +21,7 @@ namespace UTubeTake.Code {
         }
 
         private string SpaceCleaner(string link) {
+
             int i = 0;
             
             while(i < link.Length) {

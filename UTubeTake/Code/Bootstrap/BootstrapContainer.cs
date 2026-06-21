@@ -11,7 +11,7 @@ namespace UTubeTake.Code.Bootstrap {
         public required VideoUiUpdater VideoUiUpdater { get; init; }
         public required VideoDownloader VideoDownloader { get; init; }
 
-        public required ErrorHandlService ErrorHandlService { get; init; }
+        public required ErrorHandlerService ErrorHandlService { get; init; }
 
     }
 
