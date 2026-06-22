@@ -1,8 +1,9 @@
-using Microsoft.Maui.Controls.Shapes;
-using UTubeTake.Code;
 using UTubeTake.Code.Bootstrap;
 using UTubeTake.Code.Setting;
 using UTubeTake.Code.StartPage;
+using UTubeTake.Code.StartPage.Error;
+using UTubeTake.Code.StartPage.Loading;
+using UTubeTake.Code.StartPage.Video.Elements;
 using UTubeTake.Code.Tools;
 
 
@@ -19,7 +20,7 @@ public partial class StartPage : ContentPage {
 
 		InitializeComponent();
 
-		var xamlContainer = InitializeXAMLContainer();
+		var xamlContainer = BuildXAMLContainer();
         _viewManager = new StartPage_ViewManager(xamlContainer);
         _viewManager.ShowWelcomeView();
 
@@ -27,29 +28,28 @@ public partial class StartPage : ContentPage {
 
 	}
 
-    private StartPage_XAMLContainer InitializeXAMLContainer() {
+    private StartPage_XAMLContainer BuildXAMLContainer() {
+
+		var loadingView = new LoadingViewElements(LoadingView, Dot_1, Dot_2, Dot_3);
+
+		var videoTitle = new VideoTitleElements(VideoNameLabel, VideoAuthorLabel, 
+												VideoDurationLabel, VideoSizeLabel);
+		var videoThumbnail = new VideoThumbnailElements(ThumbnailImage, ThumbnailButtonBorder, 
+														ThumbnailButtonImage, ThumbnailButtonLabel);
+		var videoPicker = new VideoPickerElements(VideoQualityPicker, VideoBitratePicker, VideoPickerButtonBorder, 
+												  VideoPickerButtonImage, VideoPickerButtonLabel);
+        var videoBar = new VideoDownloaderBarElements(BarBorder, BarBorder, BarEllipse, BarStatusLabel, BarPercentLabel, BarNameFileLabel, BarProgressBar);
+        var videoView = new VideoViewElements(VideoView, videoTitle, videoThumbnail, videoPicker, videoBar);
+
+		var errorView = new ErrorViewEelemetns(ErrorView, ErrorCodeLabel, ErrorResolveLabel);
+
 
 		StartPage_XAMLContainer container = new StartPage_XAMLContainer {
 			WelcomeView = this.WelcomeView,
 
-			LoadongView = this.LoadingView,
-			LoadingDots = new List<Ellipse> { Dot_1, Dot_2, Dot_3 },
-
-			VideoLayout = this.VideoView,
-			QualityPicker = this.PickerQuality,
-			BitRatePicker = this.PickerBitRate,
-			TitleVideoLabel = this.VideoNameLabel,
-			AuthorVideoLabel = this.VideoAuthorLabel,
-			DurationVideoLabel = this.VideoDurationLabel,
-			SizeVideoLabel = this.VideoSizeLabel,
-			ThumbnailImage = this.ThumbnailImage,
-			ThumbnailButtonBorder = this.ThumbnailButtonBorder,
-			ThumbnailButtonImage = this.ThumbnailButtonImage,
-			ThumbnailButtonLabel = this.ThumbnailButtonLabel,
-
-			ErrorView = this.ErrorView,
-			ErrorCodeLabel = this.ErrorCodeLabel,
-			ErrorResolveLabel = this.ErrorResolveLabel,
+			LoadingView = loadingView,
+			VideoView = videoView,
+			ErrorView = errorView
 		};
 
 		return container;

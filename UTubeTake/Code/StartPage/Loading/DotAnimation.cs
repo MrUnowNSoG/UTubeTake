@@ -2,16 +2,16 @@
 
 
 
-namespace UTubeTake.Code.Animation {
+namespace UTubeTake.Code.StartPage.Loading {
 
     internal class DotAnimation {
 
         private const float MIN_SIZE = 0.5f;
         private const float MAX_SIZE = 1.0f;
 
-        private List<Ellipse> _dots;
-        private CancellationTokenSource _cancellToken;
+        private readonly List<Ellipse> _dots;
 
+        private CancellationTokenSource _cancellToken;
         private bool _animationState;
         public bool GetAnimationState() => _animationState;
 
@@ -49,9 +49,14 @@ namespace UTubeTake.Code.Animation {
         }
 
         public void StopAnimation() {
-            _cancellToken.Cancel();
-            _cancellToken = new CancellationTokenSource();
-            _animationState = false;
+
+            if (_animationState == true) {
+                _cancellToken.Cancel();
+                _cancellToken = new CancellationTokenSource();
+            
+                _animationState = false;
+            }
+
         }
 
     }

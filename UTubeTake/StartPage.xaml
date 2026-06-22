@@ -625,7 +625,7 @@
                     </Border.StrokeShape>
                     <Border.StrokeThickness>0</Border.StrokeThickness>
 
-                    <Picker x:Name="PickerQuality"
+                    <Picker x:Name="VideoQualityPicker"
                         SelectedIndexChanged="PickerQuality_SelectedIndexChanged"
                         
                         HorizontalOptions="Fill"
@@ -646,7 +646,7 @@
                     </Border.StrokeShape>
                     <Border.StrokeThickness>0</Border.StrokeThickness>
 
-                    <Picker x:Name="PickerBitRate"
+                    <Picker x:Name="VideoBitratePicker"
                         SelectedIndexChanged="PickerBitRate_SelectedIndexChanged"
                         
                         HorizontalOptions="Fill"
@@ -657,7 +657,7 @@
 
                 </Border>
 
-                <Border 
+                <Border x:Name="VideoPickerButtonBorder" 
                     Grid.Column="2"
                     Grid.Row="1"
                     HorizontalOptions="Fill"
@@ -676,7 +676,7 @@
                         ColumnDefinitions="*, *" 
                         ColumnSpacing="{StaticResource InternalSpace}">
 
-                        <Image 
+                        <Image x:Name="VideoPickerButtonImage"  
                             Grid.Column="0"
                             HeightRequest="{StaticResource ImageSize_small}" 
                             WidthRequest="{StaticResource ImageSize_small}"
@@ -691,7 +691,7 @@
                         </Image>
 
 
-                        <Label x:Name="DownloadVideoLabel"  
+                        <Label x:Name="VideoPickerButtonLabel"  
                             Grid.Column="1"
                             VerticalOptions="Center"
                             VerticalTextAlignment="Center"
@@ -712,7 +712,7 @@
 
             </Grid>
 
-            <Border
+            <Border x:Name="BarBorder"
                 Padding="{StaticResource ExternalSpace}"
                 BackgroundColor="{StaticResource CardBackground}"
                 
@@ -741,10 +741,9 @@
                         <RowDefinition Height="{StaticResource ExternalSpace}"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <Ellipse
+                    <Ellipse x:Name="BarEllipse"
                         Grid.Column="0"
                         Grid.Row="0"
                         
@@ -753,7 +752,7 @@
                         
                         BackgroundColor="{StaticResource MainAccent}"/>
 
-                    <Label
+                    <Label x:Name="BarStatusLabel"
                         Grid.Column="1"
                         Grid.Row="0"
                         
@@ -771,7 +770,7 @@
                         FontAttributes="Bold"
                         Text="Downloading..."/>
 
-                    <Label
+                    <Label x:Name="BarPercentLabel"
                         Grid.Column="2"
                         Grid.Row="0"
                         
@@ -801,7 +800,7 @@
                         </Image.Behaviors>
                     </Image>
 
-                    <Label
+                    <Label x:Name="BarNameFileLabel"
                         Grid.Column="1"
                         Grid.Row="2"
                         
@@ -818,7 +817,7 @@
                         FontSize="{StaticResource FontSize_middle}"
                         Text="Name file.mp3"/>
 
-                    <ProgressBar x:Name="MyProgressBar"
+                    <ProgressBar x:Name="BarProgressBar"
                          Grid.Column="0"
                          Grid.ColumnSpan="3"
                          Grid.Row="3"
@@ -834,39 +833,6 @@
              
                          Progress="0.5"/>
 
-                    <HorizontalStackLayout
-                        Grid.Column="0"
-                        Grid.ColumnSpan="3"
-                        Grid.Row="4"
-                        
-                        HorizontalOptions="Fill"
-                        VerticalOptions="Fill"
-                        Margin="0,8,0,8"
-                        
-                        Spacing="{StaticResource ExternalSpace}">
-
-                        <Label                     
-                            MaxLines="1"
-                        
-                            TextColor="{StaticResource TextSecondery}"
-                            FontSize="{StaticResource FontSize_middle}"
-                            Text="148 KB / 148 KB"/>
-
-                        <Label                     
-                            MaxLines="1"
-                        
-                            TextColor="{StaticResource TextSecondery}"
-                            FontSize="{StaticResource FontSize_middle}"
-                            Text="2.4 MB/s"/>
-
-                        <Label                     
-                            MaxLines="1"
-                        
-                            TextColor="{StaticResource TextSecondery}"
-                            FontSize="{StaticResource FontSize_middle}"
-                            Text="ETA: 6s"/>
-
-                    </HorizontalStackLayout>
                 </Grid>
 
             </Border>
@@ -876,4 +842,5 @@
 
 
     </Grid>
+    
 </ContentPage>

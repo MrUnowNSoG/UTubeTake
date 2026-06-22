@@ -1,5 +1,6 @@
-﻿using UTubeTake.Code.Animation;
-using UTubeTake.Code.StartPage.View;
+﻿using UTubeTake.Code.StartPage.Error;
+using UTubeTake.Code.StartPage.Loading;
+using UTubeTake.Code.StartPage.Video;
 using UTubeTake.Code.Tools;
 
 
@@ -8,28 +9,20 @@ namespace UTubeTake.Code.StartPage {
     internal sealed class StartPage_ViewManager {
 
         private readonly Layout _welcomeView;
-        private readonly Layout _loadView;
+        private readonly LoadingView _loadView;
         private readonly VideoView _videoView;
-        private readonly Layout _errorView;
-
-        private readonly DotAnimation _dotAnimation;
+        private readonly ErrorView _errorView;
 
         public StartPage_ViewManager(StartPage_XAMLContainer container) {
             _welcomeView = container.WelcomeView;
-            _loadView = container.LoadongView;
-            _videoView = new VideoView(container);
-            _errorView = container.ErrorView;
+            _loadView = new LoadingView(container.LoadingView);
+            _videoView = new VideoView(container.VideoView);
+            _errorView = new ErrorView(container.ErrorView);
 
-            _dotAnimation = new DotAnimation(container.LoadingDots);
-
-            Subscribe();
-        }
-
-        private void Subscribe() {
             ErrorHandlerService.GetInstance().OnCatchError += ShowErrorView;
             _videoView.OnLoadDataComplite += ShowVideoView;
         }
-
+        
         public void ShowWelcomeView() {
             HideAllView();
 
@@ -70,10 +63,10 @@ namespace UTubeTake.Code.StartPage {
             _errorView.IsVisible = false;
         }
 
-    }
-
-
 
     }
 
-}
+
+
+    }
+

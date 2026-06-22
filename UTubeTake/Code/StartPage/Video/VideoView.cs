@@ -3,10 +3,11 @@ using Microsoft.Maui.Controls.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UTubeTake.Code.StartPage.Video.Elements;
 using UTubeTake.Code.Tools;
 using UTubeTake.Code.VideoManger;
 
-namespace UTubeTake.Code.StartPage.View {
+namespace UTubeTake.Code.StartPage.Video {
     internal sealed class VideoView {
 
         private readonly VideoManager _videoManger;
@@ -26,7 +27,7 @@ namespace UTubeTake.Code.StartPage.View {
 
         public event Action OnLoadDataComplite;
 
-        public VideoView(StartPage_XAMLContainer container) {
+        public VideoView(VideoViewElements videoView) {
             _videoManger = new VideoManager();
             _thumbnailService = new ThumbnailVideoService();
 
