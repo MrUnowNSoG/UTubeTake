@@ -3,7 +3,7 @@ using YoutubeExplode.Exceptions;
 
 
 
-namespace UTubeTake.Code.Tools {
+namespace UTubeTake.Code.Tools.ErrorHandler {
 
     internal sealed class ErrorHandlerService {
 

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using UTubeTake.Code.Tools.ErrorHandler;
+
 
 namespace UTubeTake.Code.StartPage.Error {
     
@@ -14,6 +13,17 @@ namespace UTubeTake.Code.StartPage.Error {
             _view = elements.View;
             _errorLabel = elements.Code;
             _resolveLabel = elements.Resolve;
+        }
+
+        public void Show(ErrorLog log) {
+            _errorLabel.Text = log.Message;
+            _resolveLabel.Text = log.Resolve;
+
+            _view.IsVisible = true;
+        }
+
+        public void Hide() {
+            _view.IsVisible = false;
         }
 
     }

@@ -1,7 +1,16 @@
-﻿namespace UTubeTake.Code {
+﻿using UTubeTake.Code.Tools.ErrorHandler;
+
+
+
+namespace UTubeTake.Code {
+
     internal sealed class ThumbnailVideoService {
 
-        public ThumbnailVideoService() { }
+        private readonly HttpClient _httpClient;
+
+        public ThumbnailVideoService() { 
+            _httpClient = new HttpClient();
+        }
 
         public string? GetThumbnailUrl(string url) {
 
@@ -13,14 +22,12 @@
 
         private string? GetCodeThumbnail(string url) {
 
-            //Shorts
             if (url.Contains("https://www.youtube.com/shorts/") == true) {
                 url = url.Remove(0, 31);
 
                 if (url.Length > 3) return url;
             }
 
-            //Video
             if (url.Contains("https://www.youtube.com/watch?v=") == true) {
 
                 int index = 0;
@@ -48,6 +55,25 @@
             }
 
             return null;
+        }
+
+        public async Task<bool> DownloadThumbnail(string urlVideo, string nameFile, string path) {
+
+            string? url = GetThumbnailUrl(urlVideo);
+            if (url == null) return false;
+
+            try {
+
+                byte[] img = await _httpClient.GetByteArrayAsync(url);
+                string pathFile = System.IO.Path.Combine(path, nameFile + ".jpg");
+                await File.WriteAllBytesAsync(pathFile, img);
+                return true;
+
+            } catch (Exception ex) {
+                ErrorHandlerService.GetInstance().CathcError(ex);
+                return false;
+            }
+
         }
 
     }
