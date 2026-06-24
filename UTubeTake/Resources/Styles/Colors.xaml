@@ -14,7 +14,8 @@
     
     <Color x:Key="MainAccent">#17c8b8</Color>
     <Color x:Key="SubMainAccent">#3317c8b8</Color>
-    <Color x:Key="SubAccent">#4ade80</Color>
+    <Color x:Key="SecondAccent">#4ade80</Color>
+    <Color x:Key="SubSecondAccent">#334ade80</Color>
 
     <Color x:Key="Border">#12FFFFFF</Color>
     <Color x:Key="TextPrimary">#D1FFFFFF</Color>

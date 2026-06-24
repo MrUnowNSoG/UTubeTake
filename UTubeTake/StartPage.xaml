@@ -288,7 +288,7 @@
 
                 <Ellipse.Background>
                     <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
-                        <GradientStop Color="{StaticResource SubAccent}" Offset="0.0"/>
+                        <GradientStop Color="{StaticResource SecondAccent}" Offset="0.0"/>
                         <GradientStop Color="{StaticResource MainAccent}" Offset="1.0"/>
                     </RadialGradientBrush>
                 </Ellipse.Background>
@@ -300,7 +300,7 @@
 
                 <Ellipse.Background>
                     <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
-                        <GradientStop Color="{StaticResource SubAccent}" Offset="0.0"/>
+                        <GradientStop Color="{StaticResource SecondAccent}" Offset="0.0"/>
                         <GradientStop Color="{StaticResource MainAccent}" Offset="1.0"/>
                     </RadialGradientBrush>
                 </Ellipse.Background>
@@ -312,7 +312,7 @@
 
                 <Ellipse.Background>
                     <RadialGradientBrush Center="0.5,0.5" Radius="0.4">
-                        <GradientStop Color="{StaticResource SubAccent}" Offset="0.0"/>
+                        <GradientStop Color="{StaticResource SecondAccent}" Offset="0.0"/>
                         <GradientStop Color="{StaticResource MainAccent}" Offset="1.0"/>
                     </RadialGradientBrush>
                 </Ellipse.Background>
@@ -415,13 +415,8 @@
                                HeightRequest="{StaticResource ImageSize_small}" 
                                WidthRequest="{StaticResource ImageSize_small}"
                                 
-                               Source="gallery_download_icon_white.png"
+                               Source="gallery_download_icon.png"
                                Aspect="AspectFit">
-
-                                <Image.Behaviors>
-                                    <toolkit:IconTintColorBehavior TintColor="{StaticResource MainAccent}"/>
-                                </Image.Behaviors>
-
                             </Image>
 
 

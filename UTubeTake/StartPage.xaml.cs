@@ -30,14 +30,20 @@ public partial class StartPage : ContentPage {
 
 		var loadingView = new LoadingViewElements(LoadingView, Dot_1, Dot_2, Dot_3);
 
+
 		var videoTitle = new VideoTitleElements(VideoNameLabel, VideoAuthorLabel, 
 												VideoDurationLabel, VideoSizeLabel);
-		var videoThumbnail = new VideoThumbnailElements(ThumbnailImage, ThumbnailButtonBorder, 
-														ThumbnailButtonImage, ThumbnailButtonLabel);
+
+		var videoThumbnail = new VideoThumbnailElements(ThumbnailImage, ThumbnailButtonBorder, ThumbnailButtonImage, 
+														ThumbnailButtonLabel);
+
 		var videoPicker = new VideoPickerElements(VideoQualityPicker, VideoBitratePicker, VideoPickerButtonBorder, 
 												  VideoPickerButtonImage, VideoPickerButtonLabel);
+
         var videoBar = new VideoDownloaderBarElements(BarBorder, BarBorder, BarEllipse, BarStatusLabel, BarPercentLabel, BarNameFileLabel, BarProgressBar);
-        var videoView = new VideoViewElements(VideoView, videoTitle, videoThumbnail, videoPicker, videoBar);
+        
+		var videoView = new VideoViewElements(VideoView, videoTitle, videoThumbnail, videoPicker, videoBar);
+
 
 		var errorView = new ErrorViewEelemetns(ErrorView, ErrorCodeLabel, ErrorResolveLabel);
 

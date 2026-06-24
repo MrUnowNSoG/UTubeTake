@@ -87,12 +87,13 @@ namespace UTubeTake.Code.StartPage.Video {
             if(StaticFlags.downloadImg == true) return;
             if(string.IsNullOrEmpty(_currentVideo) == true) return;
 
-
             StaticFlags.downloadImg = true;
+            _thumbnail.SetLoadingState();
 
             string nameFile = StringHelper.RemoveInvalidPathChars(_videoManger.GetFileName());
-            bool result = await _thumbnailService.DownloadThumbnail(_currentVideo, nameFile, SettingStatic.pathForImage);
+            bool res = await _thumbnailService.DownloadThumbnail(_currentVideo, nameFile, SettingStatic.pathForImage);
 
+            if(res == true) _thumbnail.SetCompleteState();
             StaticFlags.downloadImg = false;
         }
 
@@ -125,7 +126,7 @@ namespace UTubeTake.Code.StartPage.Video {
         }
 
         private void ResetViewEffect() {
-
+            _thumbnail.SetDefaultState();
         }
 
     }
