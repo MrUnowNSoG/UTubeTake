@@ -35,6 +35,8 @@ namespace UTubeTake.Code.StartPage.Video {
             _bar = new VideoDownloaderBarPresenter(elements.Bar);
         }
 
+
+
         public async Task LoadView(string url) {
 
             if (StaticFlags.downloadInfo == true) return;
@@ -64,8 +66,6 @@ namespace UTubeTake.Code.StartPage.Video {
         }
 
         public void Show() {
-            ResetViewEffect();
-
             var title = _videoManger.BuildTitleData();
             _title.SetTitleData(title);
 
@@ -83,6 +83,14 @@ namespace UTubeTake.Code.StartPage.Video {
             _title.SetSizeFile(size);
         }
 
+        public void Hide() {
+            _view.IsVisible = false;
+            ResetViewEffect();
+        }
+
+
+
+
         public async void DownloadThumbnail() {
             if(StaticFlags.downloadImg == true) return;
             if(string.IsNullOrEmpty(_currentVideo) == true) return;
@@ -99,34 +107,49 @@ namespace UTubeTake.Code.StartPage.Video {
 
         public async void DownloadFile() {
 
+            if (StaticFlags.downloadFile == true) return;
             StaticFlags.downloadFile = true;
 
+            bool back = false;
             IProgress<double> progress = new Progress<double>(ProgressFileDownload);
-            string nameFile = StringHelper.RemoveInvalidPathChars(_videoManger.GetFileName());
             var index = _pickers.GetCurrentSelect();
 
+            string nameFile = StringHelper.RemoveInvalidPathChars(_videoManger.GetFileName());
+            string typeFile = _videoManger.DefinityTypeFile(index.Item1, index.Item2);
+
+            ShowLoadingState(nameFile, typeFile);
+
             try {
-                await _videoManger.DownloadVideo(nameFile, SettingStatic.pathForVideo, index.Item1, index.Item2, progress);
+                back = await _videoManger.DownloadVideo(nameFile, SettingStatic.pathForVideo, index.Item1, index.Item2, progress);
 
             } catch (Exception ex) {
                 ErrorHandlerService.GetInstance().CathcError(ex);
             }
 
+            if (back == true) SetCompleteState();
             StaticFlags.downloadFile = false;
         }
 
-        private void ProgressFileDownload(double d) {
-            string percent = Math.Truncate(d * 100).ToString() + "%";
-            _pickers.UpdateFileDownload(percent);
-            //if (Math.Truncate(d * 100) >= 99) DownloadVideoLabel.Text = "Download";
+        private void ShowLoadingState(string fileName, string fileType) {
+            _pickers.SetLoadingState();
+            _bar.SetLoadingState(fileName, fileType);
         }
 
-        public void Hide() {
-            _view.IsVisible = false;
+        private void ProgressFileDownload(double value) {
+            string percent = Math.Truncate(value * 100).ToString() + "%";
+            _pickers.UpdateFileDownload(percent);
+            _bar.UpdateFileDownload(percent, value);
+        }
+
+        private void SetCompleteState() {
+            _pickers.SetCompleteState();
+            _bar.SetCompleteState();
         }
 
         private void ResetViewEffect() {
             _thumbnail.SetDefaultState();
+            _pickers.SetDefaultState();
+            _bar.SetDefaultState();
         }
 
     }

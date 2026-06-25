@@ -31,12 +31,18 @@ namespace UTubeTake.Code.VideoManger {
 
         public string BuildFileSize(int videoId, int bitRateId) => _dataProvider.BuildFileSize(videoId, bitRateId);
 
-        public async Task DownloadVideo(string nameFile, string pathFile,int qualityId, int bitRateId, IProgress<double> progress) {
+        public string DefinityTypeFile(int qualityId, int bitRateId) {
+            IStreamInfo? video = _dataProvider.GetVideoStreamInfo(qualityId);
+            IStreamInfo? audio = _dataProvider.GetAudioStreamInfo(bitRateId);
+            return _downloader.DefinityTypeFile(video, audio);
+        }
+
+        public async Task<bool> DownloadVideo(string nameFile, string pathFile,int qualityId, int bitRateId, IProgress<double> progress) {
 
             string path = Path.Combine(pathFile, nameFile);
             IStreamInfo? video = _dataProvider.GetVideoStreamInfo(qualityId);
             IStreamInfo? audio = _dataProvider.GetAudioStreamInfo(bitRateId);
-            await _downloader.DownloadVideo(path, video, audio, progress);
+            return await _downloader.DownloadVideo(path, video, audio, progress);
 
         }
 

@@ -25,17 +25,18 @@ namespace UTubeTake.Code.StartPage.Video.Presenters {
                 : ImageSource.FromFile("video_base_icon.png");
         }
 
-        public void SetDefaultState() => SetState("gallery_download_icon.png", "Save thumbnail", AppColor.MainAccent, AppColor.SubMainAccent);
+        public void SetDefaultState() => SetState("gallery_download_icon.png", AppColor.TextPrimary,"Save thumbnail", AppColor.MainAccent, AppColor.SubMainAccent);
 
-        public void SetLoadingState() => SetState("loading_thumbnail_icon.png", "Saving...", AppColor.Border, AppColor.AccentBackground);
+        public void SetLoadingState() => SetState("loading_thumbnail_icon.png", AppColor.TextSecondery, "Saving...", AppColor.Border, AppColor.AccentBackground);
 
-        public void SetCompleteState() => SetState("check_icon_second_accent.png", "Saved", AppColor.SecondAccent, AppColor.SubSecondAccent);
+        public void SetCompleteState() => SetState("check_icon_second_accent.png", AppColor.TextPrimary, "Saved", AppColor.SecondAccent, AppColor.SubSecondAccent);
 
-        private void SetState(string img, string label, Color stroke, Color back) {
+        private void SetState(string img, Color textColor, string label, Color stroke, Color back) {
             _borderThumbnailButton.BackgroundColor = back;
             _borderThumbnailButton.Stroke = stroke;
 
             _imageThumbnailButton.Source = ImageSource.FromFile(img);
+            _labelThumbnailButton.TextColor = textColor;
             _labelThumbnailButton.Text = label;
         }
 

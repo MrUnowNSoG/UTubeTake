@@ -15,10 +15,19 @@ namespace UTubeTake.Code.VideoManger {
             _client = client;
         }
 
-        public async Task DownloadVideo(string pathFile, IStreamInfo? video, IStreamInfo? audio, IProgress<double> progress) {
+        public string DefinityTypeFile(IStreamInfo? video, IStreamInfo? audio) {
+
+            if (video is null && audio is null) return "";
+            if (video is null && audio is not null) return ".mp3";
+            return ".mp4";
+
+        }
+
+        public async Task<bool> DownloadVideo(string pathFile, IStreamInfo? video, IStreamInfo? audio, IProgress<double> progress) {
 
             if (video is null && audio is null) {
                 ErrorHandlerService.GetInstance().CathcError(new Exception("Incorrect video download settings selected!"));
+                return false;
             }
 
 
@@ -27,7 +36,7 @@ namespace UTubeTake.Code.VideoManger {
 
                 if (File.Exists(ffmpegPath) == false) {
                     ErrorHandlerService.GetInstance().CathcError(new FileNotFoundException("Program can't find ffmpeg.exe!"));
-                    return;
+                    return false;
                 }
 
                 ConversionRequestBuilder convers = new ConversionRequestBuilder(pathFile + ".mp4");
@@ -35,16 +44,23 @@ namespace UTubeTake.Code.VideoManger {
 
                 var streamInfos = new IStreamInfo[] { video, audio };
                 await _client.Videos.DownloadAsync(streamInfos, convers.Build(), progress);
+                return true;
 
             } else {
 
-                if (video is not null)
+                if (video is not null) {
                     await _client.Videos.Streams.DownloadAsync(video, pathFile + ".mp4", progress);
+                    return true;
+                }
 
-                if (audio is not null)
+                if (audio is not null) {
                     await _client.Videos.Streams.DownloadAsync(audio, pathFile + ".mp3", progress);
+                    return true;
+                }
             }
 
+            return false;
+            
         }
 
     }

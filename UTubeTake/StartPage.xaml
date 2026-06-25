@@ -657,13 +657,14 @@
                     Grid.Row="1"
                     HorizontalOptions="Fill"
                     VerticalOptions="Fill"
-                    BackgroundColor="{StaticResource MainAccent}">
+                    BackgroundColor="{StaticResource MainAccent}"
+                    Stroke="{StaticResource MainAccent}">
 
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="{StaticResource CornerRadius}"/>
                     </Border.StrokeShape>
-                    <Border.StrokeThickness>0</Border.StrokeThickness>
-
+                    <Border.StrokeThickness>2</Border.StrokeThickness>
+                    
                     <Grid
                         HorizontalOptions="Center" 
                         VerticalOptions="Center"
@@ -676,14 +677,8 @@
                             HeightRequest="{StaticResource ImageSize_small}" 
                             WidthRequest="{StaticResource ImageSize_small}"
                                 
-                            Source="download_bottom_icon_white.png"
-                            Aspect="AspectFit">
-
-                            <Image.Behaviors>
-                                <toolkit:IconTintColorBehavior TintColor="{StaticResource Background}"/>
-                            </Image.Behaviors>
-
-                        </Image>
+                            Source="loading_thumbnail_icon.png"
+                            Aspect="AspectFit"/>
 
 
                         <Label x:Name="VideoPickerButtonLabel"  
@@ -708,6 +703,8 @@
             </Grid>
 
             <Border x:Name="BarBorder"
+                IsVisible="False"
+                    
                 Padding="{StaticResource ExternalSpace}"
                 BackgroundColor="{StaticResource CardBackground}"
                 

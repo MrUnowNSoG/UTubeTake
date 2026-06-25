@@ -40,7 +40,7 @@ public partial class StartPage : ContentPage {
 		var videoPicker = new VideoPickerElements(VideoQualityPicker, VideoBitratePicker, VideoPickerButtonBorder, 
 												  VideoPickerButtonImage, VideoPickerButtonLabel);
 
-        var videoBar = new VideoDownloaderBarElements(BarBorder, BarBorder, BarEllipse, BarStatusLabel, BarPercentLabel, BarNameFileLabel, BarProgressBar);
+        var videoBar = new VideoDownloaderBarElements(BarBorder, BarEllipse, BarStatusLabel, BarPercentLabel, BarNameFileLabel, BarProgressBar);
         
 		var videoView = new VideoViewElements(VideoView, videoTitle, videoThumbnail, videoPicker, videoBar);
 

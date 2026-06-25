@@ -19,15 +19,28 @@
         public static Color SubSecondAccent => _subSecondAccent ??= ResolveColor("SubSecondAccent");
 
 
+
         private static Color? _border;
         public static Color Border => _border ??= ResolveColor("Border");
 
         private static Color? _textPrimary;
         public static Color TextPrimary => _textPrimary ??= ResolveColor("TextPrimary");
 
+        private static Color? _textSecondery;
+        public static Color TextSecondery => _textSecondery ??= ResolveColor("TextSecondery");
+
+
 
         private static Color? _accentBackground;
         public static Color AccentBackground => _accentBackground ??= ResolveColor("AccentBackground");
+
+        private static Color? _background;
+        public static Color Background => _background ??= ResolveColor("Background");
+
+        private static Color? _cardBackground;
+        public static Color CardBackground => _cardBackground ??= ResolveColor("CardBackground");
+
+
 
 
         private static Color ResolveColor(string name) {
