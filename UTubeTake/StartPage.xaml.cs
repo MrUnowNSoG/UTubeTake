@@ -5,7 +5,6 @@ using UTubeTake.Code.StartPage.Loading;
 using UTubeTake.Code.StartPage.Video.Elements;
 using UTubeTake.Code.Tools;
 using UTubeTake.Code.Tools.ErrorHandler;
-using UTubeTake.Resources.Strings;
 
 
 
@@ -71,7 +70,7 @@ public partial class StartPage : ContentPage {
 		if(url != null) {
 			_viewManager.ProcessVideoView(url);
         } else {
-			ErrorHandlerService.GetInstance().CatchError(new Exception(AppResources.Error_BadLink));
+			ErrorHandlerService.GetInstance().CatchError(new InvalidLinkException());
 		}
 
 	}

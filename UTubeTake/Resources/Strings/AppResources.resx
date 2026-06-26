@@ -190,13 +190,25 @@
   <data name="Error_PaidVideo_Hint" xml:space="preserve">
     <value>This video requires purchase and cannot be downloaded.</value>
   </data>
-  <data name="Error_BadLink" xml:space="preserve">
-    <value>Bad link!</value>
+  <data name="Error_BadLink_Title" xml:space="preserve">
+    <value>The provided URL is not a valid YouTube link.</value>
   </data>
-  <data name="Error_BadDownloadSettings" xml:space="preserve">
-    <value>Incorrect video download settings selected!</value>
+  <data name="Error_BadLink_Hint" xml:space="preserve">
+    <value>Make sure you pasted a valid YouTube link.</value>
   </data>
-  <data name="Error_FfmpegNotFound" xml:space="preserve">
-    <value>Program can't find ffmpeg.exe!</value>
+  <data name="Error_DownloadSettings_Title" xml:space="preserve">
+    <value>No video or audio stream was selected for download.</value>
+  </data>
+  <data name="Error_DownloadSettings_Hint" xml:space="preserve">
+    <value>Select at least a video or audio quality before downloading.</value>
+  </data>
+  <data name="Error_Ffmpeg_Title" xml:space="preserve">
+    <value>ffmpeg.exe was not found in the application directory.</value>
+  </data>
+  <data name="Error_Ffmpeg_Hint" xml:space="preserve">
+    <value>Place ffmpeg.exe in the application folder and try again.</value>
+  </data>
+  <data name="Error_Unknown_Hint" xml:space="preserve">
+    <value>Please contact the app author.</value>
   </data>
 </root>
