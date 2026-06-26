@@ -9,7 +9,7 @@
             url = url.Trim();
             url = url.Replace(" ", "");
 
-            if (url.Contains("youtube.com") != true && url.Contains("youtu.be") != true)
+            if (url.Contains(YouTubeUrls.DomainFull) != true && url.Contains(YouTubeUrls.DomainShort) != true)
                 return null;
 
             if (url.StartsWith("http://") != true && url.StartsWith("https://") != true)

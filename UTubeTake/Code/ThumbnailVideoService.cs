@@ -1,4 +1,5 @@
-﻿using UTubeTake.Code.Tools.ErrorHandler;
+﻿using UTubeTake.Code.Tools;
+using UTubeTake.Code.Tools.ErrorHandler;
 
 
 
@@ -16,19 +17,19 @@ namespace UTubeTake.Code {
 
             string? code = GetCodeThumbnail(url);
 
-            if (code != null) return @"http://img.youtube.com/vi/" + code + @"/mqdefault.jpg";
+            if (code != null) return YouTubeUrls.ThumbnailPrefix + code + YouTubeUrls.ThumbnailSuffix;
             return null;
         }
 
         private string? GetCodeThumbnail(string url) {
 
-            if (url.Contains("https://www.youtube.com/shorts/") == true) {
-                url = url.Remove(0, 31);
+            if (url.Contains(YouTubeUrls.ShortsPrefix) == true) {
+                url = url.Remove(0, YouTubeUrls.ShortsPrefix.Length);
 
                 if (url.Length > 3) return url;
             }
 
-            if (url.Contains("https://www.youtube.com/watch?v=") == true) {
+            if (url.Contains(YouTubeUrls.WatchPrefix) == true) {
 
                 int index = 0;
                 int count = 0;
@@ -65,12 +66,12 @@ namespace UTubeTake.Code {
             try {
 
                 byte[] img = await _httpClient.GetByteArrayAsync(url);
-                string pathFile = System.IO.Path.Combine(path, nameFile + ".jpg");
+                string pathFile = System.IO.Path.Combine(path, nameFile + FileExtensions.Jpg);
                 await File.WriteAllBytesAsync(pathFile, img);
                 return true;
 
             } catch (Exception ex) {
-                ErrorHandlerService.GetInstance().CathcError(ex);
+                ErrorHandlerService.GetInstance().CatchError(ex);
                 return false;
             }
 

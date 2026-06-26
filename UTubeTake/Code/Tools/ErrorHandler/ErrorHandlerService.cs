@@ -21,12 +21,12 @@ namespace UTubeTake.Code.Tools.ErrorHandler {
         public event Action<ErrorLog> OnCatchError;
 
 
-        public void CathcError(Exception ex) {
-            ErrorLog log = DefinityError(ex);
+        public void CatchError(Exception ex) {
+            ErrorLog log = IdentifyTypeError(ex);
             OnCatchError?.Invoke(log);
         }
 
-        private ErrorLog DefinityError(Exception ex) => ex switch {
+        private ErrorLog IdentifyTypeError(Exception ex) => ex switch {
 
             HttpRequestException or WebException => new ErrorLog("Немає підключення", "Перевірте своє інтернет підключення та спробуйте ще раз."),
                

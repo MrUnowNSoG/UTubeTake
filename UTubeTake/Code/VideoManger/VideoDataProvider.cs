@@ -35,9 +35,9 @@ namespace UTubeTake.Code.VideoManger {
 
         public async Task LoadVideoSetting() {
 
-            StreamManifest steamsManifest = await _client.Videos.Streams.GetManifestAsync(_currentUrl);
+            StreamManifest streamsManifest = await _client.Videos.Streams.GetManifestAsync(_currentUrl);
 
-            _streamsVideo = steamsManifest.GetVideoOnlyStreams()
+            _streamsVideo = streamsManifest.GetVideoOnlyStreams()
                 .Where(s => s.Container == Container.Mp4)
                 .GroupBy(s => s.VideoQuality.MaxHeight)
                 .Select(group =>
@@ -47,7 +47,7 @@ namespace UTubeTake.Code.VideoManger {
                 .OrderByDescending(s => s.VideoQuality.MaxHeight)
                 .ToList();
 
-            _streamsAudio = steamsManifest.GetAudioOnlyStreams()
+            _streamsAudio = streamsManifest.GetAudioOnlyStreams()
                 .Where(s => s.Container == Container.Mp4)
                 .OrderByDescending(item => item.Bitrate).ToList();
         }
@@ -66,55 +66,56 @@ namespace UTubeTake.Code.VideoManger {
             return _currentVideo?.Title ?? "None";
         }
 
-        public List<string> BuildQualityList() {
+        public List<QualityOptionData> BuildQualityList() {
             
-            List<string> back = new List<string>();
-            back.Add("No video");
+            List<QualityOptionData> back = new List<QualityOptionData>();
+            back.Add(new QualityOptionData("No video", null));
             
             if(_streamsVideo != null) {
 
-                for (int i = 0, k = 0; i < _streamsVideo.Count; i++, k++) 
-                        back.Add(_streamsVideo[i].VideoQuality.Label);
+                for (int i = 0; i < _streamsVideo.Count; i++) {
+                    var temp = new QualityOptionData(_streamsVideo[i].VideoQuality.Label, _streamsVideo[i]);
+                    back.Add(temp);
+                } 
 
             }
 
             return back;
         }
 
-        public List<string> BuildBitRateList() {
+        public List<BitRateOptionData> BuildBitRateList() {
 
-            List<string> back = new List<string>();
-            back.Add("No sound");
+            List<BitRateOptionData> back = new List<BitRateOptionData>();
+            back.Add(new BitRateOptionData("No sound", null));
 
             if (_streamsAudio != null) {
 
-                for (int i = 0, k = 0; i < _streamsAudio.Count; i++, k++)
-                    back.Add(_streamsAudio[i].Bitrate.ToString());
+                for (int i = 0; i < _streamsAudio.Count; i++) {
+                    var temp = new BitRateOptionData(_streamsAudio[i].Bitrate.ToString(), _streamsAudio[i]);
+                    back.Add(temp);
+                } 
 
             }
 
             return back;
         }
 
-        public string BuildFileSize(int videoId, int bitRateId) {
+        public string BuildFileSize(VideoOnlyStreamInfo? video, AudioOnlyStreamInfo? audio) {
 
-            videoId -= 1;
-            bitRateId -= 1;
-
-            if (videoId < 0 && bitRateId < 0) return "0 Bytes";
+            if (video is null && audio is null) return "0 Bytes";
 
             double size = 0;
 
-            if (videoId >= 0 && _streamsVideo != null) {
-                size = _streamsVideo[videoId].Size.Bytes;;
+            if (video is not null) {
+                size = video.Size.Bytes;
             }
 
-            if (bitRateId >= 0 && _streamsAudio != null) {
-                size += _streamsAudio[bitRateId].Size.Bytes;
+            if (audio is not null) {
+                size += audio.Size.Bytes;
             }
 
             string typeMemory = "Bytes";
-            string[] arrayType = { "Kb", "Mb", "Gb", "B" };
+            string[] arrayType = { "Kb", "Mb", "Gb" };
 
             for (int i = 0; i < arrayType.Length; i++) {
                 if (size / 1024.0 >= 1) {
@@ -124,28 +125,6 @@ namespace UTubeTake.Code.VideoManger {
             }
 
             return $"{size:0.##} {typeMemory}";
-        }
-
-        public IStreamInfo? GetVideoStreamInfo(int id) {
-            
-            if(_streamsVideo != null) {
-                id -= 1;
-                if (id < 0 || id >= _streamsVideo.Count) return null;
-                return _streamsVideo[id];
-            }
-
-            return null;
-        }
-
-        public IStreamInfo? GetAudioStreamInfo(int id) {
-
-            if (_streamsAudio != null) {
-                id -= 1;
-                if (id < 0 || id >= _streamsAudio.Count) return null;
-                return _streamsAudio[id];
-            }
-
-            return null;
         }
 
     }

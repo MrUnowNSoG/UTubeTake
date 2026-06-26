@@ -20,12 +20,13 @@ public partial class SettingPage : ContentPage {
             if (folder.Folder != null) {
 
                 if (folder.Folder.Path  != null && folder.Folder.Path.ToString() != "") {
-                    SettingStatic.SaveSetting(folder.Folder.Path.ToString(), SettingStatic.pathForImage);
+                    SettingStatic.SaveSetting(folder.Folder.Path.ToString(), SettingStatic.PathForImage);
                     UpdateTextForPath();
                 }
             }
 
         }catch(Exception ex) {
+            Console.WriteLine(ex.ToString());
             PathVideo_label.Text = "Error path";
         }
     }
@@ -38,19 +39,20 @@ public partial class SettingPage : ContentPage {
             if (folder.Folder != null) {
 
                 if (folder.Folder.Path.ToString() != null && folder.Folder.Path.ToString() != "") {
-                    SettingStatic.SaveSetting(SettingStatic.pathForVideo, folder.Folder.Path.ToString());
+                    SettingStatic.SaveSetting(SettingStatic.PathForVideo, folder.Folder.Path.ToString());
                     UpdateTextForPath();
                 }
             }
 
         } catch (Exception ex) {
+            Console.WriteLine(ex.ToString());
             PathImage_label.Text = "Error path";
         }
     }
 
     private void UpdateTextForPath() {
-        PathVideo_label.Text = SettingStatic.pathForVideo;
-        PathImage_label.Text = SettingStatic.pathForImage;
+        PathVideo_label.Text = SettingStatic.PathForVideo;
+        PathImage_label.Text = SettingStatic.PathForImage;
     }
 
     private async void BackEvent(object sender, EventArgs e) {

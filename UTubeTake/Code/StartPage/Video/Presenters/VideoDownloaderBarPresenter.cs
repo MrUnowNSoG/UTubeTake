@@ -1,5 +1,4 @@
-﻿using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
-using Microsoft.Maui.Controls.Shapes;
+﻿using Microsoft.Maui.Controls.Shapes;
 using UTubeTake.Code.StartPage.Video.Elements;
 using UTubeTake.Code.Tools;
 
@@ -12,7 +11,7 @@ namespace UTubeTake.Code.StartPage.Video.Presenters {
         private readonly Border _viewBorder;
         private readonly Ellipse _ellipse;
         private readonly Label _status;
-        private readonly Label _persent;
+        private readonly Label _percent;
         private readonly Label _nameFile;
         private readonly ProgressBar _progressBar;
 
@@ -20,13 +19,13 @@ namespace UTubeTake.Code.StartPage.Video.Presenters {
             _viewBorder = elements.Border;
             _ellipse = elements.Ellipse;
             _status = elements.Status;
-            _persent = elements.Persent;
+            _percent = elements.Percent;
             _nameFile = elements.NameFile;
             _progressBar = elements.ProgressBar;
         }
 
         public void UpdateFileDownload(string percent, double value) {
-            _persent.Text = percent;
+            _percent.Text = percent;
             _progressBar.Progress = value;
         }
 
@@ -34,14 +33,14 @@ namespace UTubeTake.Code.StartPage.Video.Presenters {
             _viewBorder.IsVisible = false;
             _nameFile.Text = "";
 
-            SetState("Downloding...", "0%", 0f, AppColor.MainAccent);
+            SetState("Downloading...", "0%", 0f, AppColor.MainAccent);
         }
 
         public void SetLoadingState(string nameFile, string typeFile) {
             _viewBorder.IsVisible = true;
 
             _nameFile.Text = nameFile + typeFile;
-            SetState("Downloding...", "0%", 0f, AppColor.MainAccent);
+            SetState("Downloading...", "0%", 0f, AppColor.MainAccent);
         }
 
         public void SetCompleteState() {
@@ -50,13 +49,13 @@ namespace UTubeTake.Code.StartPage.Video.Presenters {
 
         private void SetState(string status, string textLabel, double barProgress, Color color) {
             _status.Text = status;
-            _persent.Text = textLabel;
+            _percent.Text = textLabel;
             _progressBar.Progress = barProgress;
 
             _viewBorder.Stroke = color;
             _ellipse.BackgroundColor = color;
             _progressBar.ProgressColor = color;
-            _persent.TextColor = color;
+            _percent.TextColor = color;
         }
     }
 

@@ -9,7 +9,7 @@ namespace UTubeTake.Code.StartPage.Error {
         private readonly Label _errorLabel;
         private readonly Label _resolveLabel;
 
-        public ErrorView(ErrorViewEelemetns elements) {
+        public ErrorView(ErrorViewElements elements) {
             _view = elements.View;
             _errorLabel = elements.Code;
             _resolveLabel = elements.Resolve;

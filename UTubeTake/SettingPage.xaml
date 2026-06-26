@@ -140,7 +140,7 @@
 
                 <Label
                     FontSize="{StaticResource FontSize_small}"
-                    TextColor="{StaticResource TextSecondery}"
+                    TextColor="{StaticResource TextSecondary}"
                     MaxLines="2"
                     LineBreakMode="TailTruncation"
                     
@@ -215,7 +215,7 @@
 
                 <Label
                     FontSize="{StaticResource FontSize_small}"
-                    TextColor="{StaticResource TextSecondery}"
+                    TextColor="{StaticResource TextSecondary}"
                     MaxLines="2"
                     LineBreakMode="TailTruncation"
                     

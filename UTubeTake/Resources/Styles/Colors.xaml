@@ -21,7 +21,7 @@
 
     <Color x:Key="Border">#12FFFFFF</Color>
     <Color x:Key="TextPrimary">#D1FFFFFF</Color>
-    <Color x:Key="TextSecondery">#47FFFFFF</Color>
+    <Color x:Key="TextSecondary">#47FFFFFF</Color>
 
     <!--System color-->
     <Color x:Key="Primary">#512BD4</Color>

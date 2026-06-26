@@ -1,5 +1,6 @@
 ﻿using UTubeTake.Code.VideoManger.VideoData;
 using YoutubeExplode;
+using YoutubeExplode.Videos;
 using YoutubeExplode.Videos.Streams;
 
 
@@ -26,22 +27,18 @@ namespace UTubeTake.Code.VideoManger {
 
         public VideoTitleData BuildTitleData() => _dataProvider.BuildTitleData();
         public string GetFileName() => _dataProvider.GetFileName();
-        public List<string> BuildQualityList() => _dataProvider.BuildQualityList();
-        public List<string> BuildBitRateList() => _dataProvider.BuildBitRateList();
+        public List<QualityOptionData> BuildQualityList() => _dataProvider.BuildQualityList();
+        public List<BitRateOptionData> BuildBitRateList() => _dataProvider.BuildBitRateList();
 
-        public string BuildFileSize(int videoId, int bitRateId) => _dataProvider.BuildFileSize(videoId, bitRateId);
+        public string BuildFileSize(VideoOnlyStreamInfo? video, AudioOnlyStreamInfo? audio) => _dataProvider.BuildFileSize(video, audio);
 
-        public string DefinityTypeFile(int qualityId, int bitRateId) {
-            IStreamInfo? video = _dataProvider.GetVideoStreamInfo(qualityId);
-            IStreamInfo? audio = _dataProvider.GetAudioStreamInfo(bitRateId);
-            return _downloader.DefinityTypeFile(video, audio);
+        public string IdentifyTypeFile(VideoOnlyStreamInfo? video, AudioOnlyStreamInfo? audio) {
+            return _downloader.IdentifyTypeFile(video, audio);
         }
 
-        public async Task<bool> DownloadVideo(string nameFile, string pathFile,int qualityId, int bitRateId, IProgress<double> progress) {
+        public async Task<bool> DownloadVideo(string nameFile, string pathFile, VideoOnlyStreamInfo? video, AudioOnlyStreamInfo? audio, IProgress<double> progress) {
 
             string path = Path.Combine(pathFile, nameFile);
-            IStreamInfo? video = _dataProvider.GetVideoStreamInfo(qualityId);
-            IStreamInfo? audio = _dataProvider.GetAudioStreamInfo(bitRateId);
             return await _downloader.DownloadVideo(path, video, audio, progress);
 
         }

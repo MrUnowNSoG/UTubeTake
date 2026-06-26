@@ -12,7 +12,7 @@ namespace UTubeTake;
 
 public partial class StartPage : ContentPage {
 
-	private StartPage_ViewManager _viewManager;
+	private StartPageViewManager _viewManager;
 
 
 	public StartPage() {
@@ -21,13 +21,13 @@ public partial class StartPage : ContentPage {
 
 		SettingStatic.LoadSetting();
 
-		var xamlContainer = BuildXAMLContainer();
-        _viewManager = new StartPage_ViewManager(xamlContainer);
+		var xamlContainer = BuildXamlContainer();
+        _viewManager = new StartPageViewManager(xamlContainer);
         _viewManager.ShowWelcomeView();
 
 	}
 
-    private StartPage_XAMLContainer BuildXAMLContainer() {
+    private StartPageXamlContainer BuildXamlContainer() {
 
 		var loadingView = new LoadingViewElements(LoadingView, Dot_1, Dot_2, Dot_3);
 
@@ -46,10 +46,10 @@ public partial class StartPage : ContentPage {
 		var videoView = new VideoViewElements(VideoView, videoTitle, videoThumbnail, videoPicker, videoBar);
 
 
-		var errorView = new ErrorViewEelemetns(ErrorView, ErrorCodeLabel, ErrorResolveLabel);
+		var errorView = new ErrorViewElements(ErrorView, ErrorCodeLabel, ErrorResolveLabel);
 
 
-		StartPage_XAMLContainer container = new StartPage_XAMLContainer {
+		StartPageXamlContainer container = new StartPageXamlContainer {
 			WelcomeView = this.WelcomeView,
 
 			LoadingView = loadingView,
@@ -70,14 +70,14 @@ public partial class StartPage : ContentPage {
 		if(url != null) {
 			_viewManager.ProcessVideoView(url);
         } else {
-			ErrorHandlerService.GetInstance().CathcError(new Exception("Bad link!"));
+			ErrorHandlerService.GetInstance().CatchError(new Exception("Bad link!"));
 		}
 
 	}
 
 
 
-    private void DownloadThumbnailEvent(object sender, EventArgs e) {
+    private async void DownloadThumbnailEvent(object sender, EventArgs e) {
 
 		if (StaticFlags.downloadImg == false)
 					_viewManager.DownloadThumbnail();
@@ -87,7 +87,7 @@ public partial class StartPage : ContentPage {
     private async void DownloadVideoEvent(object sender, EventArgs e) {
 
 		if (StaticFlags.downloadFile == false)
-			_viewManager.DownloadFile();
+						_viewManager.DownloadFile();
 	}
 
 

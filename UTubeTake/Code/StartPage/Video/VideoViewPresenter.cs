@@ -22,7 +22,7 @@ namespace UTubeTake.Code.StartPage.Video {
 
         private string _currentVideo;
 
-        public event Action OnLoadDataComplite;
+        public event Action OnLoadDataComplete;
 
         public VideoViewPresenter(VideoViewElements elements) {
             _videoManger = new VideoManager();
@@ -49,12 +49,12 @@ namespace UTubeTake.Code.StartPage.Video {
                 await _videoManger.DownloadVideoData(url);
 
             } catch (Exception error) {
-                ErrorHandlerService.GetInstance().CathcError(error);
+                ErrorHandlerService.GetInstance().CatchError(error);
                 StaticFlags.downloadInfo = false;
                 return;
             }
 
-            OnLoadDataComplite?.Invoke();
+            OnLoadDataComplete?.Invoke();
             StaticFlags.downloadInfo = false;
             return;
 
@@ -91,7 +91,7 @@ namespace UTubeTake.Code.StartPage.Video {
 
 
 
-        public async void DownloadThumbnail() {
+        public async Task DownloadThumbnail() {
             if(StaticFlags.downloadImg == true) return;
             if(string.IsNullOrEmpty(_currentVideo) == true) return;
 
@@ -99,31 +99,31 @@ namespace UTubeTake.Code.StartPage.Video {
             _thumbnail.SetLoadingState();
 
             string nameFile = StringHelper.RemoveInvalidPathChars(_videoManger.GetFileName());
-            bool res = await _thumbnailService.DownloadThumbnail(_currentVideo, nameFile, SettingStatic.pathForImage);
+            bool res = await _thumbnailService.DownloadThumbnail(_currentVideo, nameFile, SettingStatic.PathForImage);
 
             if(res == true) _thumbnail.SetCompleteState();
             StaticFlags.downloadImg = false;
         }
 
-        public async void DownloadFile() {
+        public async Task DownloadFile() {
 
             if (StaticFlags.downloadFile == true) return;
             StaticFlags.downloadFile = true;
 
             bool back = false;
             IProgress<double> progress = new Progress<double>(ProgressFileDownload);
-            var index = _pickers.GetCurrentSelect();
+            var streams = _pickers.GetCurrentSelect();
 
             string nameFile = StringHelper.RemoveInvalidPathChars(_videoManger.GetFileName());
-            string typeFile = _videoManger.DefinityTypeFile(index.Item1, index.Item2);
+            string typeFile = _videoManger.IdentifyTypeFile(streams.Item1, streams.Item2);
 
             ShowLoadingState(nameFile, typeFile);
 
             try {
-                back = await _videoManger.DownloadVideo(nameFile, SettingStatic.pathForVideo, index.Item1, index.Item2, progress);
+                back = await _videoManger.DownloadVideo(nameFile, SettingStatic.PathForVideo, streams.Item1, streams.Item2, progress);
 
             } catch (Exception ex) {
-                ErrorHandlerService.GetInstance().CathcError(ex);
+                ErrorHandlerService.GetInstance().CatchError(ex);
             }
 
             if (back == true) SetCompleteState();

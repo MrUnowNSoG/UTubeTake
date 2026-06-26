@@ -138,7 +138,7 @@
                         Source="link_icon_white.png">
 
                         <Image.Behaviors>
-                            <toolkit:IconTintColorBehavior TintColor="{StaticResource TextSecondery}"/>
+                            <toolkit:IconTintColorBehavior TintColor="{StaticResource TextSecondary}"/>
                         </Image.Behaviors>
                     </Image>
 
@@ -148,7 +148,7 @@
                         FontFamily="Helvetica"
                         FontSize="{StaticResource FontSize_middle}"
                         
-                        PlaceholderColor="{StaticResource TextSecondery}"
+                        PlaceholderColor="{StaticResource TextSecondary}"
                         Placeholder="https://www.youtube.com/watch..."
                         ClearButtonVisibility="WhileEditing"/>
 
@@ -241,7 +241,7 @@
                     HorizontalOptions="Center"
 
                     FontSize="{StaticResource FontSize_middle}"
-                    TextColor="{StaticResource TextSecondery}"
+                    TextColor="{StaticResource TextSecondary}"
 
                     MaxLines="2"
                     LineBreakMode="TailTruncation"
@@ -326,7 +326,7 @@
 
                     <Label
                         FontSize="{StaticResource FontSize_small}"
-                        TextColor="{StaticResource TextSecondery}"
+                        TextColor="{StaticResource TextSecondary}"
                         
                         MaxLines="2"
                         LineBreakMode="TailTruncation"
@@ -391,7 +391,7 @@
 
                     <Label
                         FontSize="{StaticResource FontSize_small}"
-                        TextColor="{StaticResource TextSecondery}"
+                        TextColor="{StaticResource TextSecondary}"
                         
                         MaxLines="2"
                         LineBreakMode="TailTruncation"
@@ -713,7 +713,7 @@
                                VerticalTextAlignment="Center"
                    
                                FontSize="{StaticResource FontSize_middle}" 
-                               TextColor="{StaticResource TextSecondery}"
+                               TextColor="{StaticResource TextSecondary}"
                                MaxLines="2"
                                LineBreakMode="TailTruncation"
                                Text="Author"/>
@@ -754,14 +754,14 @@
                                    Aspect="AspectFit">
 
                                     <Image.Behaviors>
-                                        <toolkit:IconTintColorBehavior TintColor="{StaticResource TextSecondery}"/>
+                                        <toolkit:IconTintColorBehavior TintColor="{StaticResource TextSecondary}"/>
                                     </Image.Behaviors>
 
                                 </Image>
 
                                 <Label x:Name="VideoDurationLabel" 
                                     FontSize="{StaticResource FontSize_middle}" 
-                                    TextColor="{StaticResource TextSecondery}"
+                                    TextColor="{StaticResource TextSecondary}"
                                     Text="21:00"/>
 
                             </HorizontalStackLayout>
@@ -791,14 +791,14 @@
                                    Aspect="AspectFit">
 
                                     <Image.Behaviors>
-                                        <toolkit:IconTintColorBehavior TintColor="{StaticResource TextSecondery}"/>
+                                        <toolkit:IconTintColorBehavior TintColor="{StaticResource TextSecondary}"/>
                                     </Image.Behaviors>
 
                                 </Image>
 
                                 <Label x:Name="VideoSizeLabel" 
                                     FontSize="{StaticResource FontSize_middle}" 
-                                    TextColor="{StaticResource TextSecondery}"
+                                    TextColor="{StaticResource TextSecondary}"
                                     Text="45.5 MB"/>
 
                             </HorizontalStackLayout>
@@ -837,7 +837,7 @@
                     LineBreakMode="TailTruncation"
                     
                     FontSize="{StaticResource FontSize_middle}"
-                    TextColor="{StaticResource TextSecondery}"
+                    TextColor="{StaticResource TextSecondary}"
                     Text="VIDEO QUALITY"/>
 
                 <Label
@@ -852,7 +852,7 @@
                     LineBreakMode="TailTruncation"
                     
                     FontSize="{StaticResource FontSize_middle}"
-                    TextColor="{StaticResource TextSecondery}"
+                    TextColor="{StaticResource TextSecondary}"
                     Text="SOUND QUALITY"/>
 
                 <Border
@@ -1003,7 +1003,7 @@
                         MaxLines="1"
                         LineBreakMode="TailTruncation"
                         
-                        TextColor="{StaticResource TextSecondery}"
+                        TextColor="{StaticResource TextSecondary}"
                         FontSize="{StaticResource FontSize_middle}"
                         FontAttributes="Bold"
                         Text="Downloading..."/>
@@ -1034,7 +1034,7 @@
                         Aspect="AspectFit">
 
                         <Image.Behaviors>
-                            <toolkit:IconTintColorBehavior TintColor="{StaticResource TextSecondery}"/>
+                            <toolkit:IconTintColorBehavior TintColor="{StaticResource TextSecondary}"/>
                         </Image.Behaviors>
                     </Image>
 
@@ -1051,7 +1051,7 @@
                         MaxLines="1"
                         LineBreakMode="TailTruncation"
                         
-                        TextColor="{StaticResource TextSecondery}"
+                        TextColor="{StaticResource TextSecondary}"
                         FontSize="{StaticResource FontSize_middle}"
                         Text="Name file.mp3"/>
 

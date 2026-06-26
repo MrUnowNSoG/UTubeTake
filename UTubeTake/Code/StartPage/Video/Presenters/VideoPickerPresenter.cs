@@ -1,5 +1,7 @@
 ﻿using UTubeTake.Code.StartPage.Video.Elements;
 using UTubeTake.Code.Tools;
+using UTubeTake.Code.VideoManger.VideoData;
+using YoutubeExplode.Videos.Streams;
 
 
 
@@ -21,13 +23,19 @@ namespace UTubeTake.Code.StartPage.Video.Presenters {
             _labelButton = elements.Label;
         }
 
-        public void SetPickers(List<string> quality, List<string> bitrate) {
+        public void SetPickers(List<QualityOptionData> quality, List<BitRateOptionData> bitrate) {
             _qualityPicker.ItemsSource = quality;
             _bitratePicker.ItemsSource = bitrate;
         }
 
-        public (int, int) GetCurrentSelect() {
-            return (_qualityPicker.SelectedIndex, _bitratePicker.SelectedIndex);
+        public (VideoOnlyStreamInfo?, AudioOnlyStreamInfo?) GetCurrentSelect() {
+
+            VideoOnlyStreamInfo? video = null;
+            AudioOnlyStreamInfo? bitRate = null;
+            if (_qualityPicker.SelectedItem is QualityOptionData qData) video = qData.GetStream();
+            if (_bitratePicker.SelectedItem is BitRateOptionData bData) bitRate = bData.GetStream();
+            
+            return (video, bitRate);
         }
 
 
@@ -37,17 +45,17 @@ namespace UTubeTake.Code.StartPage.Video.Presenters {
 
         public void SetDefaultState() {
             Color textColor = AppColor.Background;
-            SetState("download_bottom_icon.png", textColor, "Download", AppColor.MainAccent, AppColor.MainAccent);
+            SetState(Icons.Download, textColor, "Downloading", AppColor.MainAccent, AppColor.MainAccent);
         }
 
         public void SetLoadingState() {
-            Color textColor = AppColor.TextSecondery;
-            SetState("loading_thumbnail_icon.png", textColor, "0%", AppColor.Border, AppColor.CardBackground);
+            Color textColor = AppColor.TextSecondary;
+            SetState(Icons.Loading, textColor, "0%", AppColor.Border, AppColor.CardBackground);
         }
 
         public void SetCompleteState() {
             Color textColor = AppColor.TextPrimary;
-            SetState("check_icon_second_accent.png", textColor, "Done", AppColor.SecondAccent, AppColor.SubSecondAccent);
+            SetState(Icons.Complete, textColor, "Done", AppColor.SecondAccent, AppColor.SubSecondAccent);
         }
 
         private void SetState(string img, Color colorLabel, string label, Color stroke, Color back) {

@@ -2,23 +2,23 @@
 
     public static class SettingStatic {
 
-        public static string pathForVideo = "";
-        public static string pathForImage = "";
+        public static string PathForVideo = "";
+        public static string PathForImage = "";
         private static Setting _setting = new Setting();
 
         public static void LoadSetting() {
 
-            if(_setting.HadSettingFile == false) _setting.CreatAllFiles();
+            if(_setting.HadSettingFile == false) _setting.CreateAllFiles();
 
-            pathForVideo = _setting.GetVideoFolder();
-            pathForImage = _setting.GetImageFolder();
+            PathForVideo = _setting.GetVideoFolder();
+            PathForImage = _setting.GetImageFolder();
         }
         
 
         public static void SaveSetting(string videoPath, string imgPath) {
-            pathForVideo = videoPath;
-            pathForImage = imgPath;
-            _setting.SaveFoleders(videoPath, imgPath);
+            PathForVideo = videoPath;
+            PathForImage = imgPath;
+            _setting.SaveFolders(videoPath, imgPath);
         }
     
     }

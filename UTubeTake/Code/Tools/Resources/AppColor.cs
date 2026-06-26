@@ -26,8 +26,8 @@
         private static Color? _textPrimary;
         public static Color TextPrimary => _textPrimary ??= ResolveColor("TextPrimary");
 
-        private static Color? _textSecondery;
-        public static Color TextSecondery => _textSecondery ??= ResolveColor("TextSecondery");
+        private static Color? _textSecondary;
+        public static Color TextSecondary => _textSecondary ??= ResolveColor("TextSecondary");
 
 
 

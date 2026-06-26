@@ -6,7 +6,7 @@ using UTubeTake.Code.StartPage.Video.Elements;
 
 namespace UTubeTake.Code.StartPage {
     
-    internal sealed class StartPage_XAMLContainer {
+    internal sealed class StartPageXamlContainer {
     
         public required Layout WelcomeView { get; init; }
         
@@ -14,7 +14,7 @@ namespace UTubeTake.Code.StartPage {
 
         public required VideoViewElements VideoView { get; init; }
 
-        public required ErrorViewEelemetns ErrorView { get; init; }
+        public required ErrorViewElements ErrorView { get; init; }
 
     }
 

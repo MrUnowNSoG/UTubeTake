@@ -6,21 +6,22 @@ using UTubeTake.Code.Tools.ErrorHandler;
 
 
 namespace UTubeTake.Code.StartPage {
-    internal sealed class StartPage_ViewManager {
+
+    internal sealed class StartPageViewManager {
 
         private readonly Layout _welcomeView;
         private readonly LoadingView _loadView;
         private readonly VideoViewPresenter _videoView;
         private readonly ErrorView _errorView;
 
-        public StartPage_ViewManager(StartPage_XAMLContainer container) {
+        public StartPageViewManager(StartPageXamlContainer container) {
             _welcomeView = container.WelcomeView;
             _loadView = new LoadingView(container.LoadingView);
             _videoView = new VideoViewPresenter(container.VideoView);
             _errorView = new ErrorView(container.ErrorView);
 
             ErrorHandlerService.GetInstance().OnCatchError += ShowErrorView;
-            _videoView.OnLoadDataComplite += ShowVideoView;
+            _videoView.OnLoadDataComplete += ShowVideoView;
         }
         
         public void ShowWelcomeView() {
@@ -33,11 +34,11 @@ namespace UTubeTake.Code.StartPage {
             _errorView.Show(log);
         }
 
-        public void ProcessVideoView(string url) {
+        public async void ProcessVideoView(string url) {
             HideAllView();
             _loadView.Show();
 
-            _videoView.LoadView(url);   
+            await _videoView.LoadView(url);   
         }
 
         private void ShowVideoView() {
@@ -47,9 +48,9 @@ namespace UTubeTake.Code.StartPage {
 
         public void UpdateVideoSize() => _videoView.UpdateVideoSize();
 
-        public void DownloadThumbnail() => _videoView.DownloadThumbnail();
+        public async Task DownloadThumbnail() => await _videoView.DownloadThumbnail();
 
-        public void DownloadFile() => _videoView.DownloadFile();
+        public async Task DownloadFile() => await _videoView.DownloadFile();
 
         private void HideAllView() {
             _welcomeView.IsVisible = false;

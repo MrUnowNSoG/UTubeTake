@@ -1,101 +1,76 @@
-﻿using CommunityToolkit.Maui.Converters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace UTubeTake.Code.Setting {
 
-namespace UTubeTake.Code.Setting {
-    internal class Setting {
+    internal sealed class Setting {
 
-        //Const
-        private const string keyVideo = "VideoFolderPath";
-        private const string keyImage = "ImageFolderPath";
+        private const string KEY_VIDEO = "VideoFolderPath";
+        private const string KEY_IMAGE = "ImageFolderPath";
 
-        //All path for code
-        private string pathProject;
-        private string pathSettingFile;
-        private string pathVideoFolder;
-        private string pathImageFolder;
+        private string _pathProject;
+        private string _pathSettingFile;
+        private string _pathVideoFolder;
+        private string _pathImageFolder;
 
         public Setting() {
-            pathProject = AppContext.BaseDirectory;
-            ClearPathProject();
+            _pathProject = AppContext.BaseDirectory;
 
-            pathSettingFile = pathProject + @"\Setting.txt";
-            pathVideoFolder = pathProject + @"Video";
-            pathImageFolder = pathProject + @"Image";
+            _pathSettingFile = Path.Combine(_pathProject, "Setting.txt");
+            _pathVideoFolder = Path.Combine(_pathProject, "Video");
+            _pathImageFolder = Path.Combine(_pathProject, "Image");
         }
 
-        public bool HadSettingFile => File.Exists(pathSettingFile);
+        public bool HadSettingFile => File.Exists(_pathSettingFile);
         
 
-        //Main
-        public void CreatAllFiles() {
-            //Folder
-            if (Directory.Exists(pathVideoFolder) == false) Directory.CreateDirectory(pathVideoFolder);
-            if (Directory.Exists(pathImageFolder) == false) Directory.CreateDirectory(pathImageFolder);
+        public void CreateAllFiles() {
+            if (Directory.Exists(_pathVideoFolder) == false) Directory.CreateDirectory(_pathVideoFolder);
+            if (Directory.Exists(_pathImageFolder) == false) Directory.CreateDirectory(_pathImageFolder);
 
-            //Setting
-            FileStream file = File.Create(pathSettingFile);
+            FileStream file = File.Create(_pathSettingFile);
             file.Close();
 
-            ClearFile(pathSettingFile);
-            AddParemetr(pathSettingFile, keyVideo, pathVideoFolder);
-            AddParemetr(pathSettingFile, keyImage, pathImageFolder);
+            ClearFile(_pathSettingFile);
+            AddParameter(_pathSettingFile, KEY_VIDEO, _pathVideoFolder);
+            AddParameter(_pathSettingFile, KEY_IMAGE, _pathImageFolder);
         }
 
-        public void SaveFoleders(string vieo, string image) {
-            ClearFile(pathSettingFile);
-            AddParemetr(pathSettingFile, keyVideo, vieo);
-            AddParemetr(pathSettingFile, keyImage, image);
+        public void SaveFolders(string video, string image) {
+            ClearFile(_pathSettingFile);
+            AddParameter(_pathSettingFile, KEY_VIDEO, video);
+            AddParameter(_pathSettingFile, KEY_IMAGE, image);
         }
 
 
-        //Getter
         public string GetVideoFolder() {
-            string str = ReadParametr(pathSettingFile, keyVideo);
+            string? str = ReadParameter(_pathSettingFile, KEY_VIDEO);
 
-            if (str == null || str == "") return pathVideoFolder;
-            if(Directory.Exists(str) == false) return pathVideoFolder;
+            if (str == null || str == "") return _pathVideoFolder;
+            if(Directory.Exists(str) == false) return _pathVideoFolder;
 
             return str;
         }
 
         public string GetImageFolder() {
-            string str = ReadParametr(pathSettingFile, keyImage);
+            string? str = ReadParameter(_pathSettingFile, KEY_IMAGE);
 
-            if (str == null || str == "") return pathImageFolder;
-            if (Directory.Exists(str) == false) return pathImageFolder;
+            if (str == null || str == "") return _pathImageFolder;
+            if (Directory.Exists(str) == false) return _pathImageFolder;
 
             return str;
         }
 
-
-        //
-        private void ClearPathProject() {
-            for (int i = pathProject.Length - 1; i > 0; i--) {
-                if (pathProject[i] == '\\') {
-                    break;
-                } else {
-                    pathProject.Remove(i);
-                    i++;
-                }
-            }
-        }
         private void ClearFile(string path) {
             using (StreamWriter writer = new StreamWriter(path, false)) {
                 writer.Write("");
             }
         }
 
-        private void AddParemetr(string path, string key, string value) {
+        private void AddParameter(string path, string key, string value) {
             using (StreamWriter writer = new StreamWriter(path, true)) {
                 writer.Write($@"`{key}`:`{value}`" + "\n");
             }
         }
 
-        private string ReadParametr(string path, string key) {
+        private string? ReadParameter(string path, string key) {
 
             string line = "";
 
