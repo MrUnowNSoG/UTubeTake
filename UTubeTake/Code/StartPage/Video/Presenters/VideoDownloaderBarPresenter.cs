@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
 using UTubeTake.Code.StartPage.Video.Elements;
 using UTubeTake.Code.Tools;
+using UTubeTake.Resources.Strings;
 
 
 
@@ -33,18 +34,18 @@ namespace UTubeTake.Code.StartPage.Video.Presenters {
             _viewBorder.IsVisible = false;
             _nameFile.Text = "";
 
-            SetState("Downloading...", "0%", 0f, AppColor.MainAccent);
+            SetState(AppResources.Status_Downloading, "0%", 0f, AppColor.MainAccent);
         }
 
         public void SetLoadingState(string nameFile, string typeFile) {
             _viewBorder.IsVisible = true;
 
             _nameFile.Text = nameFile + typeFile;
-            SetState("Downloading...", "0%", 0f, AppColor.MainAccent);
+            SetState(AppResources.Status_Downloading, "0%", 0f, AppColor.MainAccent);
         }
 
         public void SetCompleteState() {
-            SetState("Done", "100%", 1f, AppColor.SecondAccent);
+            SetState(AppResources.Status_Done, "100%", 1f, AppColor.SecondAccent);
         }
 
         private void SetState(string status, string textLabel, double barProgress, Color color) {

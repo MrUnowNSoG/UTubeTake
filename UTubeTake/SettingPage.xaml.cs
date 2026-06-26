@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui.Storage;
 using UTubeTake.Code.Setting;
+using UTubeTake.Resources.Strings;
 
 
 
@@ -27,7 +28,7 @@ public partial class SettingPage : ContentPage {
 
         }catch(Exception ex) {
             Console.WriteLine(ex.ToString());
-            PathVideo_label.Text = "Error path";
+            PathVideo_label.Text = AppResources.Setting_PathError;
         }
     }
 
@@ -46,7 +47,7 @@ public partial class SettingPage : ContentPage {
 
         } catch (Exception ex) {
             Console.WriteLine(ex.ToString());
-            PathImage_label.Text = "Error path";
+            PathImage_label.Text = AppResources.Setting_PathError;
         }
     }
 

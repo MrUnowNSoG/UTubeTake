@@ -1,5 +1,6 @@
 ﻿using UTubeTake.Code.Tools;
 using UTubeTake.Code.Tools.ErrorHandler;
+using UTubeTake.Resources.Strings;
 using YoutubeExplode;
 using YoutubeExplode.Converter;
 using YoutubeExplode.Videos.Streams;
@@ -27,7 +28,7 @@ namespace UTubeTake.Code.VideoManger {
         public async Task<bool> DownloadVideo(string pathFile, IStreamInfo? video, IStreamInfo? audio, IProgress<double> progress) {
 
             if (video is null && audio is null) {
-                ErrorHandlerService.GetInstance().CatchError(new Exception("Incorrect video download settings selected!"));
+                ErrorHandlerService.GetInstance().CatchError(new Exception(AppResources.Error_BadDownloadSettings));
                 return false;
             }
 
@@ -36,7 +37,7 @@ namespace UTubeTake.Code.VideoManger {
                 string ffmpegPath = FfmpegConfig.ExecutablePath;
 
                 if (File.Exists(ffmpegPath) == false) {
-                    ErrorHandlerService.GetInstance().CatchError(new FileNotFoundException("Program can't find ffmpeg.exe!"));
+                    ErrorHandlerService.GetInstance().CatchError(new FileNotFoundException(AppResources.Error_FfmpegNotFound));
                     return false;
                 }
 

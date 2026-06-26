@@ -1,6 +1,7 @@
 ﻿using UTubeTake.Code.StartPage.Video.Elements;
 using UTubeTake.Code.Tools;
 using UTubeTake.Code.VideoManger.VideoData;
+using UTubeTake.Resources.Strings;
 using YoutubeExplode.Videos.Streams;
 
 
@@ -45,7 +46,7 @@ namespace UTubeTake.Code.StartPage.Video.Presenters {
 
         public void SetDefaultState() {
             Color textColor = AppColor.Background;
-            SetState(Icons.Download, textColor, "Downloading", AppColor.MainAccent, AppColor.MainAccent);
+            SetState(Icons.Download, textColor, AppResources.Picker_DefaultLabel, AppColor.MainAccent, AppColor.MainAccent);
         }
 
         public void SetLoadingState() {
@@ -55,7 +56,7 @@ namespace UTubeTake.Code.StartPage.Video.Presenters {
 
         public void SetCompleteState() {
             Color textColor = AppColor.TextPrimary;
-            SetState(Icons.Complete, textColor, "Done", AppColor.SecondAccent, AppColor.SubSecondAccent);
+            SetState(Icons.Complete, textColor, AppResources.Status_Done, AppColor.SecondAccent, AppColor.SubSecondAccent);
         }
 
         private void SetState(string img, Color colorLabel, string label, Color stroke, Color back) {

@@ -1,5 +1,6 @@
 ﻿using UTubeTake.Code.StartPage.Video.Elements;
 using UTubeTake.Code.Tools;
+using UTubeTake.Resources.Strings;
 
 
 
@@ -25,11 +26,11 @@ namespace UTubeTake.Code.StartPage.Video.Presenters {
                 : ImageSource.FromFile(Icons.VideoPlaceholder);
         }
 
-        public void SetDefaultState() => SetState(Icons.SaveThumbnail, AppColor.TextPrimary,"Save thumbnail", AppColor.MainAccent, AppColor.SubMainAccent);
+        public void SetDefaultState() => SetState(Icons.SaveThumbnail, AppColor.TextPrimary, AppResources.Thumbnail_Save, AppColor.MainAccent, AppColor.SubMainAccent);
 
-        public void SetLoadingState() => SetState(Icons.Loading, AppColor.TextSecondary, "Saving...", AppColor.Border, AppColor.AccentBackground);
+        public void SetLoadingState() => SetState(Icons.Loading, AppColor.TextSecondary, AppResources.Thumbnail_Saving, AppColor.Border, AppColor.AccentBackground);
 
-        public void SetCompleteState() => SetState(Icons.Complete, AppColor.TextPrimary, "Saved", AppColor.SecondAccent, AppColor.SubSecondAccent);
+        public void SetCompleteState() => SetState(Icons.Complete, AppColor.TextPrimary, AppResources.Thumbnail_Saved, AppColor.SecondAccent, AppColor.SubSecondAccent);
 
         private void SetState(string img, Color textColor, string label, Color stroke, Color back) {
             _borderThumbnailButton.BackgroundColor = back;

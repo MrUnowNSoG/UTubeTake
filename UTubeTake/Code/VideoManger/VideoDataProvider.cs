@@ -1,4 +1,5 @@
 ﻿using UTubeTake.Code.VideoManger.VideoData;
+using UTubeTake.Resources.Strings;
 using YoutubeExplode;
 using YoutubeExplode.Videos;
 using YoutubeExplode.Videos.Streams;
@@ -54,7 +55,7 @@ namespace UTubeTake.Code.VideoManger {
 
         public VideoTitleData BuildTitleData() {
 
-            if (_currentVideo == null) return new VideoTitleData("None", "None", "00:00");
+            if (_currentVideo == null) return new VideoTitleData(AppResources.Common_None, AppResources.Common_None, "00:00");
 
             TimeSpan span = _currentVideo.Duration ?? TimeSpan.Zero;
             string timeVideo = $"{(int)span.TotalMinutes}:{span.Seconds:D2}";
@@ -63,13 +64,13 @@ namespace UTubeTake.Code.VideoManger {
         }
 
         public string GetFileName() {
-            return _currentVideo?.Title ?? "None";
+            return _currentVideo?.Title ?? AppResources.Common_None;
         }
 
         public List<QualityOptionData> BuildQualityList() {
             
             List<QualityOptionData> back = new List<QualityOptionData>();
-            back.Add(new QualityOptionData("No video", null));
+            back.Add(new QualityOptionData(AppResources.Picker_NoVideo, null));
             
             if(_streamsVideo != null) {
 
@@ -86,7 +87,7 @@ namespace UTubeTake.Code.VideoManger {
         public List<BitRateOptionData> BuildBitRateList() {
 
             List<BitRateOptionData> back = new List<BitRateOptionData>();
-            back.Add(new BitRateOptionData("No sound", null));
+            back.Add(new BitRateOptionData(AppResources.Picker_NoSound, null));
 
             if (_streamsAudio != null) {
 

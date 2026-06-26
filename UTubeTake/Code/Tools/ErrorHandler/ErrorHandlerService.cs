@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using UTubeTake.Resources.Strings;
 using YoutubeExplode.Exceptions;
 
 
@@ -28,13 +29,13 @@ namespace UTubeTake.Code.Tools.ErrorHandler {
 
         private ErrorLog IdentifyTypeError(Exception ex) => ex switch {
 
-            HttpRequestException or WebException => new ErrorLog("Немає підключення", "Перевірте своє інтернет підключення та спробуйте ще раз."),
-               
-            FileNotFoundException => new ErrorLog($"Файл відсутній: {(ex as FileNotFoundException)?.FileName}", "Перевірте наявність файлу."),
-            UnauthorizedAccessException => new ErrorLog("Немає доступу", "Програма не має прав доступу до файлу або папки."),
+            HttpRequestException or WebException => new ErrorLog(AppResources.Error_NoConnection_Title, AppResources.Error_NoConnection_Hint),
 
-            VideoUnavailableException => new ErrorLog("Відео недоступне.", "Це відео недоступне або було видалено."),
-            VideoRequiresPurchaseException => new ErrorLog("Платне відео", "Це відео потребує придбання і не може бути завантажене."),
+            FileNotFoundException => new ErrorLog(string.Format(AppResources.Error_FileNotFound_Title, (ex as FileNotFoundException)?.FileName), AppResources.Error_FileNotFound_Hint),
+            UnauthorizedAccessException => new ErrorLog(AppResources.Error_NoAccess_Title, AppResources.Error_NoAccess_Hint),
+
+            VideoUnavailableException => new ErrorLog(AppResources.Error_VideoUnavailable_Title, AppResources.Error_VideoUnavailable_Hint),
+            VideoRequiresPurchaseException => new ErrorLog(AppResources.Error_PaidVideo_Title, AppResources.Error_PaidVideo_Hint),
 
             _ => new ErrorLog(ex.Message, "")
         };

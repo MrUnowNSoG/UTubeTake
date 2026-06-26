@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- Welcome -->
+  <data name="Welcome_Hint" xml:space="preserve">
+    <value>Paste a link to get started</value>
+  </data>
+  <data name="Welcome_SubHint" xml:space="preserve">
+    <value>Works with YouTube videos and shorts</value>
+  </data>
+
+  <!-- Buttons -->
+  <data name="Button_Find" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="Button_TryAgain" xml:space="preserve">
+    <value>Try again</value>
+  </data>
+  <data name="Button_Dismiss" xml:space="preserve">
+    <value>Dismiss</value>
+  </data>
+  <data name="Button_PickPath" xml:space="preserve">
+    <value>Pick path</value>
+  </data>
+
+  <!-- Error view -->
+  <data name="Error_Detected" xml:space="preserve">
+    <value>Error detected</value>
+  </data>
+  <data name="Error_WhatWentWrong" xml:space="preserve">
+    <value>WHAT WENT WRONG</value>
+  </data>
+  <data name="Error_HowToFix" xml:space="preserve">
+    <value>HOW TO FIX IT</value>
+  </data>
+
+  <!-- Video view -->
+  <data name="Video_NameCaption" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Video_AuthorCaption" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="Video_VideoQuality" xml:space="preserve">
+    <value>VIDEO QUALITY</value>
+  </data>
+  <data name="Video_SoundQuality" xml:space="preserve">
+    <value>SOUND QUALITY</value>
+  </data>
+
+  <!-- Settings -->
+  <data name="Setting_Title" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Setting_VideoStorage" xml:space="preserve">
+    <value>VIDEO STORAGE</value>
+  </data>
+  <data name="Setting_ThumbnailStorage" xml:space="preserve">
+    <value>THUMBNAIL STORAGE</value>
+  </data>
+  <data name="Setting_PickVideoHint" xml:space="preserve">
+    <value>Pick your video path</value>
+  </data>
+  <data name="Setting_PickImageHint" xml:space="preserve">
+    <value>Pick your image path</value>
+  </data>
+  <data name="Setting_PathError" xml:space="preserve">
+    <value>Error path</value>
+  </data>
+
+  <!-- Download / thumbnail statuses -->
+  <data name="Status_Downloading" xml:space="preserve">
+    <value>Downloading...</value>
+  </data>
+  <data name="Status_Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Picker_DefaultLabel" xml:space="preserve">
+    <value>Downloading</value>
+  </data>
+  <data name="Thumbnail_Save" xml:space="preserve">
+    <value>Save thumbnail</value>
+  </data>
+  <data name="Thumbnail_Saving" xml:space="preserve">
+    <value>Saving...</value>
+  </data>
+  <data name="Thumbnail_Saved" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+
+  <!-- Picker placeholders -->
+  <data name="Picker_NoVideo" xml:space="preserve">
+    <value>No video</value>
+  </data>
+  <data name="Picker_NoSound" xml:space="preserve">
+    <value>No sound</value>
+  </data>
+
+  <!-- Common -->
+  <data name="Common_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+
+  <!-- Error messages -->
+  <data name="Error_NoConnection_Title" xml:space="preserve">
+    <value>No connection</value>
+  </data>
+  <data name="Error_NoConnection_Hint" xml:space="preserve">
+    <value>Check your internet connection and try again.</value>
+  </data>
+  <data name="Error_FileNotFound_Title" xml:space="preserve">
+    <value>File not found: {0}</value>
+  </data>
+  <data name="Error_FileNotFound_Hint" xml:space="preserve">
+    <value>Make sure the file exists.</value>
+  </data>
+  <data name="Error_NoAccess_Title" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="Error_NoAccess_Hint" xml:space="preserve">
+    <value>The app doesn't have permission to access the file or folder.</value>
+  </data>
+  <data name="Error_VideoUnavailable_Title" xml:space="preserve">
+    <value>Video unavailable</value>
+  </data>
+  <data name="Error_VideoUnavailable_Hint" xml:space="preserve">
+    <value>This video is unavailable or has been removed.</value>
+  </data>
+  <data name="Error_PaidVideo_Title" xml:space="preserve">
+    <value>Paid video</value>
+  </data>
+  <data name="Error_PaidVideo_Hint" xml:space="preserve">
+    <value>This video requires purchase and cannot be downloaded.</value>
+  </data>
+  <data name="Error_BadLink" xml:space="preserve">
+    <value>Bad link!</value>
+  </data>
+  <data name="Error_BadDownloadSettings" xml:space="preserve">
+    <value>Incorrect video download settings selected!</value>
+  </data>
+  <data name="Error_FfmpegNotFound" xml:space="preserve">
+    <value>Program can't find ffmpeg.exe!</value>
+  </data>
+</root>

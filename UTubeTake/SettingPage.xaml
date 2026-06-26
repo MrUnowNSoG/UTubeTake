@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:strings="clr-namespace:UTubeTake.Resources.Strings"
              x:Class="UTubeTake.SettingPage"
              Title="SettingPage"
              BackgroundColor="{StaticResource Background}">
@@ -120,7 +121,7 @@
                 MaxLines="1"
                 LineBreakMode="TailTruncation"
                 
-                Text="Settings"/>
+                Text="{x:Static strings:AppResources.Setting_Title}"/>
 
         </HorizontalStackLayout>
         <!--Title page-->
@@ -144,7 +145,7 @@
                     MaxLines="2"
                     LineBreakMode="TailTruncation"
                     
-                    Text="VIDEO STORAGE"/>
+                    Text="{x:Static strings:AppResources.Setting_VideoStorage}"/>
 
                 <Grid
                     ColumnDefinitions="*, Auto"
@@ -203,7 +204,7 @@
                         
                         LineBreakMode="TailTruncation"
                         
-                        Text="Pick path"/>
+                        Text="{x:Static strings:AppResources.Button_PickPath}"/>
 
                 </Grid>
 
@@ -219,7 +220,7 @@
                     MaxLines="2"
                     LineBreakMode="TailTruncation"
                     
-                    Text="THUMBNAIL STORAGE"/>
+                    Text="{x:Static strings:AppResources.Setting_ThumbnailStorage}"/>
 
                 <Grid
                     ColumnDefinitions="*, Auto"
@@ -277,7 +278,7 @@
                         FontAttributes="Bold"
                         LineBreakMode="TailTruncation"
                         
-                        Text="Pick path"/>
+                        Text="{x:Static strings:AppResources.Button_PickPath}"/>
 
                 </Grid>
 
