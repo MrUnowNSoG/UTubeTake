@@ -21,41 +21,34 @@ namespace UTubeTake.Code {
             return null;
         }
 
+        private static readonly char[] _codeDelimiters = { '&', '?', '/' };
+
         private string? GetCodeThumbnail(string url) {
 
-            if (url.Contains(YouTubeUrls.ShortsPrefix) == true) {
-                url = url.Remove(0, YouTubeUrls.ShortsPrefix.Length);
-
-                if (url.Length > 3) return url;
+            if (url.Contains(YouTubeUrls.ShortsPrefix)) {
+                string code = ExtractCode(url, YouTubeUrls.ShortsPrefix);
+                if (code.Length > 3) return code;
             }
 
-            if (url.Contains(YouTubeUrls.WatchPrefix) == true) {
+            if (url.Contains(YouTubeUrls.WatchPrefix)) {
+                string code = ExtractCode(url, YouTubeUrls.WatchPrefix);
+                if (code.Length > 3) return code;
+            }
 
-                int index = 0;
-                int count = 0;
-
-                for (int i = 0; i < url.Length; i++) {
-
-                    if (url[i] == '=') {
-
-                        if (index == 0) {
-                            index = i + 1;
-
-                        } else {
-                            count = (i - 5) - index;
-                            break;
-                        }
-                    }
-                }
-
-                url = count != 0
-                    ? url.Substring(index, count)
-                    : url.Substring(index, url.Length - index);
-
-                if (url.Length > 3) return url;
+            if (url.Contains(YouTubeUrls.ShortLinkMarker)) {
+                string code = ExtractCode(url, YouTubeUrls.ShortLinkMarker);
+                if (code.Length > 3) return code;
             }
 
             return null;
+        }
+
+        private static string ExtractCode(string url, string marker) {
+            int start = url.IndexOf(marker, StringComparison.Ordinal) + marker.Length;
+            string code = url.Substring(start);
+
+            int end = code.IndexOfAny(_codeDelimiters);
+            return end >= 0 ? code.Substring(0, end) : code;
         }
 
         public async Task<bool> DownloadThumbnail(string urlVideo, string nameFile, string path) {

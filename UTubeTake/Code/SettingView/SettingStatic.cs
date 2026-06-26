@@ -8,10 +8,18 @@
 
         public static void LoadSetting() {
 
-            if(_setting.HadSettingFile == false) _setting.CreateAllFiles();
+            try {
+                if (_setting.HadSettingFile == false) _setting.CreateAllFiles();
 
-            PathForVideo = _setting.GetVideoFolder();
-            PathForImage = _setting.GetImageFolder();
+                PathForVideo = _setting.GetVideoFolder();
+                PathForImage = _setting.GetImageFolder();
+
+            } catch (Exception ex) {
+                // Settings I/O must never crash startup: fall back to safe defaults.
+                System.Diagnostics.Debug.WriteLine($"LoadSetting failed: {ex}");
+                PathForVideo = _setting.DefaultVideoFolder;
+                PathForImage = _setting.DefaultImageFolder;
+            }
         }
         
 

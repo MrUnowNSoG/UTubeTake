@@ -1,36 +1,36 @@
-﻿namespace UTubeTake.Code.Setting {
+using Microsoft.Maui.Storage;
+
+namespace UTubeTake.Code.Setting {
 
     internal sealed class Setting {
 
         private const string KEY_VIDEO = "VideoFolderPath";
         private const string KEY_IMAGE = "ImageFolderPath";
 
-        private string _pathProject;
-        private string _pathSettingFile;
-        private string _pathVideoFolder;
-        private string _pathImageFolder;
+        private readonly string _pathSettingFile;
+        private readonly string _defaultVideoFolder;
+        private readonly string _defaultImageFolder;
 
         public Setting() {
-            _pathProject = AppContext.BaseDirectory;
+            _pathSettingFile = Path.Combine(FileSystem.AppDataDirectory, "Setting.txt");
 
-            _pathSettingFile = Path.Combine(_pathProject, "Setting.txt");
-            _pathVideoFolder = Path.Combine(_pathProject, "Video");
-            _pathImageFolder = Path.Combine(_pathProject, "Image");
+            _defaultVideoFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+            _defaultImageFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         }
 
+        public string DefaultVideoFolder => _defaultVideoFolder;
+        public string DefaultImageFolder => _defaultImageFolder;
+
         public bool HadSettingFile => File.Exists(_pathSettingFile);
-        
+
 
         public void CreateAllFiles() {
-            if (Directory.Exists(_pathVideoFolder) == false) Directory.CreateDirectory(_pathVideoFolder);
-            if (Directory.Exists(_pathImageFolder) == false) Directory.CreateDirectory(_pathImageFolder);
-
             FileStream file = File.Create(_pathSettingFile);
             file.Close();
 
             ClearFile(_pathSettingFile);
-            AddParameter(_pathSettingFile, KEY_VIDEO, _pathVideoFolder);
-            AddParameter(_pathSettingFile, KEY_IMAGE, _pathImageFolder);
+            AddParameter(_pathSettingFile, KEY_VIDEO, _defaultVideoFolder);
+            AddParameter(_pathSettingFile, KEY_IMAGE, _defaultImageFolder);
         }
 
         public void SaveFolders(string video, string image) {
@@ -43,8 +43,8 @@
         public string GetVideoFolder() {
             string? str = ReadParameter(_pathSettingFile, KEY_VIDEO);
 
-            if (str == null || str == "") return _pathVideoFolder;
-            if(Directory.Exists(str) == false) return _pathVideoFolder;
+            if (str == null || str == "") return _defaultVideoFolder;
+            if(Directory.Exists(str) == false) return _defaultVideoFolder;
 
             return str;
         }
@@ -52,8 +52,8 @@
         public string GetImageFolder() {
             string? str = ReadParameter(_pathSettingFile, KEY_IMAGE);
 
-            if (str == null || str == "") return _pathImageFolder;
-            if (Directory.Exists(str) == false) return _pathImageFolder;
+            if (str == null || str == "") return _defaultImageFolder;
+            if (Directory.Exists(str) == false) return _defaultImageFolder;
 
             return str;
         }
@@ -72,25 +72,27 @@
 
         private string? ReadParameter(string path, string key) {
 
-            string line = "";
+            string prefix = $"`{key}`:`";
+
+            string? match = null;
 
             using (StreamReader sr = new StreamReader(path)) {
+                string? line;
                 while ((line = sr.ReadLine()) != null) {
-                    if (line.Contains(@$"`{key}`")) break;
+                    if (line.StartsWith(prefix, StringComparison.Ordinal)
+                        && line.EndsWith("`", StringComparison.Ordinal)) {
+                        match = line;
+                        break;
+                    }
                 }
-
             }
 
-            if (line == "" || line == null) return null;
+            if (match == null) return null;
 
-            //4 - these ``:` additional symbols, line remove delete last additional symbol
-            int startRead = key.Length + 4;
-            line = line.Substring(startRead);
-            line = line.Remove(line.Length - 1);
+            int valueLength = match.Length - prefix.Length - 1;
+            if (valueLength <= 0) return null;
 
-            if (line.Length < 3) return null;
-
-            return line;
+            return match.Substring(prefix.Length, valueLength);
         }
     }
 }
