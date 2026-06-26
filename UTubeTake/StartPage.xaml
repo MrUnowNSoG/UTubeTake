@@ -186,89 +186,318 @@
 
 
         <!--Welcome view-->
-        <HorizontalStackLayout x:Name="WelcomeView" IsVisible="False"
+        <VerticalStackLayout x:Name="WelcomeView"
             Grid.Column="1"
             Grid.ColumnSpan="3"
             Grid.Row="2"
             Grid.RowSpan="3"
-                                 
+
             HorizontalOptions="Center"
             VerticalOptions="Center"
-            Spacing="12">
+            Spacing="{StaticResource ExternalSpace}">
 
-            <Label
-                FontSize="40"
-                Text="Welcome dear user, I wait You ^.^"/>
+            <Border
+                WidthRequest="64"
+                HeightRequest="64"
+                HorizontalOptions="Center"
 
-        </HorizontalStackLayout>
+                BackgroundColor="Transparent"
+                Stroke="{StaticResource MainAccent}"
+                StrokeThickness="2">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="32"/>
+                </Border.StrokeShape>
+
+                <Image
+                    HeightRequest="{StaticResource ImageSize_middle}"
+                    WidthRequest="{StaticResource ImageSize_middle}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+
+                    Aspect="AspectFit"
+                    Source="task_list_icon.png"/>
+            </Border>
+
+            <VerticalStackLayout
+                HorizontalOptions="Center"
+                Spacing="{StaticResource InternalSpace}">
+
+                <Label
+                    HorizontalTextAlignment="Center"
+                    HorizontalOptions="Center"
+
+                    FontSize="{StaticResource FontSize_big}"
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource TextPrimary}"
+
+                    Text="Paste a link to get started"/>
+
+                <Label
+                    HorizontalTextAlignment="Center"
+                    HorizontalOptions="Center"
+
+                    FontSize="{StaticResource FontSize_middle}"
+                    TextColor="{StaticResource TextSecondery}"
+
+                    Text="Works with YouTube videos and shorts"/>
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
         <!--Welcome view-->
 
 
         <!--Error view-->
-        <Grid x:Name="ErrorView"
-            Grid.Column="1"
-            Grid.ColumnSpan="3"
-            Grid.Row="2"
+        <Border x:Name="ErrorView"
+            Grid.Column="2"
+            Grid.ColumnSpan="1"
+            Grid.Row="3"
             Grid.RowSpan="3"
-            
-            IsVisible="True"
-            
-            Margin="5, 10, 5, 5"  
-            
-            ColumnDefinitions="Auto, *"
-            RowDefinitions="auto,*,auto">
 
-            <Label
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Grid.Row="0"
-                
-                HorizontalOptions="Center"
-                
-                FontSize="20"
-                Text="Error detected!"
-                />
+            HorizontalOptions="Fill"
+            VerticalOptions="Start"
 
-            <Label
-                Grid.Column="0"
-                Grid.Row="1"
-                
-                HorizontalOptions="Center"
-                BackgroundColor="Yellow"
+            Padding="{StaticResource ExternalSpace}"
+            BackgroundColor="{StaticResource CardBackground}"
 
-                FontSize="20"
-                Text="Error context:"/>
+            Stroke="{StaticResource Border}"
+            StrokeThickness="2">
 
-            <Label
-                x:Name="ErrorCodeLabel"
-                 Grid.Column="1"
-                 Grid.Row="1"
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="{StaticResource CornerRadius}"/>
+            </Border.StrokeShape>
 
-                 FontSize="20"
-                 Text=""/>
+            <VerticalStackLayout Spacing="{StaticResource ExternalSpace}">
 
-            <Label
-                Grid.Column="0"
-                Grid.Row="2"
-                
-                HorizontalOptions="Center"
-                BackgroundColor="Red"
+                <!--Header-->
+                <HorizontalStackLayout Spacing="{StaticResource InternalSpace}">
 
-                HeightRequest="80"
-                
-                FontSize="20"
-                Text="Resolve:"/>
+                    <Border
+                        WidthRequest="48"
+                        HeightRequest="48"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
 
-            <Label
-                x:Name="ErrorResolveLabel"
-                 Grid.Column="1"
-                 Grid.Row="2"
+                        Padding="0, 0, 0, 4"
+                        
+                        BackgroundColor="Transparent"
+                        Stroke="{StaticResource ErrorAccent}"
+                        StrokeThickness="2">
 
-                 FontSize="20"
-                 Text=""/>
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="24"/>
+                        </Border.StrokeShape>
 
-        </Grid>
-        <!--Welcome view-->
+                        <Image
+                            HeightRequest="{StaticResource ImageSize_middle}"
+                            WidthRequest="{StaticResource ImageSize_middle}"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+
+                            Aspect="AspectFit"
+                            Source="alert_triangle_icon.png"/>
+                    </Border>
+
+                    <Label
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center"
+
+                        FontSize="{StaticResource FontSize_big}"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource TextPrimary}"
+
+                        Text="Error detected"/>
+
+                </HorizontalStackLayout>
+                <!--Header-->
+
+                <!--What went wrong-->
+                <VerticalStackLayout Spacing="{StaticResource InternalSpace}">
+
+                    <Label
+                        FontSize="{StaticResource FontSize_small}"
+                        TextColor="{StaticResource TextSecondery}"
+                        Text="WHAT WENT WRONG"/>
+
+                    <Border
+                        HorizontalOptions="Fill"
+
+                        Padding="{StaticResource ExternalSpace}"
+                        BackgroundColor="{StaticResource AccentBackground}"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="{StaticResource CornerRadius}"/>
+                        </Border.StrokeShape>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{StaticResource ImageSize_small}"/>
+                                <ColumnDefinition Width="{StaticResource ExternalSpace}"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Image
+                                Grid.Column="0"
+                                HeightRequest="{StaticResource ImageSize_small}"
+                                WidthRequest="{StaticResource ImageSize_small}"
+                                VerticalOptions="Center"
+
+                                Aspect="AspectFit"
+                                Source="chat_error_icon.png"/>
+
+                            <Label x:Name="ErrorCodeLabel"
+                                Grid.Column="2"
+                                HorizontalOptions="Fill"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center"
+
+                                FontSize="{StaticResource FontSize_middle}"
+                                TextColor="{StaticResource TextPrimary}"
+
+                                MaxLines="4"
+                                LineBreakMode="TailTruncation"
+                                    
+                                Text="Error code!"/>
+
+                        </Grid>
+
+                    </Border>
+
+                </VerticalStackLayout>
+                <!--What went wrong-->
+
+                <!--How to fix it-->
+                <VerticalStackLayout Spacing="{StaticResource InternalSpace}">
+
+                    <Label
+                        FontSize="{StaticResource FontSize_small}"
+                        TextColor="{StaticResource TextSecondery}"
+                        Text="HOW TO FIX IT"/>
+
+                    <Border
+                        HorizontalOptions="Fill"
+
+                        Padding="{StaticResource ExternalSpace}"
+                        BackgroundColor="{StaticResource AccentBackground}"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="{StaticResource CornerRadius}"/>
+                        </Border.StrokeShape>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{StaticResource ImageSize_small}"/>
+                                <ColumnDefinition Width="{StaticResource ExternalSpace}"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Image
+                                Grid.Column="0"
+                                HeightRequest="{StaticResource ImageSize_small}"
+                                WidthRequest="{StaticResource ImageSize_small}"
+                                VerticalOptions="Center"
+
+                                Aspect="AspectFit"
+                                Source="lightbulb_shine_icon.png"/>
+
+                            <Label x:Name="ErrorResolveLabel"
+                                Grid.Column="2"
+                                HorizontalOptions="Fill"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center"
+
+                                FontSize="{StaticResource FontSize_middle}"
+                                TextColor="{StaticResource TextPrimary}"
+
+                                MaxLines="4"
+                                LineBreakMode="TailTruncation"
+                                    
+                                Text="Resolve"/>
+
+                        </Grid>
+
+                    </Border>
+
+                </VerticalStackLayout>
+                <!--How to fix it-->
+
+                <!--Buttons-->
+                <HorizontalStackLayout
+                    HorizontalOptions="Start"
+                    Spacing="{StaticResource InternalSpace}">
+
+                    <Border
+                        Padding="16,8"
+
+                        BackgroundColor="{StaticResource MainAccent}"
+                        Stroke="{StaticResource MainAccent}"
+                        StrokeThickness="2">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="{StaticResource CornerRadius}"/>
+                        </Border.StrokeShape>
+
+                        <Label
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+
+                            TextColor="{StaticResource Background}"
+                            FontSize="{StaticResource FontSize_middle}"
+                            FontAttributes="Bold"
+
+                            Text="Try again"/>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TryAgainEvent"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border
+                        Padding="16,8"
+
+                        BackgroundColor="Transparent"
+                        Stroke="{StaticResource Border}"
+                        StrokeThickness="2">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="{StaticResource CornerRadius}"/>
+                        </Border.StrokeShape>
+
+                        <Label
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+
+                            TextColor="{StaticResource TextPrimary}"
+                            FontSize="{StaticResource FontSize_middle}"
+                            FontAttributes="Bold"
+
+                            Text="Dismiss"/>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="DismissErrorEvent"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                </HorizontalStackLayout>
+                <!--Buttons-->
+
+            </VerticalStackLayout>
+
+        </Border>
+        <!--Error view-->
 
 
         <!--Loading view-->
@@ -420,7 +649,7 @@
                             </Image>
 
 
-                            <Label x:Name="ThumbnailButtonLabel " 
+                            <Label x:Name="ThumbnailButtonLabel" 
                                 Grid.Column="1"
                                 VerticalOptions="Center"
                                 VerticalTextAlignment="Center"

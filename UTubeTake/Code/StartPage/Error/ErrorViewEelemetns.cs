@@ -1,5 +1,5 @@
 ﻿namespace UTubeTake.Code.StartPage.Error {
 
-    internal record ErrorViewEelemetns(Layout View, Label Code, Label Resolve);
+    internal record ErrorViewEelemetns(Border View, Label Code, Label Resolve);
 
 }

@@ -4,6 +4,7 @@ using UTubeTake.Code.StartPage.Error;
 using UTubeTake.Code.StartPage.Loading;
 using UTubeTake.Code.StartPage.Video.Elements;
 using UTubeTake.Code.Tools;
+using UTubeTake.Code.Tools.ErrorHandler;
 
 
 
@@ -60,17 +61,17 @@ public partial class StartPage : ContentPage {
 
 	}
 
-    private void FindVideoEvent(object sender, System.EventArgs e) {
+    private void FindVideoEvent(object sender, EventArgs e) {
 
         if (StaticFlags.downloadInfo == true) return;
 
-        Button button = (Button)sender;
 		string? url = StringHelper.ValidationUrl(linkEntry.Text);
 		
 		if(url != null) {
-            button.Text = "Find!";
 			_viewManager.ProcessVideoView(url);
-        }
+        } else {
+			ErrorHandlerService.GetInstance().CathcError(new Exception("Bad link!"));
+		}
 
 	}
 
@@ -95,6 +96,9 @@ public partial class StartPage : ContentPage {
     private void PickerQuality_SelectedIndexChanged(object sender, EventArgs e) => UpdateVideoSize();
 	private void UpdateVideoSize() => _viewManager.UpdateVideoSize();
 
+
+    private void TryAgainEvent(object sender, EventArgs e) => FindVideoEvent(sender, e);
+    private void DismissErrorEvent(object sender, EventArgs e) => _viewManager.ShowWelcomeView();
 
 
     private async void SettingPageEvent(object sender, EventArgs eventArgs) {

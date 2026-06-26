@@ -5,7 +5,7 @@ namespace UTubeTake.Code.StartPage.Error {
     
     internal sealed class ErrorView {
 
-        private readonly Layout _view;
+        private readonly Border _view;
         private readonly Label _errorLabel;
         private readonly Label _resolveLabel;
 
