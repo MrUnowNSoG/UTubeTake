@@ -1,6 +1,8 @@
 using CommunityToolkit.Maui.Storage;
 using UTubeTake.Code.Setting;
 
+
+
 namespace UTubeTake;
 
 public partial class SettingPage : ContentPage {
@@ -16,6 +18,7 @@ public partial class SettingPage : ContentPage {
             var folder = await FolderPicker.PickAsync(default);
 
             if (folder.Folder != null) {
+
                 if (folder.Folder.Path  != null && folder.Folder.Path.ToString() != "") {
                     SettingStatic.SaveSetting(folder.Folder.Path.ToString(), SettingStatic.pathForImage);
                     UpdateTextForPath();
@@ -33,6 +36,7 @@ public partial class SettingPage : ContentPage {
             var folder = await FolderPicker.PickAsync(default);
             
             if (folder.Folder != null) {
+
                 if (folder.Folder.Path.ToString() != null && folder.Folder.Path.ToString() != "") {
                     SettingStatic.SaveSetting(SettingStatic.pathForVideo, folder.Folder.Path.ToString());
                     UpdateTextForPath();
@@ -40,7 +44,6 @@ public partial class SettingPage : ContentPage {
             }
 
         } catch (Exception ex) {
-
             PathImage_label.Text = "Error path";
         }
     }
@@ -50,7 +53,7 @@ public partial class SettingPage : ContentPage {
         PathImage_label.Text = SettingStatic.pathForImage;
     }
 
-    private async void Back_Clicked(object sender, EventArgs e) {
+    private async void BackEvent(object sender, EventArgs e) {
 		await Navigation.PopModalAsync();
     }
 }

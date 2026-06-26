@@ -231,6 +231,9 @@
                     FontAttributes="Bold"
                     TextColor="{StaticResource TextPrimary}"
 
+                    MaxLines="2"
+                    LineBreakMode="TailTruncation"
+                    
                     Text="Paste a link to get started"/>
 
                 <Label
@@ -240,6 +243,9 @@
                     FontSize="{StaticResource FontSize_middle}"
                     TextColor="{StaticResource TextSecondery}"
 
+                    MaxLines="2"
+                    LineBreakMode="TailTruncation"
+                    
                     Text="Works with YouTube videos and shorts"/>
 
             </VerticalStackLayout>
@@ -306,7 +312,10 @@
                         FontSize="{StaticResource FontSize_big}"
                         FontAttributes="Bold"
                         TextColor="{StaticResource TextPrimary}"
-
+                        
+                        MaxLines="1"
+                        LineBreakMode="TailTruncation"
+                        
                         Text="Error detected"/>
 
                 </HorizontalStackLayout>
@@ -318,6 +327,10 @@
                     <Label
                         FontSize="{StaticResource FontSize_small}"
                         TextColor="{StaticResource TextSecondery}"
+                        
+                        MaxLines="2"
+                        LineBreakMode="TailTruncation"
+                        
                         Text="WHAT WENT WRONG"/>
 
                     <Border
@@ -379,6 +392,10 @@
                     <Label
                         FontSize="{StaticResource FontSize_small}"
                         TextColor="{StaticResource TextSecondery}"
+                        
+                        MaxLines="2"
+                        LineBreakMode="TailTruncation"
+                        
                         Text="HOW TO FIX IT"/>
 
                     <Border
