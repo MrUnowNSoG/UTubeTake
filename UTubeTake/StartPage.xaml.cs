@@ -1,124 +1,107 @@
-using Microsoft.Maui.Graphics.Platform;
-using UTubeTake.Code;
+using UTubeTake.Code.Setting;
+using UTubeTake.Code.StartPage;
+using UTubeTake.Code.StartPage.Error;
+using UTubeTake.Code.StartPage.Loading;
+using UTubeTake.Code.StartPage.Video.Elements;
+using UTubeTake.Code.Tools;
+using UTubeTake.Code.Tools.ErrorHandler;
+
+
 
 namespace UTubeTake;
 
 public partial class StartPage : ContentPage {
 
-	private LinkTest _linkTest;
-	private ImgVideoDownload _imgVideoDownload;
-	
-	private VideoVariable _videoVariable;
-	private VideoInformer _videoInformer;
-	private VideoUiUpdater _videoUiUpdater;
-	private VideoDownloader _videoDownloader;
+	private StartPageViewManager _viewManager;
 
 
 	public StartPage() {
+
 		InitializeComponent();
 
-		//
 		SettingStatic.LoadSetting();
 
-		//FirstStage
-		_linkTest = new LinkTest();
-		_imgVideoDownload = new ImgVideoDownload();
+		var xamlContainer = BuildXamlContainer();
+        _viewManager = new StartPageViewManager(xamlContainer);
+        _viewManager.ShowWelcomeView();
 
-		//SecondStage
-		_videoVariable = VideoVariable.Instanite();
-
-		_videoInformer = new VideoInformer(_videoVariable);
-		_videoUiUpdater = new VideoUiUpdater(PickerQuality, PickerBitRate, VideoNameText, VideoAuthorText, VideoDurationText, VideoSizeText);
-		
-		_videoDownloader = new VideoDownloader(_videoVariable);
 	}
 
+    private StartPageXamlContainer BuildXamlContainer() {
 
-	private void FindVideo(object sender, System.EventArgs e) {
+		var loadingView = new LoadingViewElements(LoadingView, Dot_1, Dot_2, Dot_3);
+
+
+		var videoTitle = new VideoTitleElements(VideoNameLabel, VideoAuthorLabel, 
+												VideoDurationLabel, VideoSizeLabel);
+
+		var videoThumbnail = new VideoThumbnailElements(ThumbnailImage, ThumbnailButtonBorder, ThumbnailButtonImage, 
+														ThumbnailButtonLabel);
+
+		var videoPicker = new VideoPickerElements(VideoQualityPicker, VideoBitratePicker, VideoPickerButtonBorder, 
+												  VideoPickerButtonImage, VideoPickerButtonLabel);
+
+        var videoBar = new VideoDownloaderBarElements(BarBorder, BarEllipse, BarStatusLabel, BarPercentLabel, BarNameFileLabel, BarProgressBar);
+        
+		var videoView = new VideoViewElements(VideoView, videoTitle, videoThumbnail, videoPicker, videoBar);
+
+
+		var errorView = new ErrorViewElements(ErrorView, ErrorCodeLabel, ErrorResolveLabel);
+
+
+		StartPageXamlContainer container = new StartPageXamlContainer {
+			WelcomeView = this.WelcomeView,
+
+			LoadingView = loadingView,
+			VideoView = videoView,
+			ErrorView = errorView
+		};
+
+		return container;
+
+	}
+
+    private void FindVideoEvent(object sender, EventArgs e) {
+
+        if (StaticFlags.downloadInfo == true) return;
+
+		string? url = StringHelper.ValidationUrl(linkEntry.Text);
 		
-		//Variables
-		Button button = (Button)sender;
-		string link = linkEntry.Text;
-
-		//
-		if(_linkTest.testUrl(ref link) && StaticFlags.downloadInfo == false) {
-
-            button.Text = "Find!";
-            imageVideo.Source = _imgVideoDownload.GetImgVideoUrl(link);
-			DownloadInfoForVideo(link);
-			
-			
+		if(url != null) {
+			_viewManager.ProcessVideoView(url);
         } else {
-            button.Text = "Try another link!";
-        }
-	}
-
-	private async void DownloadInfoForVideo(string url) {
-
-        StaticFlags.downloadInfo = true;
-
-		Task video = _videoInformer.LoadInfo(url);
-		Task picker = _videoInformer.LoadInfoForPicker(url);
-
-		await video;
-		_videoUiUpdater.UpdateTextVideo(_videoInformer.GetInfoForVideo());
-
-		await picker;
-		_videoUiUpdater.UpdatePicker(_videoInformer.GetQualityList(), _videoInformer.GetBitRateList());
-
-		UpdateVideoSize();
-
-		StaticFlags.downloadInfo = false;
-	}
-
-	//Download Button
-	private async void DownloadVideo(object sender, EventArgs e) {
-
-		if (StaticFlags.downloadFile == false) {
-
-			StaticFlags.downloadFile = true;
-
-			IProgress<double> progress = new Progress<double>(GetPercentVideo);
-			await _videoDownloader.DownloadVideo(PickerQuality.SelectedIndex, PickerBitRate.SelectedIndex, progress);
-		
-			StaticFlags.downloadFile = false;
+			ErrorHandlerService.GetInstance().CatchError(new InvalidLinkException());
 		}
+
 	}
 
-	
-	private void GetPercentVideo(double d) {
-        DownloadVideoButton.Text = Math.Truncate(d * 100).ToString() + "%";
 
-		if (Math.Truncate(d * 100) >= 99) DownloadVideoButton.Text = "Download";
+
+    private void DownloadThumbnailEvent(object sender, EventArgs e) {
+
+		if (StaticFlags.downloadImg == false)
+					_viewManager.DownloadThumbnail();
+
     }
 
-	private void DownloadImg(object sender, EventArgs e) {
+    private void DownloadVideoEvent(object sender, EventArgs e) {
 
-		if (StaticFlags.downloadImg == false) {
-			string link = linkEntry.Text;
-
-			if (link != null && link != "" && _linkTest.testUrl(ref link)) {
-
-				StaticFlags.downloadImg = true;
-				_imgVideoDownload.DownloadImg(link, _videoVariable.video.Title.ToString(), SettingStatic.pathForImage);
-			}
-		}
+		if (StaticFlags.downloadFile == false)
+						_viewManager.DownloadFile();
 	}
 
-	//Size video
-    private void PickerBitRate_SelectedIndexChanged(object sender, EventArgs e) {
-		UpdateVideoSize();
-    }
-
-    private void PickerQuality_SelectedIndexChanged(object sender, EventArgs e) {
-		UpdateVideoSize();
-    }
-
-	private void UpdateVideoSize() => _videoUiUpdater.UpdateSizeVideo(_videoInformer.GetSizeFile(PickerQuality.SelectedIndex, PickerBitRate.SelectedIndex));
 
 
-    //Pages
-    private async void SettingPage(object sender, EventArgs eventArgs) {
+    private void PickerBitRate_SelectedIndexChanged(object sender, EventArgs e) => UpdateVideoSize();
+    private void PickerQuality_SelectedIndexChanged(object sender, EventArgs e) => UpdateVideoSize();
+	private void UpdateVideoSize() => _viewManager.UpdateVideoSize();
+
+
+    private void TryAgainEvent(object sender, EventArgs e) => FindVideoEvent(sender, e);
+    private void DismissErrorEvent(object sender, EventArgs e) => _viewManager.ShowWelcomeView();
+
+
+    private async void SettingPageEvent(object sender, EventArgs eventArgs) {
         await Navigation.PushModalAsync(new SettingPage(), false);
     }
 

@@ -1,5 +1,8 @@
 using CommunityToolkit.Maui.Storage;
-using UTubeTake.Code;
+using UTubeTake.Code.Setting;
+using UTubeTake.Resources.Strings;
+
+
 
 namespace UTubeTake;
 
@@ -16,14 +19,16 @@ public partial class SettingPage : ContentPage {
             var folder = await FolderPicker.PickAsync(default);
 
             if (folder.Folder != null) {
+
                 if (folder.Folder.Path  != null && folder.Folder.Path.ToString() != "") {
-                    SettingStatic.SaveSetting(folder.Folder.Path.ToString(), SettingStatic.pathForImage);
+                    SettingStatic.SaveSetting(folder.Folder.Path.ToString(), SettingStatic.PathForImage);
                     UpdateTextForPath();
                 }
             }
 
         }catch(Exception ex) {
-            PathVideo_label.Text = "Error path";
+            Console.WriteLine(ex.ToString());
+            PathVideo_label.Text = AppResources.Setting_PathError;
         }
     }
 
@@ -33,24 +38,25 @@ public partial class SettingPage : ContentPage {
             var folder = await FolderPicker.PickAsync(default);
             
             if (folder.Folder != null) {
+
                 if (folder.Folder.Path.ToString() != null && folder.Folder.Path.ToString() != "") {
-                    SettingStatic.SaveSetting(SettingStatic.pathForVideo, folder.Folder.Path.ToString());
+                    SettingStatic.SaveSetting(SettingStatic.PathForVideo, folder.Folder.Path.ToString());
                     UpdateTextForPath();
                 }
             }
 
         } catch (Exception ex) {
-
-            PathImage_label.Text = "Error path";
+            Console.WriteLine(ex.ToString());
+            PathImage_label.Text = AppResources.Setting_PathError;
         }
     }
 
     private void UpdateTextForPath() {
-        PathVideo_label.Text = SettingStatic.pathForVideo;
-        PathImage_label.Text = SettingStatic.pathForImage;
+        PathVideo_label.Text = SettingStatic.PathForVideo;
+        PathImage_label.Text = SettingStatic.PathForImage;
     }
 
-    private async void Back_Clicked(object sender, EventArgs e) {
+    private async void BackEvent(object sender, EventArgs e) {
 		await Navigation.PopModalAsync();
     }
 }

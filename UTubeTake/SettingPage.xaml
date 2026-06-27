@@ -1,177 +1,293 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:strings="clr-namespace:UTubeTake.Resources.Strings"
              x:Class="UTubeTake.SettingPage"
-               BackgroundColor="{StaticResource BlackBacground}"
-             Title="SettingPage">
+             Title="SettingPage"
+             BackgroundColor="{StaticResource Background}">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="48"/>
+            <ColumnDefinition Width="{StaticResource ExternalSpace}"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="{StaticResource ExternalSpace}"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource ExternalSpace}"/>
             <RowDefinition Height="60"/>
-            <RowDefinition/>
+            <RowDefinition Height="{StaticResource InternalSpace}"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="{StaticResource ExternalSpace}"/>
         </Grid.RowDefinitions>
 
+        <!--Nav-->
+        <BoxView
+           Grid.Column="0"
+           Grid.Row="0"
+           Grid.RowSpan="7"
+
+           BackgroundColor="{StaticResource NavBackground}"/>
+
+        <Image
+            Grid.Column="0"
+            Grid.Row="1"
+
+            HeightRequest="{StaticResource ImageSize_middle}"
+            WidthRequest="{StaticResource ImageSize_middle}"
+            Margin="0"
+
+            Aspect="AspectFit"
+            Source="logo_icon.png"
+
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+        </Image>
+
+        <Image
+            Grid.Column="0"
+            Grid.Row="3"
+   
+            HeightRequest="{StaticResource ImageSize_middle}"
+            WidthRequest="{StaticResource ImageSize_middle}"            
+            
+            HorizontalOptions="Center"
+            VerticalOptions="End"            
+
+            Aspect="AspectFit"
+            Source="back_icon.png">
+
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="BackEvent"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <!--Nav-->
+
+
+        <!--Window spliters-->
         <BoxView
             Grid.Column="1"
             Grid.Row="0"
-            Grid.RowSpan="5"
-            
+            Grid.RowSpan="7"
+
             HorizontalOptions="Start"
             VerticalOptions="Fill"
 
             WidthRequest="1"
-            
-            BackgroundColor="{StaticResource BlackElement}"
+
+            BackgroundColor="{StaticResource Border}"
         />
-
-        <!--Nav-->
-        <Border
+        <BoxView
             Grid.Column="0"
+            Grid.ColumnSpan="4"
             Grid.Row="0"
-            
-            HorizontalOptions="Center"
-            VerticalOptions="Center"        
-        
-            HeightRequest="40" 
-            WidthRequest="40"
-            Margin="0,20,0,0"
-        
-            Stroke="Transparent">
 
-            <Image
-            Aspect="AspectFit"
-            Source="logo_icon.png"
-           
-            VerticalOptions="Center"
-            HorizontalOptions="Center"/>
-        </Border>
+            HorizontalOptions="Fill"
+            VerticalOptions="Start"
 
+            HeightRequest="1"
 
-        <VerticalStackLayout 
-            Grid.Column="0"
-            Grid.Row="1"
-            
-            VerticalOptions="End">
+            BackgroundColor="{StaticResource Border}"
+        />
+        <!--Window spliters-->
 
-
-            <ImageButton    
-                Grid.Column="0"
-                Grid.Row="4"
-            
-                Margin="0,0,0,20"
-                HeightRequest="40" 
-                WidthRequest="40"
-                
-                HorizontalOptions="Center"
-                VerticalOptions="Center"        
-                Padding="5"
-                
-                Aspect="AspectFill"
-                Source="back_icon.png"
-  
-  
-                BackgroundColor="Transparent"
-   
-                Clicked="Back_Clicked"/>
-            
-        </VerticalStackLayout>
-        <!--Nav-->
 
         <!--Title page-->
-        <Label
-            Grid.Column="1"
-            Grid.Row="0"
-     
-            HorizontalTextAlignment="Center"
-            VerticalTextAlignment="Center"
-     
-            FontSize="20"
-            TextColor="White"
-     
-            Text="Setting"/>
-
-        <!--Buttons-->
-        <VerticalStackLayout
-            Grid.Column="1"
+        <HorizontalStackLayout
+            Grid.Column="2"
             Grid.Row="1"
+
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Spacing="{StaticResource InternalSpace}">
+
+            <Image
+                HeightRequest="{StaticResource ImageSize_middle}"
+                WidthRequest="{StaticResource ImageSize_middle}"
+                VerticalOptions="Center"
+
+                Aspect="AspectFit"
+                Source="setting_icon.png"/>
+
+            <Label
+                VerticalOptions="Center"
+                VerticalTextAlignment="Center"
+
+                FontSize="{StaticResource FontSize_big}"
+                FontAttributes="Bold"
+                TextColor="{StaticResource TextPrimary}"
+
+                MaxLines="1"
+                LineBreakMode="TailTruncation"
+                
+                Text="{x:Static strings:AppResources.Setting_Title}"/>
+
+        </HorizontalStackLayout>
+        <!--Title page-->
+
+        <!--Storage settings-->
+        <VerticalStackLayout
+            Grid.Column="2"
+            Grid.ColumnSpan="1"
+            Grid.Row="2"
+            Grid.RowSpan="3"
+
             HorizontalOptions="Fill"
-            Padding="20">
+            Spacing="{StaticResource ExternalSpace}">
 
-            <!--Video-->
-            <Label 
-                VerticalOptions="Center" 
-                HorizontalOptions="StartAndExpand"
-                FontSize="16"
-                
-                Text="Place where videos are stored:"/>
+            <!--Video storage-->
+            <VerticalStackLayout Spacing="{StaticResource InternalSpace}">
 
-            <Label
-                HeightRequest="30"
-                VerticalTextAlignment="Center"
-                
-                Padding="20,0,0,0"
-                
-                
-                BackgroundColor="{StaticResource BlackElementLight}"
-                FontSize="16"
-                
-                x:Name="PathVideo_label"
-                
-                Text="Pick your video path"/>
+                <Label
+                    FontSize="{StaticResource FontSize_small}"
+                    TextColor="{StaticResource TextSecondary}"
+                    MaxLines="2"
+                    LineBreakMode="TailTruncation"
+                    
+                    Text="{x:Static strings:AppResources.Setting_VideoStorage}"/>
 
-            <Button
-                HeightRequest="50" 
-                HorizontalOptions="FillAndExpand"
-                CornerRadius="0"
-                
-                BackgroundColor="{StaticResource NeonBlue}"
-                TextColor="White"
-                FontSize="16"
-                
-                Clicked="PathVideo_Clicked"
-                Text="Pick Path"/>
+                <Grid
+                    ColumnDefinitions="*, Auto"
+                    ColumnSpacing="{StaticResource InternalSpace}">
 
-            <!--Just space-->
-            <Label Margin="10"/>
+                    <Border
+                        Grid.Column="0"
+                        HeightRequest="48"
+                        HorizontalOptions="Fill"
 
-            <!--Image-->
-            <Label 
-                VerticalOptions="Center" 
-                HorizontalOptions="StartAndExpand"
-                FontSize="16"
-                
-                Text="Place where pictures are stored:"/>
-            
-            <Label
-                HeightRequest="30"
-                VerticalTextAlignment="Center"
-                
-                Padding="20,0,0,0"
-                
-                BackgroundColor="{StaticResource BlackElementLight}"
-                FontSize="16"
-                
-                x:Name="PathImage_label"
-                Text="Pick your image path"/>
+                        Padding="16,0"
+                        BackgroundColor="{StaticResource AccentBackground}"
+                        StrokeThickness="0">
 
-            <Button
-                HeightRequest="50"
-                HorizontalOptions="Fill"
-                CornerRadius="0"
-                
-                BackgroundColor="{StaticResource NeonBlue}"
-                TextColor="White" 
-                FontSize="16"
-            
-                Clicked="PathImage_Clicked"
-                Text="Pick Path"/>
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="{StaticResource CornerRadius}"/>
+                        </Border.StrokeShape>
+
+                        <HorizontalStackLayout
+                            VerticalOptions="Center"
+                            Spacing="{StaticResource InternalSpace}">
+
+                            <Image
+                                HeightRequest="{StaticResource ImageSize_small}"
+                                WidthRequest="{StaticResource ImageSize_small}"
+                                VerticalOptions="Center"
+
+                                Aspect="AspectFit"
+                                Source="folder_icon.png"/>
+
+                            <Label
+                                x:Name="PathVideo_label"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center"
+
+                                FontSize="{StaticResource FontSize_middle}"
+                                TextColor="{StaticResource TextPrimary}"
+
+                                Text="Pick your video path"/>
+
+                        </HorizontalStackLayout>
+
+                    </Border>
+
+                    <Button Clicked="PathVideo_Clicked"
+                        Grid.Column="1"
+                        HeightRequest="48"
+
+                        Padding="20,0"
+                        CornerRadius="8"
+
+                        BackgroundColor="{StaticResource MainAccent}"
+                        TextColor="{StaticResource Background}"
+                        FontSize="{StaticResource FontSize_middle}"
+                        FontAttributes="Bold"
+                        
+                        LineBreakMode="TailTruncation"
+                        
+                        Text="{x:Static strings:AppResources.Button_PickPath}"/>
+
+                </Grid>
+
+            </VerticalStackLayout>
+            <!--Video storage-->
+
+            <!--Thumbnail storage-->
+            <VerticalStackLayout Spacing="{StaticResource InternalSpace}">
+
+                <Label
+                    FontSize="{StaticResource FontSize_small}"
+                    TextColor="{StaticResource TextSecondary}"
+                    MaxLines="2"
+                    LineBreakMode="TailTruncation"
+                    
+                    Text="{x:Static strings:AppResources.Setting_ThumbnailStorage}"/>
+
+                <Grid
+                    ColumnDefinitions="*, Auto"
+                    ColumnSpacing="{StaticResource InternalSpace}">
+
+                    <Border
+                        Grid.Column="0"
+                        HeightRequest="48"
+                        HorizontalOptions="Fill"
+
+                        Padding="16,0"
+                        BackgroundColor="{StaticResource AccentBackground}"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="{StaticResource CornerRadius}"/>
+                        </Border.StrokeShape>
+
+                        <HorizontalStackLayout
+                            VerticalOptions="Center"
+                            Spacing="{StaticResource InternalSpace}">
+
+                            <Image
+                                HeightRequest="{StaticResource ImageSize_small}"
+                                WidthRequest="{StaticResource ImageSize_small}"
+                                VerticalOptions="Center"
+
+                                Aspect="AspectFit"
+                                Source="folder_icon.png"/>
+
+                            <Label
+                                x:Name="PathImage_label"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center"
+
+                                FontSize="{StaticResource FontSize_middle}"
+                                TextColor="{StaticResource TextPrimary}"
+
+                                Text="Pick your image path"/>
+
+                        </HorizontalStackLayout>
+
+                    </Border>
+
+                    <Button Clicked="PathImage_Clicked"
+                        Grid.Column="1"
+                        HeightRequest="48"
+
+                        Padding="20,0"
+                        CornerRadius="8"
+
+                        BackgroundColor="{StaticResource MainAccent}"
+                        TextColor="{StaticResource Background}"
+                        FontSize="{StaticResource FontSize_middle}"
+                        FontAttributes="Bold"
+                        LineBreakMode="TailTruncation"
+                        
+                        Text="{x:Static strings:AppResources.Button_PickPath}"/>
+
+                </Grid>
+
+            </VerticalStackLayout>
+            <!--Thumbnail storage-->
 
         </VerticalStackLayout>
+        <!--Storage settings--> 
+
     </Grid>
 
 </ContentPage>
