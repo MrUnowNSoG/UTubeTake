@@ -314,5 +314,17 @@ namespace UTubeTake.Resources.Strings {
                 return ResourceManager.GetString("Error_Unknown_Hint", resourceCulture);
             }
         }
+
+        public static string Error_NotAVideo_Title {
+            get {
+                return ResourceManager.GetString("Error_NotAVideo_Title", resourceCulture);
+            }
+        }
+
+        public static string Error_NotAVideo_Hint {
+            get {
+                return ResourceManager.GetString("Error_NotAVideo_Hint", resourceCulture);
+            }
+        }
     }
 }

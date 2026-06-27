@@ -48,9 +48,9 @@ namespace UTubeTake.Code.StartPage {
 
         public void UpdateVideoSize() => _videoView.UpdateVideoSize();
 
-        public async Task DownloadThumbnail() => await _videoView.DownloadThumbnail();
+        public async void DownloadThumbnail() => await _videoView.DownloadThumbnail();
 
-        public async Task DownloadFile() => await _videoView.DownloadFile();
+        public async void DownloadFile() => await _videoView.DownloadFile();
 
         private void HideAllView() {
             _welcomeView.IsVisible = false;

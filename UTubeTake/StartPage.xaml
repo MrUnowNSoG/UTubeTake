@@ -525,8 +525,8 @@
             Grid.Row="2"
             Grid.RowSpan="3"
                                
-            HorizontalOptions="CenterAndExpand"
-            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
             Spacing="12">
 
             <Ellipse x:Name="Dot_1"

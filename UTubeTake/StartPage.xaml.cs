@@ -77,14 +77,14 @@ public partial class StartPage : ContentPage {
 
 
 
-    private async void DownloadThumbnailEvent(object sender, EventArgs e) {
+    private void DownloadThumbnailEvent(object sender, EventArgs e) {
 
 		if (StaticFlags.downloadImg == false)
 					_viewManager.DownloadThumbnail();
 
     }
 
-    private async void DownloadVideoEvent(object sender, EventArgs e) {
+    private void DownloadVideoEvent(object sender, EventArgs e) {
 
 		if (StaticFlags.downloadFile == false)
 						_viewManager.DownloadFile();

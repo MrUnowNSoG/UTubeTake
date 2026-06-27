@@ -30,6 +30,7 @@ namespace UTubeTake.Code.Tools.ErrorHandler {
         private ErrorLog IdentifyTypeError(Exception ex) => ex switch {
 
             InvalidLinkException => new ErrorLog(AppResources.Error_BadLink_Title, AppResources.Error_BadLink_Hint),
+            ArgumentException => new ErrorLog(AppResources.Error_NotAVideo_Title, AppResources.Error_NotAVideo_Hint),
             InvalidDownloadSettingsException => new ErrorLog(AppResources.Error_DownloadSettings_Title, AppResources.Error_DownloadSettings_Hint),
             FfmpegNotFoundException => new ErrorLog(AppResources.Error_Ffmpeg_Title, AppResources.Error_Ffmpeg_Hint),
 

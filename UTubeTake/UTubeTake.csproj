@@ -46,37 +46,37 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-maccatalyst|AnyCPU'">
-	  <ApplicationDisplayVersion>1.1.0.0</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>1.2.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>3</ApplicationVersion>
 	  <ApplicationId>com.HundredHands.utubetake</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android|AnyCPU'">
-	  <ApplicationDisplayVersion>1.1.0.0</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>1.2.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>3</ApplicationVersion>
 	  <ApplicationId>com.HundredHands.utubetake</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationDisplayVersion>1.1.0.0</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>1.2.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>3</ApplicationVersion>
 	  <ApplicationId>com.HundredHands.utubetake</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-maccatalyst|AnyCPU'">
-	  <ApplicationDisplayVersion>1.1.0.0</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>1.2.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>3</ApplicationVersion>
 	  <ApplicationId>com.HundredHands.utubetake</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
-	  <ApplicationDisplayVersion>1.1.0.0</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>1.2.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>3</ApplicationVersion>
 	  <ApplicationId>com.HundredHands.utubetake</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationDisplayVersion>1.1.0.0</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>1.2.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>3</ApplicationVersion>
 	  <ApplicationId>com.HundredHands.utubetake</ApplicationId>
 	</PropertyGroup>
@@ -100,10 +100,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="14.1.1" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.60" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.60" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="14.2.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.80" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.80" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.9" />
 		<PackageReference Include="YoutubeExplode" Version="6.6.0" />
 		<PackageReference Include="YoutubeExplode.Converter" Version="6.6.0" />
 	</ItemGroup>

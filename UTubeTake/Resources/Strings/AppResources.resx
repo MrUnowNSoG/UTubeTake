@@ -211,4 +211,10 @@
   <data name="Error_Unknown_Hint" xml:space="preserve">
     <value>Please contact the app author.</value>
   </data>
+  <data name="Error_NotAVideo_Title" xml:space="preserve">
+    <value>This link is not a video</value>
+  </data>
+  <data name="Error_NotAVideo_Hint" xml:space="preserve">
+    <value>Paste a link to a specific video, not to a channel or playlist.</value>
+  </data>
 </root>
